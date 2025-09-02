@@ -1,0 +1,200 @@
+# Cursor Rules for Knowledge Hub Project
+
+## Project Context
+You are working on a Knowledge Hub application built with React, TypeScript, Vite, and Tailwind CSS. The project uses a Japanese stationary-inspired design system with semantic design tokens.
+
+## Essential Files
+Always reference these key files:
+- `src/index.css` - Complete design system with CSS variables
+- `tailwind.config.ts` - Tailwind configuration with design tokens  
+- `docs/DESIGN_SYSTEM.md` - Design system documentation
+- `docs/PROJECT_STRUCTURE.md` - Project architecture guide
+- `CURSOR_GUIDE.md` - Quick reference for development
+
+## Code Style Rules
+
+### 1. Always Use Semantic Design Tokens
+```tsx
+// ✅ CORRECT - Use semantic tokens
+className="text-ink bg-washi paper-card shadow-elegant"
+
+// ❌ WRONG - Never use direct colors
+className="text-black bg-white border-gray-200"
+```
+
+### 2. Import Patterns
+```tsx
+// UI components
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+
+// Feature components
+import { SmartDiscovery } from "@/components/knowledge/SmartDiscovery"
+
+// Utilities
+import { cn } from "@/lib/utils"
+```
+
+### 3. Component Structure
+```tsx
+interface ComponentProps {
+  // Always use TypeScript interfaces
+}
+
+export function ComponentName({ ...props }: ComponentProps) {
+  // React hooks at the top
+  const [state, setState] = useState();
+  
+  // Helper functions
+  const handleAction = () => {};
+  
+  // Always use semantic design tokens in className
+  return (
+    <Card className="paper-card p-6">
+      <h3 className="text-lg font-semibold text-ink">{title}</h3>
+      {/* More JSX */}
+    </Card>
+  );
+}
+```
+
+### 4. Design System Colors
+Use these semantic color tokens:
+- `text-ink` - Main text color
+- `text-seal` - Red accent text
+- `text-bamboo` - Green accent text
+- `text-gold` - Gold accent text
+- `bg-washi` - Light background
+- `bg-gradient-sakura` - Pink gradient
+- `bg-gradient-bamboo` - Green gradient
+- `paper-card` - Card styling with paper effect
+
+### 5. Mobile-First Responsive Design
+```tsx
+// Always start with mobile, then add larger breakpoints
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<h1 className="text-xl md:text-3xl font-bold">
+```
+
+## Component Guidelines
+
+### UI Components
+- Always use components from `src/components/ui/` as base
+- Customize with design system tokens
+- Follow existing patterns in the codebase
+
+### Feature Components
+- Place in appropriate category folder under `src/components/`
+- Use TypeScript interfaces for all props
+- Include loading and error states when applicable
+- Follow mobile-first responsive design
+
+### Page Components
+- Place in `src/pages/` directory
+- Use the `AppLayout` wrapper for consistent layout
+- Add routes in `src/App.tsx`
+
+## Styling Rules
+
+### Never Use These
+- Direct color classes like `text-black`, `bg-white`, `text-blue-500`
+- Hardcoded colors in style attributes
+- Non-semantic class names
+
+### Always Use These
+- Semantic design tokens from the design system
+- `paper-card` for consistent card styling
+- `text-ink` for main text color
+- `bg-washi` for light backgrounds
+- Responsive classes starting with mobile-first
+
+## File Organization
+
+### New Components
+1. Create in appropriate subfolder under `src/components/`
+2. Use TypeScript for all components
+3. Export from index files when appropriate
+4. Follow existing naming conventions
+
+### Styling
+1. Use design tokens from `src/index.css`
+2. Follow the Japanese stationary theme
+3. Maintain consistency with existing components
+4. Test on mobile and desktop
+
+## Architecture Patterns
+
+### State Management
+- Use React hooks for local state
+- TanStack Query for server state
+- Context API for shared state when needed
+
+### Navigation
+- React Router v6 patterns
+- Centralized routing in `src/App.tsx`
+- Mobile-friendly navigation components
+
+### Error Handling
+- Use Error Boundaries
+- Provide user-friendly error messages
+- Include loading states
+
+## Quality Standards
+
+### TypeScript
+- Always use TypeScript interfaces
+- No `any` types unless absolutely necessary
+- Proper type definitions for all props and state
+
+### Accessibility
+- Include proper ARIA labels
+- Ensure keyboard navigation works
+- Use semantic HTML elements
+- Test with screen readers
+
+### Performance
+- Use React best practices (keys, memoization when needed)
+- Lazy load components when appropriate
+- Optimize images and assets
+
+## Testing Approach
+
+### Component Testing
+- Test user interactions
+- Verify responsive behavior
+- Check accessibility features
+- Validate design system usage
+
+## Common Patterns
+
+### Card Components
+```tsx
+<Card className="paper-card p-6">
+  <h3 className="text-lg font-semibold text-ink mb-4">Title</h3>
+  <div className="space-y-3">
+    {/* Content */}
+  </div>
+</Card>
+```
+
+### Button Variants
+```tsx
+<Button className="bg-gradient-sakura">Primary Action</Button>
+<Button variant="outline" className="border-bamboo">Secondary</Button>
+```
+
+### Interactive Elements
+```tsx
+<div className="p-3 rounded-lg bg-washi hover:bg-white transition-colors cursor-pointer">
+  {/* Interactive content */}
+</div>
+```
+
+### Typography
+```tsx
+<h1 className="text-2xl md:text-4xl font-bold text-ink">
+<p className="text-muted-foreground">
+<span className="text-sm font-medium">
+```
+
+Remember: This project prioritizes consistency, accessibility, and mobile-first design while maintaining the Japanese stationary aesthetic. Always check existing components for patterns before creating new ones.
