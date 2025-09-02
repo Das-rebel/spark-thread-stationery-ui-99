@@ -68,6 +68,10 @@ export type Database = {
       }
       bookmarks: {
         Row: {
+          author_avatar: string | null
+          author_handle: string | null
+          author_name: string | null
+          author_verified: boolean | null
           collection_id: string | null
           content_type: string | null
           created_at: string | null
@@ -75,11 +79,14 @@ export type Database = {
           energy_level: number | null
           favicon_url: string | null
           focus_score: number | null
+          has_thread: boolean | null
           id: string
           image_url: string | null
+          images: string[] | null
           is_archived: boolean | null
           is_favorite: boolean | null
           is_private: boolean | null
+          likes_count: number | null
           mood: string | null
           personal_metadata: Json | null
           platform_id: string | null
@@ -88,12 +95,17 @@ export type Database = {
           reading_time_minutes: number | null
           source_platform: string | null
           tags: string[] | null
+          thread_count: number | null
           title: string
           updated_at: string | null
           url: string | null
           user_id: string | null
         }
         Insert: {
+          author_avatar?: string | null
+          author_handle?: string | null
+          author_name?: string | null
+          author_verified?: boolean | null
           collection_id?: string | null
           content_type?: string | null
           created_at?: string | null
@@ -101,11 +113,14 @@ export type Database = {
           energy_level?: number | null
           favicon_url?: string | null
           focus_score?: number | null
+          has_thread?: boolean | null
           id?: string
           image_url?: string | null
+          images?: string[] | null
           is_archived?: boolean | null
           is_favorite?: boolean | null
           is_private?: boolean | null
+          likes_count?: number | null
           mood?: string | null
           personal_metadata?: Json | null
           platform_id?: string | null
@@ -114,12 +129,17 @@ export type Database = {
           reading_time_minutes?: number | null
           source_platform?: string | null
           tags?: string[] | null
+          thread_count?: number | null
           title: string
           updated_at?: string | null
           url?: string | null
           user_id?: string | null
         }
         Update: {
+          author_avatar?: string | null
+          author_handle?: string | null
+          author_name?: string | null
+          author_verified?: boolean | null
           collection_id?: string | null
           content_type?: string | null
           created_at?: string | null
@@ -127,11 +147,14 @@ export type Database = {
           energy_level?: number | null
           favicon_url?: string | null
           focus_score?: number | null
+          has_thread?: boolean | null
           id?: string
           image_url?: string | null
+          images?: string[] | null
           is_archived?: boolean | null
           is_favorite?: boolean | null
           is_private?: boolean | null
+          likes_count?: number | null
           mood?: string | null
           personal_metadata?: Json | null
           platform_id?: string | null
@@ -140,6 +163,7 @@ export type Database = {
           reading_time_minutes?: number | null
           source_platform?: string | null
           tags?: string[] | null
+          thread_count?: number | null
           title?: string
           updated_at?: string | null
           url?: string | null
@@ -637,6 +661,14 @@ export type Database = {
       }
     }
     Functions: {
+      extract_domain_from_url: {
+        Args: { url_input: string }
+        Returns: string
+      }
+      format_time_ago: {
+        Args: { timestamp_input: string }
+        Returns: string
+      }
       generate_smart_actionables: {
         Args: { user_uuid: string }
         Returns: undefined
