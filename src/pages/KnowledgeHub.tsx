@@ -42,7 +42,14 @@ export default function KnowledgeHub() {
   }
 
   const handleCategorySelect = (category: string) => {
+    console.log('🎯 Tab switching to:', category);
     setActiveTab(category);
+  };
+
+  // Enhanced click handler with feedback
+  const handleTabClick = (tab: string, source: string) => {
+    console.log('🔥 Click detected:', { tab, source, timestamp: new Date().toISOString() });
+    setActiveTab(tab);
   };
 
   return (
@@ -87,7 +94,7 @@ export default function KnowledgeHub() {
             {activeTab === "overview" && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Discover Category */}
-                <div className="bg-gradient-to-br from-sakura/5 to-transparent border border-sakura/10 rounded-xl p-4 space-y-3">
+                <div className="category-card bg-gradient-to-br from-sakura/5 to-transparent border border-sakura/10 rounded-xl p-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-gradient-sakura rounded-lg flex items-center justify-center">
                       <Sparkles className="w-4 h-4 text-white" />
@@ -99,8 +106,12 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setActiveTab("discovery")}
-                      className="justify-start text-xs h-8"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleTabClick("discovery", "discover-button");
+                      }}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20"
                     >
                       <Sparkles className="w-3 h-3 mr-1" />
                       Discovery
@@ -108,8 +119,12 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setActiveTab("search")}
-                      className="justify-start text-xs h-8"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleTabClick("search", "search-button");
+                      }}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20"
                     >
                       <Search className="w-3 h-3 mr-1" />
                       Search
@@ -118,7 +133,7 @@ export default function KnowledgeHub() {
                 </div>
 
                 {/* Create Category */}
-                <div className="bg-gradient-to-br from-seal/5 to-transparent border border-seal/10 rounded-xl p-4 space-y-3">
+                <div className="category-card bg-gradient-to-br from-seal/5 to-transparent border border-seal/10 rounded-xl p-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-gradient-seal rounded-lg flex items-center justify-center">
                       <Zap className="w-4 h-4 text-white" />
@@ -130,8 +145,12 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setActiveTab("workflows")}
-                      className="justify-start text-xs h-8"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleTabClick("workflows", "workflows-button");
+                      }}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20"
                     >
                       <Zap className="w-3 h-3 mr-1" />
                       Workflows
@@ -139,8 +158,12 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setActiveTab("collections")}
-                      className="justify-start text-xs h-8"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleTabClick("collections", "collections-button");
+                      }}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20"
                     >
                       <FolderOpen className="w-3 h-3 mr-1" />
                       Collections
@@ -149,7 +172,7 @@ export default function KnowledgeHub() {
                 </div>
 
                 {/* Analyze Category */}
-                <div className="bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 rounded-xl p-4 space-y-3">
+                <div className="category-card bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 rounded-xl p-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
                       <BarChart3 className="w-4 h-4 text-white" />
@@ -161,8 +184,12 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setActiveTab("actionables")}
-                      className="justify-start text-xs h-8"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleTabClick("actionables", "actionables-button");
+                      }}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20"
                     >
                       <Target className="w-3 h-3 mr-1" />
                       Tasks
@@ -170,8 +197,12 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setActiveTab("analytics")}
-                      className="justify-start text-xs h-8"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleTabClick("analytics", "analytics-button");
+                      }}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20"
                     >
                       <BarChart3 className="w-3 h-3 mr-1" />
                       Analytics
@@ -195,8 +226,12 @@ export default function KnowledgeHub() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => setActiveTab("achievements")}
-                    className="shrink-0"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("achievements", "progress-button");
+                    }}
+                    className="interactive-button shrink-0"
                   >
                     View Progress
                   </Button>
@@ -218,8 +253,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>
@@ -236,8 +275,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>
@@ -254,8 +297,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>
@@ -273,8 +320,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>
@@ -291,8 +342,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>
@@ -309,8 +364,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>
@@ -327,8 +386,12 @@ export default function KnowledgeHub() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setActiveTab("overview")}
-                    className="p-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleTabClick("overview", "back-button");
+                    }}
+                    className="interactive-button p-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
                   </Button>

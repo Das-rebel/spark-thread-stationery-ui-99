@@ -56,6 +56,7 @@
     /* Gradients */
     --gradient-paper: linear-gradient(135deg, hsl(45 30% 96%), hsl(45 25% 94%));
     --gradient-ink: linear-gradient(135deg, hsl(220 40% 25%), hsl(220 45% 20%));
+    --gradient-primary: linear-gradient(135deg, hsl(220 40% 25%), hsl(220 35% 30%));
     --gradient-sakura: linear-gradient(135deg, hsl(345 50% 85%), hsl(345 40% 80%));
     --gradient-bamboo: linear-gradient(135deg, hsl(120 25% 45%), hsl(120 30% 40%));
     --gradient-seal: linear-gradient(135deg, hsl(355 70% 60%), hsl(355 65% 55%));
@@ -290,6 +291,10 @@
     background: var(--gradient-seal);
   }
 
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+
   .bg-gradient-gold {
     background: var(--gradient-gold);
   }
@@ -454,6 +459,51 @@
   .hover-lift:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-floating);
+  }
+
+  /* Interactive button enhancements */
+  .interactive-button {
+    @apply transition-all duration-200 active:scale-98;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+
+  .interactive-button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .interactive-button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-paper);
+  }
+
+  /* Tab button interactions */
+  .tab-button {
+    @apply relative overflow-hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tab-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .tab-button.active {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  /* Category card enhancements */
+  .category-card {
+    @apply transition-all duration-300 cursor-pointer;
+    transform: translateY(0);
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-floating);
+  }
+
+  .category-card:active {
+    transform: translateY(-2px);
   }
 
 
