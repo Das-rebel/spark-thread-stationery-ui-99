@@ -1,73 +1,199 @@
-# Welcome to your Lovable project
+# Knowledge Hub - AI-Powered Learning Companion
 
-## Project info
+A beautiful, responsive web application built with React, TypeScript, and Tailwind CSS, featuring a unique **Retro Japanese Stationary** design theme.
 
-**URL**: https://lovable.dev/projects/3535c5e0-c01f-41ca-b360-1e437a53226b
+## 🎨 Design System
 
-## How can I edit this code?
+This project features a comprehensive design system inspired by traditional Japanese stationary:
 
-There are several ways of editing your application.
+- **Color Palette**: Warm creams, deep ink blues, cherry blossom pinks, and bamboo greens
+- **Typography**: Elegant font combinations with Playfair Display and Inter
+- **Effects**: Paper textures, ink brush animations, and seal stamp interactions
+- **Components**: Fully styled UI library with consistent theming
 
-**Use Lovable**
+👉 **Full design documentation**: [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3535c5e0-c01f-41ca-b360-1e437a53226b) and start prompting.
+## 🚀 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+### Frontend
+- **React 18** with TypeScript
+- **Tailwind CSS** for styling with custom design system
+- **Shadcn/ui** components with custom theming
+- **Lucide React** for icons
+- **React Router** for navigation
+- **React Query** for state management
 
-**Use your preferred IDE**
+### Backend Integration
+- **Supabase** for database and authentication
+- **Real-time updates** and data synchronization
+- **Row Level Security** for data protection
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Build Tools
+- **Vite** for fast development and building
+- **TypeScript** for type safety
+- **ESLint** for code quality
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📁 Project Structure
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/
+│   ├── ui/                 # Base UI components (buttons, cards, etc.)
+│   ├── layout/             # Layout components (header, navigation)
+│   ├── knowledge/          # Knowledge hub features
+│   ├── twitter/            # Social media features
+│   └── user/               # User-related components
+├── pages/                  # Main application pages
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utility functions
+├── assets/                 # Images and static assets
+└── integrations/           # External service integrations
 ```
 
-**Edit a file directly in GitHub**
+## 🔧 Backend Development with Cursor
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+This project is optimized for **dual development**:
 
-**Use GitHub Codespaces**
+- **Frontend**: Continue using Lovable for UI/UX development
+- **Backend**: Use Cursor/VS Code for API development, database schema, etc.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### GitHub Sync Setup
 
-## What technologies are used for this project?
+1. **Connect to GitHub in Lovable**:
+   - Click the GitHub button in the top right
+   - Authorize the Lovable GitHub App
+   - Select your GitHub account/organization
+   - Click "Create Repository" to sync your project
 
-This project is built with:
+2. **Bidirectional Sync**:
+   - Changes in Lovable → Automatically push to GitHub
+   - Changes in GitHub → Automatically sync to Lovable
+   - Work simultaneously in both tools
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+3. **Working with Cursor**:
+   ```bash
+   # Clone the repository
+   git clone <your-github-url>
+   cd <your-project>
+   
+   # Install dependencies
+   npm install
+   
+   # Start development
+   npm run dev
+   ```
 
-## How can I deploy this project?
+### Development Workflow
+1. **Lovable**: Use for UI components, styling, frontend features
+2. **Cursor**: Use for database migrations, API routes, backend logic
+3. **Automatic Sync**: Both tools stay in sync via GitHub
 
-Simply open [Lovable](https://lovable.dev/projects/3535c5e0-c01f-41ca-b360-1e437a53226b) and click on Share -> Publish.
+## 🎯 Key Features
 
-## Can I connect a custom domain to my Lovable project?
+### Knowledge Hub
+- **AI-Powered Discovery**: Smart content recommendations
+- **Enhanced Search**: Semantic search with AI insights
+- **Smart Actionables**: AI-generated tasks from bookmarks
+- **Workflow Automation**: Automated task generation and follow-ups
+- **Learning Analytics**: Progress tracking and insights
 
-Yes, you can!
+### Social Features
+- **Twitter Integration**: Bookmark and organize tweets
+- **Thread Viewer**: Beautiful thread reading experience
+- **Social Bookmarking**: Save and categorize social content
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### UI/UX Excellence
+- **Responsive Design**: Mobile-first, works on all devices
+- **Dark Mode Support**: Automatic theme switching
+- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
+- **Performance**: Optimized loading, lazy loading, virtual scrolling
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🎨 Design System Usage
+
+### Color Guidelines
+```tsx
+// ✅ CORRECT - Use semantic tokens
+<Button className="bg-gradient-sakura text-white">
+<div className="text-ink bg-washi">
+
+// ❌ WRONG - Don't use direct colors
+<Button className="bg-pink-200 text-black">
+```
+
+### Available Design Tokens
+- **Colors**: `text-ink`, `text-sakura`, `bg-washi`, `bg-gradient-primary`
+- **Effects**: `paper-card`, `interactive-button`, `category-card`
+- **Animations**: `transition-smooth`, `hover-lift`
+
+### Typography Classes
+- **Headings**: `font-display` (Playfair Display)
+- **Body**: `font-sans` (Inter)
+- **Code**: `font-mono` (JetBrains Mono)
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: 320px - 767px
+- **Tablet**: 768px - 1023px  
+- **Desktop**: 1024px+
+- **Large Desktop**: 1440px+
+
+## 🛠 Development Commands
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+
+# Type checking
+npm run type-check   # Check TypeScript types
+```
+
+## 🚀 Deployment
+
+### Lovable Platform (Recommended)
+- Click "Publish" in Lovable for instant deployment
+- Custom domain support available
+- Automatic HTTPS and CDN
+
+### Self-Hosting
+```bash
+npm run build        # Create production build
+# Deploy the 'dist' folder to your hosting platform
+```
+
+Compatible with: Vercel, Netlify, AWS, GitHub Pages, etc.
+
+## 📄 Environment Variables
+
+Create a `.env` file:
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## 🎯 Component Library
+
+### Core UI Components
+- **Button**: Multiple variants with consistent theming
+- **Card**: Paper-effect cards with shadows
+- **Input**: Styled form inputs with validation states
+- **Navigation**: Tab and menu components
+
+### Feature Components
+- **Knowledge Hub**: AI-powered learning interface
+- **Search**: Enhanced search with filters and AI
+- **Actionables**: Task management with automation
+- **Analytics**: Progress tracking and insights
+
+---
+
+## 🤝 Contributing
+
+This project uses a dual development approach:
+1. **UI/Frontend**: Use Lovable for rapid development
+2. **Backend/Logic**: Use Cursor for detailed development
+3. **Automatic Sync**: GitHub keeps everything synchronized
+
+**Built with ❤️ using Lovable and designed for Cursor integration**
