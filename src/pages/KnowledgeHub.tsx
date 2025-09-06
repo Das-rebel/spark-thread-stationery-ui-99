@@ -106,12 +106,8 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleTabClick("discovery", "discover-button");
-                      }}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20"
+                      onClick={() => handleTabClick("discovery", "discover-button")}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20 cursor-pointer"
                     >
                       <Sparkles className="w-3 h-3 mr-1" />
                       Discovery
@@ -119,12 +115,8 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleTabClick("search", "search-button");
-                      }}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20"
+                      onClick={() => handleTabClick("search", "search-button")}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20 cursor-pointer"
                     >
                       <Search className="w-3 h-3 mr-1" />
                       Search
@@ -145,12 +137,8 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleTabClick("workflows", "workflows-button");
-                      }}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20"
+                      onClick={() => handleTabClick("workflows", "workflows-button")}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20 cursor-pointer"
                     >
                       <Zap className="w-3 h-3 mr-1" />
                       Workflows
@@ -158,12 +146,8 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleTabClick("collections", "collections-button");
-                      }}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20"
+                      onClick={() => handleTabClick("collections", "collections-button")}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20 cursor-pointer"
                     >
                       <FolderOpen className="w-3 h-3 mr-1" />
                       Collections
@@ -184,12 +168,8 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleTabClick("actionables", "actionables-button");
-                      }}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20"
+                      onClick={() => handleTabClick("actionables", "actionables-button")}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20 cursor-pointer"
                     >
                       <Target className="w-3 h-3 mr-1" />
                       Tasks
@@ -197,12 +177,8 @@ export default function KnowledgeHub() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleTabClick("analytics", "analytics-button");
-                      }}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20"
+                      onClick={() => handleTabClick("analytics", "analytics-button")}
+                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20 cursor-pointer"
                     >
                       <BarChart3 className="w-3 h-3 mr-1" />
                       Analytics
