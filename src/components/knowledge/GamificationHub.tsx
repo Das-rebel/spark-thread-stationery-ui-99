@@ -253,34 +253,43 @@ export function GamificationHub() {
       </div>
 
       {/* Progress Section */}
-      <Card className="paper-card p-6">
-        <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-primary" />
-            Learning Progress
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+      <Card className="paper-card p-6 border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
+            <TrendingUp className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-ink">Learning Progress</h3>
+            <p className="text-sm text-muted-foreground">Track your knowledge journey</p>
+          </div>
+        </div>
+        
+        <div className="space-y-6">
           {/* Level Progress */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-medium">Level {knowledgeStats.level} Progress</span>
+              <span className="font-semibold text-ink">Level {knowledgeStats.level} Progress</span>
               <span className="text-sm text-muted-foreground">
                 {knowledgeStats.currentXP} / {knowledgeStats.nextLevelXP} XP
               </span>
             </div>
             <Progress 
               value={(knowledgeStats.currentXP / knowledgeStats.nextLevelXP) * 100} 
-              className="h-3 bg-gradient-to-r from-primary to-primary/60"
+              className="h-4 bg-gradient-to-r from-primary/20 to-primary/10"
             />
+            <p className="text-xs text-muted-foreground">
+              {knowledgeStats.nextLevelXP - knowledgeStats.currentXP} XP until next level
+            </p>
           </div>
 
           {/* Streak Progress */}
-          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg">
-            <div className="flex items-center gap-3">
-              <Flame className="w-8 h-8 text-orange-500" />
+          <div className="flex items-center justify-between p-5 bg-gradient-to-r from-orange-100 to-red-50 rounded-xl border border-orange-200">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                <Flame className="w-6 h-6 text-white" />
+              </div>
               <div>
-                <p className="font-semibold text-orange-700">
+                <p className="font-bold text-orange-700 text-lg">
                   {learningStreak.current} Day Streak! 🔥
                 </p>
                 <p className="text-sm text-orange-600">
@@ -288,185 +297,191 @@ export function GamificationHub() {
                 </p>
               </div>
             </div>
-            <Badge variant="outline" className="border-orange-300 text-orange-700">
+            <Badge variant="outline" className="border-orange-300 text-orange-700 bg-orange-50">
               {learningStreak.lastActivity}
             </Badge>
           </div>
 
           {/* Weekly Stats */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-3 bg-muted/30 rounded-lg">
+            <div className="text-center p-4 bg-white/50 rounded-xl border border-primary/10">
               <p className="text-2xl font-bold text-ink">{knowledgeStats.totalNodes}</p>
-              <p className="text-xs text-muted-foreground">Total Nodes</p>
+              <p className="text-sm text-muted-foreground font-medium">Total Nodes</p>
             </div>
-            <div className="text-center p-3 bg-muted/30 rounded-lg">
+            <div className="text-center p-4 bg-white/50 rounded-xl border border-primary/10">
               <p className="text-2xl font-bold text-ink">{knowledgeStats.totalConnections}</p>
-              <p className="text-xs text-muted-foreground">Connections</p>
+              <p className="text-sm text-muted-foreground font-medium">Connections</p>
             </div>
-            <div className="text-center p-3 bg-muted/30 rounded-lg">
+            <div className="text-center p-4 bg-white/50 rounded-xl border border-primary/10">
               <p className="text-2xl font-bold text-green-600">+{knowledgeStats.weeklyGrowth}</p>
-              <p className="text-xs text-muted-foreground">This Week</p>
+              <p className="text-sm text-muted-foreground font-medium">This Week</p>
             </div>
           </div>
-        </CardContent>
+        </div>
       </Card>
 
       {/* Achievements Section */}
-      <Card className="paper-card p-6">
-        <CardHeader className="pb-4">
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-primary" />
-              Achievements
-            </CardTitle>
-            <div className="flex gap-1">
-              <Button
-                variant={selectedCategory === 'all' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setSelectedCategory('all')}
-                className="text-xs"
-              >
-                All
-              </Button>
-              {Object.entries(categoryIcons).map(([category, Icon]) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className="text-xs"
-                >
-                  <Icon className="w-3 h-3" />
-                </Button>
-              ))}
+      <Card className="paper-card p-6 border border-gold/20 bg-gradient-to-br from-gold/5 to-transparent">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center">
+              <Award className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-ink">Achievements</h3>
+              <p className="text-sm text-muted-foreground">Unlock rewards as you learn</p>
             </div>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredAchievements.map((achievement) => {
-              const CategoryIcon = categoryIcons[achievement.category];
-              const AchievementIcon = achievement.icon;
-              
-              return (
-                <Card 
-                  key={achievement.id} 
-                  className={cn(
-                    "transition-all hover:shadow-elegant",
-                    achievement.unlocked ? "bg-gradient-to-br from-card to-muted/30" : "opacity-75"
-                  )}
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      <div className={cn(
-                        "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
-                        achievement.unlocked 
-                          ? rarityColors[achievement.rarity]
-                          : "bg-muted"
-                      )}>
-                        <AchievementIcon className="w-6 h-6 text-white" />
+          <div className="flex gap-1">
+            <Button
+              variant={selectedCategory === 'all' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSelectedCategory('all')}
+              className="text-xs"
+            >
+              All
+            </Button>
+            {Object.entries(categoryIcons).map(([category, Icon]) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className="text-xs"
+              >
+                <Icon className="w-3 h-3" />
+              </Button>
+            ))}
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredAchievements.map((achievement) => {
+            const CategoryIcon = categoryIcons[achievement.category];
+            const AchievementIcon = achievement.icon;
+            
+            return (
+              <Card 
+                key={achievement.id} 
+                className={cn(
+                  "transition-all hover:shadow-elegant border-2",
+                  achievement.unlocked ? 
+                    "bg-gradient-to-br from-white to-gold/10 border-gold/30" : 
+                    "opacity-75 border-gray-200"
+                )}
+              >
+                <div className="p-5">
+                  <div className="flex items-start gap-4">
+                    <div className={cn(
+                      "w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg",
+                      achievement.unlocked 
+                        ? rarityColors[achievement.rarity]
+                        : "bg-muted"
+                    )}>
+                      <AchievementIcon className="w-7 h-7 text-white" />
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h4 className={cn(
+                            "font-bold text-lg",
+                            achievement.unlocked ? "text-ink" : "text-muted-foreground"
+                          )}>
+                            {achievement.title}
+                          </h4>
+                          <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                            {achievement.description}
+                          </p>
+                        </div>
+                        <div className="ml-2">
+                          {achievement.unlocked ? (
+                            <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                              <Trophy className="w-3 h-3 mr-1" />
+                              Unlocked
+                            </Badge>
+                          ) : (
+                            <Badge className={cn("text-xs text-white", rarityColors[achievement.rarity])}>
+                              {achievement.rarity}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                       
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h4 className={cn(
-                              "font-semibold",
-                              achievement.unlocked ? "text-ink" : "text-muted-foreground"
-                            )}>
-                              {achievement.title}
-                            </h4>
-                            <p className="text-sm text-muted-foreground mt-1">
-                              {achievement.description}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-1 ml-2">
-                            {achievement.unlocked ? (
-                              <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
-                                <Trophy className="w-3 h-3 mr-1" />
-                                Unlocked
-                              </Badge>
-                            ) : (
-                              <Badge className={cn("text-xs text-white", rarityColors[achievement.rarity])}>
-                                {achievement.rarity}
-                              </Badge>
-                            )}
-                          </div>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="flex items-center gap-1">
+                            <CategoryIcon className="w-4 h-4" />
+                            <span className="capitalize font-medium">{achievement.category}</span>
+                          </span>
+                          <span className="font-bold">
+                            {achievement.progress} / {achievement.maxProgress}
+                          </span>
                         </div>
                         
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center text-sm">
-                            <span className="flex items-center gap-1">
-                              <CategoryIcon className="w-3 h-3" />
-                              {achievement.category}
-                            </span>
-                            <span className="font-medium">
-                              {achievement.progress} / {achievement.maxProgress}
-                            </span>
-                          </div>
-                          
-                          <Progress 
-                            value={(achievement.progress / achievement.maxProgress) * 100}
-                            className="h-2"
-                          />
-                          
-                          <div className="flex justify-between items-center">
-                            <span className="text-xs text-muted-foreground">
-                              {achievement.unlocked ? `Unlocked ${achievement.unlockedAt}` : 
-                               `${achievement.maxProgress - achievement.progress} more to unlock`}
-                            </span>
-                            <div className="flex items-center gap-1 text-xs">
-                              <Star className="w-3 h-3 text-yellow-500" />
-                              <span className="font-medium">{achievement.points} XP</span>
-                            </div>
+                        <Progress 
+                          value={(achievement.progress / achievement.maxProgress) * 100}
+                          className="h-3"
+                        />
+                        
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-muted-foreground">
+                            {achievement.unlocked ? `Unlocked ${achievement.unlockedAt}` : 
+                             `${achievement.maxProgress - achievement.progress} more to unlock`}
+                          </span>
+                          <div className="flex items-center gap-1 text-sm">
+                            <Star className="w-4 h-4 text-yellow-500" />
+                            <span className="font-bold text-yellow-600">{achievement.points} XP</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </CardContent>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
       </Card>
 
       {/* Daily Challenges */}
-      <Card className="paper-card p-6">
-        <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-2">
-            <Target className="w-5 h-5 text-primary" />
-            Daily Challenges
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {[
-              { task: 'Create 3 new knowledge connections', progress: 2, max: 3, xp: 100 },
-              { task: 'Add 5 bookmarks to your collection', progress: 3, max: 5, xp: 75 },
-              { task: 'Write 1 insight or reflection', progress: 0, max: 1, xp: 150 }
-            ].map((challenge, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                <div className="flex-1">
-                  <p className="font-medium text-sm">{challenge.task}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Progress 
-                      value={(challenge.progress / challenge.max) * 100}
-                      className="flex-1 h-2"
-                    />
-                    <span className="text-xs text-muted-foreground">
-                      {challenge.progress}/{challenge.max}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 ml-4">
-                  <Star className="w-3 h-3 text-yellow-500" />
-                  <span className="text-sm font-medium">{challenge.xp}</span>
+      <Card className="paper-card p-6 border border-bamboo/20 bg-gradient-to-br from-bamboo/5 to-transparent">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-gradient-bamboo rounded-xl flex items-center justify-center">
+            <Target className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-ink">Daily Challenges</h3>
+            <p className="text-sm text-muted-foreground">Complete tasks to earn extra XP</p>
+          </div>
+        </div>
+        
+        <div className="space-y-4">
+          {[
+            { task: 'Create 3 new knowledge connections', progress: 2, max: 3, xp: 100 },
+            { task: 'Add 5 bookmarks to your collection', progress: 3, max: 5, xp: 75 },
+            { task: 'Write 1 insight or reflection', progress: 0, max: 1, xp: 150 }
+          ].map((challenge, index) => (
+            <div key={index} className="flex items-center justify-between p-4 bg-white/50 rounded-xl border border-bamboo/10 hover:bg-white/80 transition-colors">
+              <div className="flex-1">
+                <p className="font-semibold text-sm text-ink">{challenge.task}</p>
+                <div className="flex items-center gap-3 mt-2">
+                  <Progress 
+                    value={(challenge.progress / challenge.max) * 100}
+                    className="flex-1 h-3"
+                  />
+                  <span className="text-sm font-medium text-muted-foreground">
+                    {challenge.progress}/{challenge.max}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-        </CardContent>
+              <div className="flex items-center gap-1 ml-6 bg-yellow-50 px-3 py-1 rounded-lg border border-yellow-200">
+                <Star className="w-4 h-4 text-yellow-500" />
+                <span className="text-sm font-bold text-yellow-600">{challenge.xp} XP</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </Card>
     </div>
   );
