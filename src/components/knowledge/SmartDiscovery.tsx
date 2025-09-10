@@ -112,41 +112,60 @@ export function SmartDiscovery() {
 
   return (
     <div className="space-y-6">
+      {/* Hero Section */}
+      <div className="text-center py-6 px-4 bg-gradient-to-br from-sakura/10 via-gold/5 to-transparent rounded-2xl border border-sakura/20">
+        <div className="w-16 h-16 bg-gradient-sakura rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <Sparkles className="w-8 h-8 text-white animate-pulse" />
+        </div>
+        <h2 className="text-2xl font-bold text-ink mb-2">AI Discovery Engine</h2>
+        <p className="text-muted-foreground max-w-md mx-auto">Let our AI uncover hidden patterns and suggest the most relevant content based on your interests and behavior</p>
+      </div>
+
       {/* AI-Powered Recommendations */}
-      <Card className="paper-card p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Sparkles className="w-5 h-5 text-gold" />
-          <h3 className="text-lg font-semibold text-ink">Smart Recommendations</h3>
+      <Card className="paper-card p-6 border-2 border-sakura/10 shadow-lg">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-gradient-sakura rounded-xl flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-ink">Personalized for You</h3>
+            <p className="text-sm text-muted-foreground">AI-curated content matching your learning patterns</p>
+          </div>
         </div>
         
-        <div className="space-y-3">
+        <div className="space-y-4">
           {recommendations.map((item) => (
-            <div key={item.id} className="flex items-center justify-between p-3 rounded-lg bg-washi hover:bg-white transition-colors">
-              <div className="flex items-center gap-3">
-                {getTypeIcon(item.type)}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-medium text-ink">{item.title}</h4>
+            <div key={item.id} className="group flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-washi to-white hover:from-sakura/10 hover:to-gold/5 transition-all duration-200 border border-transparent hover:border-sakura/20 hover:shadow-md cursor-pointer">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-sakura/20 to-gold/20 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                  {getTypeIcon(item.type)}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h4 className="font-semibold text-ink group-hover:text-sakura transition-colors">{item.title}</h4>
                     {item.trending && (
-                      <Badge variant="secondary" className="text-xs bg-seal/10 text-seal">
+                      <Badge variant="secondary" className="text-xs bg-seal/20 text-seal border-seal/30">
                         <TrendingUp className="w-3 h-3 mr-1" />
-                        Trending
+                        Hot
                       </Badge>
                     )}
                     {item.collaborative && (
-                      <Badge variant="secondary" className="text-xs bg-bamboo/10 text-bamboo">
+                      <Badge variant="secondary" className="text-xs bg-bamboo/20 text-bamboo border-bamboo/30">
                         <Users className="w-3 h-3 mr-1" />
                         Team
                       </Badge>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs text-muted-foreground">
-                      {Math.round(item.relevanceScore * 100)}% match
-                    </span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1">
+                      <div className="w-2 h-2 bg-gradient-sakura rounded-full"></div>
+                      <span className="text-sm font-medium text-sakura">
+                        {Math.round(item.relevanceScore * 100)}% relevance
+                      </span>
+                    </div>
                     <div className="flex gap-1">
                       {item.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
+                        <Badge key={tag} variant="outline" className="text-xs hover:bg-sakura/10 hover:border-sakura/30 transition-colors">
                           {tag}
                         </Badge>
                       ))}
@@ -154,8 +173,8 @@ export function SmartDiscovery() {
                   </div>
                 </div>
               </div>
-              <Button variant="ghost" size="sm">
-                <ArrowRight className="w-4 h-4" />
+              <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowRight className="w-5 h-5 text-sakura" />
               </Button>
             </div>
           ))}
@@ -163,17 +182,30 @@ export function SmartDiscovery() {
       </Card>
 
       {/* Content Clusters */}
-      <Card className="paper-card p-6">
-        <h3 className="text-lg font-semibold text-ink mb-4">Knowledge Clusters</h3>
+      <Card className="paper-card p-6 border border-gold/20">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center">
+            <BookOpen className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-ink">Knowledge Networks</h3>
+            <p className="text-sm text-muted-foreground">Explore interconnected topics and themes</p>
+          </div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {clusters.map((cluster) => (
-            <Card key={cluster.id} className={`p-4 cursor-pointer hover:shadow-md transition-shadow ${cluster.color}`}>
-              <h4 className="font-semibold mb-2">{cluster.name}</h4>
-              <p className="text-sm opacity-80 mb-3">{cluster.description}</p>
-              <div className="flex items-center justify-between">
-                <span className="text-xs opacity-60">12 items</span>
-                <ArrowRight className="w-4 h-4" />
+            <Card key={cluster.id} className={`group p-5 cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-2 border-transparent hover:border-gold/30 ${cluster.color} bg-gradient-to-br from-white to-washi`}>
+              <div className="space-y-3">
+                <h4 className="font-bold text-lg group-hover:text-gold transition-colors">{cluster.name}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{cluster.description}</p>
+                <div className="flex items-center justify-between pt-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-gradient-gold rounded-full"></div>
+                    <span className="text-sm font-medium text-gold">24 resources</span>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
               </div>
             </Card>
           ))}
@@ -181,28 +213,37 @@ export function SmartDiscovery() {
       </Card>
 
       {/* Contextual Suggestions */}
-      <Card className="paper-card p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Clock className="w-5 h-5 text-bamboo" />
-          <h3 className="text-lg font-semibold text-ink">Contextual Suggestions</h3>
+      <Card className="paper-card p-6 border border-bamboo/20 bg-gradient-to-br from-bamboo/5 to-transparent">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-gradient-bamboo rounded-xl flex items-center justify-center">
+            <Clock className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-ink">Smart Suggestions</h3>
+            <p className="text-sm text-muted-foreground">Based on your recent activity and interests</p>
+          </div>
         </div>
         
-        <div className="space-y-2">
+        <div className="space-y-3">
           {contextualSuggestions.map((item) => (
-            <div key={item.id} className="flex items-center justify-between p-2 rounded bg-washi hover:bg-white transition-colors">
-              <div className="flex items-center gap-2">
-                {getTypeIcon(item.type)}
-                <span className="text-sm text-ink">{item.title}</span>
-                <div className="flex gap-1 ml-2">
-                  {item.tags.slice(0, 2).map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
+            <div key={item.id} className="group flex items-center justify-between p-4 rounded-xl bg-white/50 hover:bg-white transition-all duration-200 border border-bamboo/10 hover:border-bamboo/30 hover:shadow-md cursor-pointer">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-bamboo/20 rounded-lg flex items-center justify-center group-hover:bg-bamboo/30 transition-colors">
+                  {getTypeIcon(item.type)}
+                </div>
+                <div className="flex-1">
+                  <span className="text-sm font-medium text-ink group-hover:text-bamboo transition-colors">{item.title}</span>
+                  <div className="flex gap-1 mt-1">
+                    {item.tags.slice(0, 2).map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-xs bg-bamboo/10 text-bamboo border-bamboo/20">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <Button variant="ghost" size="sm">
-                <ArrowRight className="w-3 h-3" />
+              <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowRight className="w-4 h-4 text-bamboo" />
               </Button>
             </div>
           ))}

@@ -94,94 +94,103 @@ export default function KnowledgeHub() {
             {activeTab === "overview" && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Discover Category */}
-                <div className="category-card bg-gradient-to-br from-sakura/5 to-transparent border border-sakura/10 rounded-xl p-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-sakura rounded-lg flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white" />
+                <div className="category-card bg-gradient-to-br from-sakura/10 via-sakura/5 to-transparent border border-sakura/20 rounded-xl p-5 space-y-4 hover:shadow-lg transition-all duration-200">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-sakura rounded-xl flex items-center justify-center shadow-sm">
+                      <Sparkles className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="font-semibold text-ink">Discover</h3>
+                    <div>
+                      <h3 className="text-lg font-bold text-ink">Discover</h3>
+                      <p className="text-xs text-sakura/80 font-medium">AI-Powered Insights</p>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">AI-powered content discovery and search</p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <p className="text-sm text-muted-foreground leading-relaxed">Uncover hidden connections and get intelligent recommendations from your knowledge base</p>
+                  <div className="grid grid-cols-2 gap-3">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleTabClick("discovery", "discover-button")}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20 cursor-pointer"
+                      className="interactive-button justify-start text-xs h-9 hover:bg-sakura/30 hover:text-sakura-foreground cursor-pointer border border-sakura/20 hover:border-sakura/40 transition-all"
                     >
-                      <Sparkles className="w-3 h-3 mr-1" />
-                      Discovery
+                      <Sparkles className="w-3 h-3 mr-2" />
+                      Smart Discovery
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleTabClick("search", "search-button")}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-sakura/20 cursor-pointer"
+                      className="interactive-button justify-start text-xs h-9 hover:bg-sakura/30 hover:text-sakura-foreground cursor-pointer border border-sakura/20 hover:border-sakura/40 transition-all"
                     >
-                      <Search className="w-3 h-3 mr-1" />
-                      Search
+                      <Search className="w-3 h-3 mr-2" />
+                      Neural Search
                     </Button>
                   </div>
                 </div>
 
                 {/* Create Category */}
-                <div className="category-card bg-gradient-to-br from-seal/5 to-transparent border border-seal/10 rounded-xl p-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-seal rounded-lg flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-white" />
+                <div className="category-card bg-gradient-to-br from-seal/10 via-seal/5 to-transparent border border-seal/20 rounded-xl p-5 space-y-4 hover:shadow-lg transition-all duration-200">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-seal rounded-xl flex items-center justify-center shadow-sm">
+                      <Zap className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="font-semibold text-ink">Create</h3>
+                    <div>
+                      <h3 className="text-lg font-bold text-ink">Create</h3>
+                      <p className="text-xs text-seal/80 font-medium">Smart Organization</p>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">Organize and automate your workflow</p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <p className="text-sm text-muted-foreground leading-relaxed">Build intelligent workflows and organize your content with AI-powered automation</p>
+                  <div className="grid grid-cols-2 gap-3">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleTabClick("workflows", "workflows-button")}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20 cursor-pointer"
+                      className="interactive-button justify-start text-xs h-9 hover:bg-seal/30 hover:text-seal-foreground cursor-pointer border border-seal/20 hover:border-seal/40 transition-all"
                     >
-                      <Zap className="w-3 h-3 mr-1" />
-                      Workflows
+                      <Zap className="w-3 h-3 mr-2" />
+                      Auto Workflows
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleTabClick("collections", "collections-button")}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-seal/20 cursor-pointer"
+                      className="interactive-button justify-start text-xs h-9 hover:bg-seal/30 hover:text-seal-foreground cursor-pointer border border-seal/20 hover:border-seal/40 transition-all"
                     >
-                      <FolderOpen className="w-3 h-3 mr-1" />
-                      Collections
+                      <FolderOpen className="w-3 h-3 mr-2" />
+                      Smart Collections
                     </Button>
                   </div>
                 </div>
 
                 {/* Analyze Category */}
-                <div className="category-card bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 rounded-xl p-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                      <BarChart3 className="w-4 h-4 text-white" />
+                <div className="category-card bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-xl p-5 space-y-4 hover:shadow-lg transition-all duration-200">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-sm">
+                      <BarChart3 className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="font-semibold text-ink">Analyze</h3>
+                    <div>
+                      <h3 className="text-lg font-bold text-ink">Analyze</h3>
+                      <p className="text-xs text-primary/80 font-medium">Data-Driven Insights</p>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">Track progress and manage tasks</p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <p className="text-sm text-muted-foreground leading-relaxed">Track your learning progress and get actionable insights from your knowledge consumption patterns</p>
+                  <div className="grid grid-cols-2 gap-3">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleTabClick("actionables", "actionables-button")}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20 cursor-pointer"
+                      className="interactive-button justify-start text-xs h-9 hover:bg-primary/30 hover:text-primary-foreground cursor-pointer border border-primary/20 hover:border-primary/40 transition-all"
                     >
-                      <Target className="w-3 h-3 mr-1" />
-                      Tasks
+                      <Target className="w-3 h-3 mr-2" />
+                      Smart Tasks
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleTabClick("analytics", "analytics-button")}
-                      className="interactive-button justify-start text-xs h-8 hover:bg-primary/20 cursor-pointer"
+                      className="interactive-button justify-start text-xs h-9 hover:bg-primary/30 hover:text-primary-foreground cursor-pointer border border-primary/20 hover:border-primary/40 transition-all"
                     >
-                      <BarChart3 className="w-3 h-3 mr-1" />
-                      Analytics
+                      <BarChart3 className="w-3 h-3 mr-2" />
+                      Deep Analytics
                     </Button>
                   </div>
                 </div>
