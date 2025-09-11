@@ -76,6 +76,15 @@ export default {
 				bamboo: 'hsl(var(--bamboo-green))',
 				gold: 'hsl(var(--gold-accent))'
 			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-sakura': 'var(--gradient-sakura)',
+				'gradient-bamboo': 'var(--gradient-bamboo)',
+				'gradient-seal': 'var(--gradient-seal)',
+				'gradient-gold': 'var(--gradient-gold)',
+				'gradient-paper': 'var(--gradient-paper)',
+				'gradient-ink': 'var(--gradient-ink)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
