@@ -1,199 +1,222 @@
-# Knowledge Hub - AI-Powered Learning Companion
+# Knowledge Hub - AI-Powered Learning Platform
 
-A beautiful, responsive web application built with React, TypeScript, and Tailwind CSS, featuring a unique **Retro Japanese Stationary** design theme.
+A beautiful, mobile-first knowledge management application with AI-powered insights, semantic search, and learning analytics.
 
-## 🎨 Design System
+## 🚀 Features
 
-This project features a comprehensive design system inspired by traditional Japanese stationary:
+- **Smart Knowledge Capture**: Multi-platform content aggregation with AI analysis
+- **Semantic Search**: Natural language search powered by AI
+- **Learning Analytics**: Track your learning progress and streaks
+- **Smart Collections**: Auto-organized content based on topics
+- **Gamification**: Levels, XP, and achievements to motivate learning
+- **Platform Integration**: Connect Gmail, Twitter, GitHub, and more
 
-- **Color Palette**: Warm creams, deep ink blues, cherry blossom pinks, and bamboo greens
-- **Typography**: Elegant font combinations with Playfair Display and Inter
-- **Effects**: Paper textures, ink brush animations, and seal stamp interactions
-- **Components**: Fully styled UI library with consistent theming
+## 🛠 Tech Stack
 
-👉 **Full design documentation**: [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)
+- **Frontend**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS with Japanese Stationary design theme
+- **Backend**: Supabase (PostgreSQL + Edge Functions)
+- **UI Components**: Radix UI + Custom components
+- **State Management**: TanStack Query
+- **Routing**: React Router v6
 
-## 🚀 Tech Stack
+## 📋 Prerequisites
 
-### Frontend
-- **React 18** with TypeScript
-- **Tailwind CSS** for styling with custom design system
-- **Shadcn/ui** components with custom theming
-- **Lucide React** for icons
-- **React Router** for navigation
-- **React Query** for state management
+- Node.js 18+ and npm
+- Supabase account (for backend)
+- Git
 
-### Backend Integration
-- **Supabase** for database and authentication
-- **Real-time updates** and data synchronization
-- **Row Level Security** for data protection
+## 🏃‍♂️ Quick Start
 
-### Build Tools
-- **Vite** for fast development and building
-- **TypeScript** for type safety
-- **ESLint** for code quality
-
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── ui/                 # Base UI components (buttons, cards, etc.)
-│   ├── layout/             # Layout components (header, navigation)
-│   ├── knowledge/          # Knowledge hub features
-│   ├── twitter/            # Social media features
-│   └── user/               # User-related components
-├── pages/                  # Main application pages
-├── hooks/                  # Custom React hooks
-├── lib/                    # Utility functions
-├── assets/                 # Images and static assets
-└── integrations/           # External service integrations
-```
-
-## 🔧 Backend Development with Cursor
-
-This project is optimized for **dual development**:
-
-- **Frontend**: Continue using Lovable for UI/UX development
-- **Backend**: Use Cursor/VS Code for API development, database schema, etc.
-
-### GitHub Sync Setup
-
-1. **Connect to GitHub in Lovable**:
-   - Click the GitHub button in the top right
-   - Authorize the Lovable GitHub App
-   - Select your GitHub account/organization
-   - Click "Create Repository" to sync your project
-
-2. **Bidirectional Sync**:
-   - Changes in Lovable → Automatically push to GitHub
-   - Changes in GitHub → Automatically sync to Lovable
-   - Work simultaneously in both tools
-
-3. **Working with Cursor**:
-   ```bash
-   # Clone the repository
-   git clone <your-github-url>
-   cd <your-project>
-   
-   # Install dependencies
-   npm install
-   
-   # Start development
-   npm run dev
-   ```
-
-### Development Workflow
-1. **Lovable**: Use for UI components, styling, frontend features
-2. **Cursor**: Use for database migrations, API routes, backend logic
-3. **Automatic Sync**: Both tools stay in sync via GitHub
-
-## 🎯 Key Features
-
-### Knowledge Hub
-- **AI-Powered Discovery**: Smart content recommendations
-- **Enhanced Search**: Semantic search with AI insights
-- **Smart Actionables**: AI-generated tasks from bookmarks
-- **Workflow Automation**: Automated task generation and follow-ups
-- **Learning Analytics**: Progress tracking and insights
-
-### Social Features
-- **Twitter Integration**: Bookmark and organize tweets
-- **Thread Viewer**: Beautiful thread reading experience
-- **Social Bookmarking**: Save and categorize social content
-
-### UI/UX Excellence
-- **Responsive Design**: Mobile-first, works on all devices
-- **Dark Mode Support**: Automatic theme switching
-- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
-- **Performance**: Optimized loading, lazy loading, virtual scrolling
-
-## 🎨 Design System Usage
-
-### Color Guidelines
-```tsx
-// ✅ CORRECT - Use semantic tokens
-<Button className="bg-gradient-sakura text-white">
-<div className="text-ink bg-washi">
-
-// ❌ WRONG - Don't use direct colors
-<Button className="bg-pink-200 text-black">
-```
-
-### Available Design Tokens
-- **Colors**: `text-ink`, `text-sakura`, `bg-washi`, `bg-gradient-primary`
-- **Effects**: `paper-card`, `interactive-button`, `category-card`
-- **Animations**: `transition-smooth`, `hover-lift`
-
-### Typography Classes
-- **Headings**: `font-display` (Playfair Display)
-- **Body**: `font-sans` (Inter)
-- **Code**: `font-mono` (JetBrains Mono)
-
-## 📱 Responsive Breakpoints
-
-- **Mobile**: 320px - 767px
-- **Tablet**: 768px - 1023px  
-- **Desktop**: 1024px+
-- **Large Desktop**: 1440px+
-
-## 🛠 Development Commands
+### 1. Clone the Repository
 
 ```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-
-# Type checking
-npm run type-check   # Check TypeScript types
+git clone <your-repo-url>
+cd <project-name>
+npm install
 ```
 
-## 🚀 Deployment
+### 2. Environment Setup
 
-### Lovable Platform (Recommended)
-- Click "Publish" in Lovable for instant deployment
-- Custom domain support available
-- Automatic HTTPS and CDN
+Create `.env.local`:
 
-### Self-Hosting
-```bash
-npm run build        # Create production build
-# Deploy the 'dist' folder to your hosting platform
-```
-
-Compatible with: Vercel, Netlify, AWS, GitHub Pages, etc.
-
-## 📄 Environment Variables
-
-Create a `.env` file:
 ```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-## 🎯 Component Library
+### 3. Run Development Server
 
-### Core UI Components
-- **Button**: Multiple variants with consistent theming
-- **Card**: Paper-effect cards with shadows
-- **Input**: Styled form inputs with validation states
-- **Navigation**: Tab and menu components
+```bash
+npm run dev
+```
 
-### Feature Components
-- **Knowledge Hub**: AI-powered learning interface
-- **Search**: Enhanced search with filters and AI
-- **Actionables**: Task management with automation
-- **Analytics**: Progress tracking and insights
+Visit `http://localhost:5173`
 
----
+## 🎨 Design System
+
+This project uses a custom "Retro Japanese Stationary" design theme:
+
+- **Color Palette**: Sakura pink, Ink black, Washi cream, Bamboo green
+- **Typography**: Clean sans-serif with Japanese-inspired spacing
+- **Components**: Paper-textured cards with elegant shadows
+- **Responsive**: Mobile-first with tablet and desktop breakpoints
+
+See `DESIGN_SYSTEM.md` for detailed guidelines.
+
+## 🗄 Backend Development
+
+For backend development with Cursor IDE, see detailed guide:
+**[CURSOR_BACKEND_SETUP.md](./CURSOR_BACKEND_SETUP.md)**
+
+### Database Schema
+
+Core tables:
+- `user_profiles` - User information and settings
+- `bookmarks` - Saved content from various sources
+- `collections` - Organized content groups
+- `smart_actionables` - AI-generated action items
+- `learning_paths` - Structured learning journeys
+- `learning_streaks` - Gamification data
+- `daily_activities` - Usage analytics
+
+All tables use Row Level Security (RLS) for data protection.
+
+## 📂 Project Structure
+
+```
+src/
+├── components/
+│   ├── knowledge/      # Knowledge hub features
+│   ├── twitter/        # Social feed features
+│   ├── layout/         # App layout components
+│   ├── ui/             # Reusable UI components
+│   └── user/           # User-specific components
+├── hooks/              # Custom React hooks
+├── pages/              # Route pages
+├── integrations/       # Supabase integration
+│   └── supabase/
+│       ├── client.ts   # Supabase client
+│       └── types.ts    # Generated types
+└── lib/                # Utilities
+
+supabase/
+├── migrations/         # Database migrations
+└── config.toml         # Supabase config
+```
+
+## 🔒 Security
+
+- Row Level Security (RLS) enabled on all tables
+- User-scoped data access only
+- Secure authentication via Supabase Auth
+- No sensitive data in frontend code
+
+**Security Issues**: See active security findings and fixes needed in the Lovable dashboard.
+
+## 🚢 Deployment
+
+### Deploy to Lovable Cloud (Recommended)
+
+1. Changes auto-deploy when connected to GitHub
+2. Database migrations run through Lovable UI
+3. Environment variables managed in Lovable dashboard
+
+### Self-Hosting
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+Deploy `dist/` folder to any static hosting (Vercel, Netlify, etc.)
+
+## 🧪 Testing
+
+```bash
+# Type checking
+npm run type-check
+
+# Linting
+npm run lint
+
+# Build test
+npm run build
+```
+
+## 📱 Mobile Development
+
+This app is mobile-first and works great as a PWA. For native mobile apps:
+
+See Capacitor setup in the docs (not yet configured).
 
 ## 🤝 Contributing
 
-This project uses a dual development approach:
-1. **UI/Frontend**: Use Lovable for rapid development
-2. **Backend/Logic**: Use Cursor for detailed development
-3. **Automatic Sync**: GitHub keeps everything synchronized
+When using Cursor IDE for development:
 
-**Built with ❤️ using Lovable and designed for Cursor integration**
+1. Use AI to understand the codebase: "Explain the bookmark flow"
+2. Generate new features: "Add a tagging system for bookmarks"  
+3. Create migrations: "Create a migration for tags table with RLS"
+4. Fix bugs: "Debug why bookmarks aren't loading"
+
+## 📝 Development Workflow
+
+### With Lovable + GitHub + Cursor
+
+1. **Connect GitHub in Lovable**: Click GitHub button → Create Repository
+2. **Clone locally**: `git clone <your-repo-url>`
+3. **Make changes in Cursor**: Edit code, create migrations, add features
+4. **Push to GitHub**: `git push origin main`
+5. **Auto-syncs to Lovable**: Changes appear in Lovable automatically
+6. **Or use Lovable**: Make UI changes in Lovable → auto-pushes to GitHub
+
+### Backend Changes with Cursor
+
+1. Create migration files in `supabase/migrations/`
+2. Test locally with `supabase start`
+3. Push to GitHub
+4. Apply in production via Lovable UI
+
+See `CURSOR_BACKEND_SETUP.md` for detailed backend workflow.
+
+## 🐛 Troubleshooting
+
+### Frontend Issues
+- Clear browser cache and reload
+- Check console for errors
+- Verify environment variables
+
+### Backend Issues  
+- Check RLS policies if queries fail
+- Ensure user is authenticated
+- Review Supabase logs
+
+### Build Issues
+- Run `npm install` to update dependencies
+- Clear `node_modules` and reinstall
+- Check Node.js version (18+)
+
+## 📚 Documentation
+
+- [Design System](./DESIGN_SYSTEM.md) - UI/UX guidelines
+- [Backend Setup](./CURSOR_BACKEND_SETUP.md) - Database and API development
+- [Cursor Guide](./CURSOR_GUIDE.md) - AI development tips
+
+## 🔗 Resources
+
+- [Lovable Documentation](https://docs.lovable.dev/)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [React Documentation](https://react.dev/)
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 🙏 Acknowledgments
+
+Built with [Lovable](https://lovable.dev) - The AI-powered app builder  
+Powered by [Supabase](https://supabase.com) - Open source Firebase alternative
