@@ -72,75 +72,42 @@ export default function KnowledgeHub() {
           {/* Categorized Navigation */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
             {/* Primary Category Cards - Only show on overview */}
-            {activeTab === "overview" && <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {activeTab === "overview" && <div className="grid grid-cols-3 gap-3">
                 {/* Discover Category */}
-                <div className="group category-card bg-gradient-to-br from-sakura/10 via-sakura/5 to-transparent border border-sakura/20 rounded-xl p-6 space-y-4 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer" onClick={() => handleTabClick("discovery", "discover-card")}>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      
-                      <div>
-                        <h3 className="text-xl font-bold text-ink">Discover</h3>
-                        
-                      </div>
+                <div className="paper-card p-4 hover:shadow-paper transition-all cursor-pointer" onClick={() => handleTabClick("discovery", "discover-card")}>
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center">
+                      <Brain className="w-6 h-6 text-blue-600" />
                     </div>
-                    <ArrowRight className="w-5 h-5 text-sakura/60 group-hover:text-sakura transition-all" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    <div className="text-center p-3 bg-white/50 rounded-lg border border-sakura/10">
-                      <Brain className="w-5 h-5 text-sakura mx-auto mb-1" />
-                      <span className="text-xs text-sakura/80 font-medium">Smart AI</span>
-                    </div>
-                    <div className="text-center p-3 bg-white/50 rounded-lg border border-sakura/10">
-                      <Network className="w-5 h-5 text-sakura mx-auto mb-1" />
-                      <span className="text-xs text-sakura/80 font-medium">Connections</span>
+                    <div>
+                      <h3 className="font-semibold text-ink mb-1">Discover</h3>
+                      <p className="text-xs text-muted-foreground">Smart AI insights</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Create Category */}
-                <div className="group category-card bg-gradient-to-br from-seal/10 via-seal/5 to-transparent border border-seal/20 rounded-xl p-6 space-y-4 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer" onClick={() => handleTabClick("workflows", "create-card")}>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      
-                      <div>
-                        <h3 className="text-xl font-bold text-ink">Create</h3>
-                        
-                      </div>
+                <div className="paper-card p-4 hover:shadow-paper transition-all cursor-pointer" onClick={() => handleTabClick("workflows", "create-card")}>
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-50 to-green-100 rounded-xl flex items-center justify-center">
+                      <Bot className="w-6 h-6 text-green-600" />
                     </div>
-                    <ArrowRight className="w-5 h-5 text-seal/60 group-hover:text-seal transition-all" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    <div className="text-center p-3 bg-white/50 rounded-lg border border-seal/10">
-                      <Bot className="w-5 h-5 text-seal mx-auto mb-1" />
-                      <span className="text-xs text-seal/80 font-medium">Automate</span>
-                    </div>
-                    <div className="text-center p-3 bg-white/50 rounded-lg border border-seal/10">
-                      <Settings className="w-5 h-5 text-seal mx-auto mb-1" />
-                      <span className="text-xs text-seal/80 font-medium">Organize</span>
+                    <div>
+                      <h3 className="font-semibold text-ink mb-1">Create</h3>
+                      <p className="text-xs text-muted-foreground">Automate flows</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Analyze Category */}
-                <div className="group category-card bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-xl p-6 space-y-4 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer" onClick={() => handleTabClick("analytics", "analyze-card")}>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      
-                      <div>
-                        <h3 className="text-xl font-bold text-ink">Analyze</h3>
-                        
-                      </div>
+                <div className="paper-card p-4 hover:shadow-paper transition-all cursor-pointer" onClick={() => handleTabClick("analytics", "analyze-card")}>
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-purple-600" />
                     </div>
-                    <ArrowRight className="w-5 h-5 text-primary/60 group-hover:text-primary transition-all" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    <div className="text-center p-3 bg-white/50 rounded-lg border border-primary/10">
-                      <TrendingUp className="w-5 h-5 text-primary mx-auto mb-1" />
-                      <span className="text-xs text-primary/80 font-medium">Trends</span>
-                    </div>
-                    <div className="text-center p-3 bg-white/50 rounded-lg border border-primary/10">
-                      <Target className="w-5 h-5 text-primary mx-auto mb-1" />
-                      <span className="text-xs text-primary/80 font-medium">Goals</span>
+                    <div>
+                      <h3 className="font-semibold text-ink mb-1">Analyze</h3>
+                      <p className="text-xs text-muted-foreground">Track trends</p>
                     </div>
                   </div>
                 </div>

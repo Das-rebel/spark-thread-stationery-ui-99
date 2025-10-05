@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PerformanceMonitor } from "@/components/ui/performance-monitor";
+
 import { PullToRefresh } from "@/components/ui/pulltorefresh";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { OfflineIndicator } from "@/components/ui/offline-indicator";
@@ -87,7 +87,6 @@ function AppContent() {
           <AppRoutes />
         </BrowserRouter>
       </PullToRefresh>
-      <PerformanceMonitor />
     </>
   );
 }
