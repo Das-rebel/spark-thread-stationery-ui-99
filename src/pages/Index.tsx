@@ -31,24 +31,24 @@ const Index = () => {
     <AppLayout>
       <div className="min-h-screen pb-8 safe-area-inset-bottom">
         {/* Header */}
-        <header className="sticky top-0 z-10 bg-gradient-to-br from-washi to-background/95 backdrop-blur-sm border-b">
+        <header className="sticky top-0 z-10 bg-gradient-to-br from-washi via-background/98 to-background/95 backdrop-blur-md border-b shadow-sm">
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-sakura rounded-xl flex items-center justify-center">
-                <Brain className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 bg-gradient-sakura rounded-xl flex items-center justify-center shadow-paper">
+                <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-ink">Knowledge Hub</h1>
-                <p className="text-xs text-muted-foreground">AI learning companion</p>
+                <p className="text-xs text-muted-foreground font-medium">AI learning companion</p>
               </div>
             </div>
             <Button 
               onClick={() => navigate('/add')}
-              className="bg-gradient-sakura text-white hover:shadow-floating focus-ring"
+              className="bg-gradient-sakura text-white hover:shadow-floating focus-ring shadow-sm"
               size="sm"
               aria-label="Add new content"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-5 h-5" />
             </Button>
           </div>
 
@@ -73,19 +73,19 @@ const Index = () => {
           <div className="grid grid-cols-2 gap-4">
             <Button 
               onClick={() => navigate('/knowledge')}
-              className="h-16 bg-gradient-bamboo text-white hover:shadow-floating flex flex-col gap-1 focus-ring"
+              className="h-20 bg-gradient-bamboo text-white hover:shadow-floating flex flex-col gap-2 focus-ring transition-all hover:scale-[1.02] shadow-sm"
               aria-label="Search your knowledge base"
             >
-              <Search className="w-5 h-5" />
-              <span className="text-sm">Search Knowledge</span>
+              <Search className="w-6 h-6" />
+              <span className="text-sm font-semibold">Search Knowledge</span>
             </Button>
             <Button 
               onClick={() => navigate('/add')}
-              className="h-16 bg-gradient-seal text-white hover:shadow-floating flex flex-col gap-1 focus-ring"
+              className="h-20 bg-gradient-seal text-white hover:shadow-floating flex flex-col gap-2 focus-ring transition-all hover:scale-[1.02] shadow-sm"
               aria-label="Add new content to your knowledge base"
             >
-              <Zap className="w-5 h-5" />
-              <span className="text-sm">Add Content</span>
+              <Zap className="w-6 h-6" />
+              <span className="text-sm font-semibold">Add Content</span>
             </Button>
           </div>
         </main>

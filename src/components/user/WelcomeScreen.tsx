@@ -57,15 +57,17 @@ export function WelcomeScreen({
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Welcome Header */}
-      <Card className="paper-card-floating p-6 bg-gradient-sakura">
-        <div className="flex items-center justify-between mb-4">
+      <Card className="paper-card-floating p-6 bg-gradient-to-br from-sakura/20 to-washi overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-sakura opacity-10 rounded-full blur-3xl"></div>
+        
+        <div className="flex items-center justify-between mb-4 relative z-10">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-gradient-ink rounded-2xl flex items-center justify-center text-2xl seal-stamp shadow-paper">
+            <div className="w-16 h-16 bg-gradient-ink rounded-2xl flex items-center justify-center text-3xl seal-stamp shadow-paper">
               🧠
             </div>
             <div>
               <h2 className="text-xl font-bold text-ink flex items-center gap-2">
-                {getGreeting()}, {userName}! {getTimeBasedEmoji()}
+                {getGreeting()}, {userName}! <span className="text-2xl">{getTimeBasedEmoji()}</span>
               </h2>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="w-4 h-4" />
@@ -74,50 +76,50 @@ export function WelcomeScreen({
             </div>
           </div>
           
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center bg-white/80 rounded-xl px-3 py-2 shadow-sm">
             <div className="flex items-center gap-1 text-orange-500 mb-1">
-              <Flame className="w-5 h-5" />
-              <span className="text-lg font-bold">{streak}</span>
+              <Flame className="w-6 h-6" />
+              <span className="text-xl font-bold">{streak}</span>
             </div>
-            <span className="text-xs text-muted-foreground">day streak</span>
+            <span className="text-xs text-muted-foreground font-medium">day streak</span>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-4">
+        <div className="mb-4 relative z-10">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-ink">Daily Learning Goal</span>
-            <span className="text-sm text-muted-foreground">{completed}/{dailyGoal}</span>
+            <span className="text-sm font-semibold text-ink">Daily Learning Goal</span>
+            <span className="text-sm font-bold text-ink">{completed}/{dailyGoal}</span>
           </div>
-          <Progress value={(completed / dailyGoal) * 100} className="h-2" />
+          <Progress value={(completed / dailyGoal) * 100} className="h-3" />
         </div>
 
         {/* Level & XP */}
-        <div className="flex items-center justify-between">
-          <Badge variant="secondary" className="text-xs bg-gradient-ink text-white">
-            <Award className="w-3 h-3 mr-1" />
+        <div className="flex items-center justify-between relative z-10">
+          <Badge variant="secondary" className="text-xs bg-gradient-ink text-white px-3 py-1">
+            <Award className="w-4 h-4 mr-1" />
             Level {level}
           </Badge>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Zap className="w-4 h-4 text-yellow-500" />
+          <div className="flex items-center gap-1.5 text-sm font-medium text-ink">
+            <Zap className="w-5 h-5 text-yellow-500" />
             <span>{weeklyXP} XP this week</span>
           </div>
         </div>
       </Card>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-3 gap-4">
-        <Card className="paper-card p-4 text-center">
-          <div className="text-2xl font-bold text-ink mb-1">247</div>
-          <div className="text-xs text-muted-foreground">Saved Items</div>
+      <div className="grid grid-cols-3 gap-3">
+        <Card className="paper-card p-4 text-center hover:shadow-paper transition-shadow">
+          <div className="text-3xl font-bold text-ink mb-1">247</div>
+          <div className="text-xs text-muted-foreground font-medium">Saved Items</div>
         </Card>
-        <Card className="paper-card p-4 text-center">
-          <div className="text-2xl font-bold text-ink mb-1">18</div>
-          <div className="text-xs text-muted-foreground">Collections</div>
+        <Card className="paper-card p-4 text-center hover:shadow-paper transition-shadow">
+          <div className="text-3xl font-bold text-ink mb-1">18</div>
+          <div className="text-xs text-muted-foreground font-medium">Collections</div>
         </Card>
-        <Card className="paper-card p-4 text-center">
-          <div className="text-2xl font-bold text-ink mb-1">34</div>
-          <div className="text-xs text-muted-foreground">Actions Done</div>
+        <Card className="paper-card p-4 text-center hover:shadow-paper transition-shadow">
+          <div className="text-3xl font-bold text-ink mb-1">34</div>
+          <div className="text-xs text-muted-foreground font-medium">Actions Done</div>
         </Card>
       </div>
 
