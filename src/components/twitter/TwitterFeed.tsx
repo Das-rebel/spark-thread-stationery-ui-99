@@ -5,6 +5,7 @@ import { PullToRefresh } from "@/components/ui/pulltorefresh";
 import { toast } from "@/hooks/use-toast";
 import { useBookmarks } from "@/hooks/use-bookmarks";
 import { Skeleton } from "@/components/ui/skeleton";
+import { motion } from "framer-motion";
 
 export function TwitterFeed() {
   const { bookmarks, loading, error, refetch } = useBookmarks();
@@ -56,21 +57,30 @@ export function TwitterFeed() {
   }
 
   return (
-    <div className="flex-1 overflow-hidden pb-20">
+    <div className="flex-1 overflow-hidden">
       <PullToRefresh onRefresh={handleRefresh}>
-        <div className="h-full overflow-y-auto">
+        <div className="h-full overflow-y-auto scrollbar-hide pb-24">
           {/* Header */}
-          <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border p-4 z-10 safe-area-inset-top">
-            <h2 className="text-xl font-semibold text-ink brush-stroke">Collections</h2>
-            <p className="text-sm text-muted-foreground">Your curated knowledge</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border px-4 py-3 z-10"
+          >
+            <h2 className="text-lg font-semibold text-ink">Collections</h2>
+            <p className="text-xs text-muted-foreground">Your curated knowledge</p>
+          </motion.div>
 
           {/* Compose Bookmark Section */}
-          <div className="p-4">
-            <Card className="paper-card p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 }}
+            className="p-3"
+          >
+            <Card className="paper-card p-3">
               <TweetComposer compact />
             </Card>
-          </div>
+          </motion.div>
 
           {/* Loading State */}
           {loading && (
@@ -97,15 +107,16 @@ export function TwitterFeed() {
 
           {/* Bookmarks */}
           {!loading && bookmarks.length > 0 && (
-            <div className="p-4 space-y-4">
+            <div className="px-3 pb-3 space-y-3">
               {bookmarks.map((bookmark, index) => (
-                <div
+                <motion.div
                   key={bookmark.id}
-                  className="animate-fade-slide-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
                 >
                   <TweetCard tweet={bookmark} />
-                </div>
+                </motion.div>
               ))}
             </div>
           )}

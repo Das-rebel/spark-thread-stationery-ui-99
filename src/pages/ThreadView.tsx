@@ -1,28 +1,29 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { ThreadViewer } from "@/components/twitter/ThreadViewer";
-import { TwitterSidebar } from "@/components/twitter/TwitterSidebar";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ThreadView = () => {
   const { threadId } = useParams();
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gradient-paper">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-4">
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <TwitterSidebar />
-            </div>
-            
-            {/* Thread View */}
-            <div className="lg:col-span-3">
-              <ThreadViewer threadId={threadId} />
-            </div>
-          </div>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="min-h-screen bg-gradient-paper pb-24"
+      >
+        <div className="max-w-2xl mx-auto p-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <ThreadViewer threadId={threadId} />
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </AppLayout>
   );
 };

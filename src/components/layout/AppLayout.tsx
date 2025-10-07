@@ -16,12 +16,11 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <div className="min-h-screen bg-gradient-paper overflow-x-hidden">
-      <div className="max-w-md mx-auto min-h-screen bg-background shadow-xl relative">
+      <div className="max-w-2xl mx-auto min-h-screen bg-background relative">
         {location.pathname !== "/" && <Header />}
         
         <GestureHandler enableBackGesture={true}>
-          <main className="pb-24 mobile-optimized scroll-smooth" 
-                style={{ paddingBottom: 'max(5rem, calc(5rem + env(safe-area-inset-bottom)))' }}>
+          <main className="mobile-optimized scroll-smooth scrollbar-hide">
             {children}
           </main>
         </GestureHandler>

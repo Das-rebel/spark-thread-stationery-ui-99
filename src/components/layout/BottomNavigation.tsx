@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Brain, Plus, Twitter, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 interface NavItem {
   id: string;
@@ -56,50 +56,68 @@ export function BottomNavigation() {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border safe-area-inset-bottom">
-      <div className="max-w-md mx-auto px-2 py-2 pb-safe"
-           style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
+    <motion.nav 
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border/50"
+      style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}
+    >
+      <div className="max-w-2xl mx-auto px-1 py-2">
         <div className="flex items-center justify-around">
-          {navItems.map((item) => {
+          {navItems.map((item, index) => {
             const active = isActive(item.path);
             const Icon = item.icon;
             
             return (
-              <Link key={item.id} to={item.path} className="flex-1">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(
-                    "flex flex-col items-center gap-1 h-auto py-2 px-2 w-full transition-all duration-200",
-                    "hover:bg-sakura/10 hover:scale-105",
-                    active
-                      ? "text-sakura bg-sakura/5 shadow-sm"
-                      : "text-muted-foreground hover:text-ink"
-                  )}
-                >
-                  <div className="relative">
-                    <Icon className={cn(
-                      "w-5 h-5 transition-all duration-200",
-                      active ? "scale-110" : ""
-                    )} />
-                    {item.badge && (
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-seal text-white text-xs rounded-full flex items-center justify-center font-bold min-w-4">
-                        {item.badge > 9 ? '9+' : item.badge}
-                      </div>
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="flex-1"
+              >
+                <Link to={item.path} className="flex flex-col items-center gap-0.5 py-2 px-2 rounded-xl transition-all duration-200 group">
+                  <motion.div 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={cn(
+                      "p-2 rounded-xl transition-all relative",
+                      active
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground group-hover:bg-accent group-hover:text-primary"
                     )}
-                  </div>
+                  >
+                    <Icon className="w-5 h-5" />
+                    {item.badge && (
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -top-1 -right-1 w-4 h-4 bg-seal text-white text-[10px] rounded-full flex items-center justify-center font-bold min-w-4"
+                      >
+                        {item.badge > 9 ? '9+' : item.badge}
+                      </motion.div>
+                    )}
+                  </motion.div>
                   <span className={cn(
-                    "text-xs font-medium transition-all duration-200",
-                    active ? "opacity-100" : "opacity-70"
+                    "text-[10px] font-medium transition-all",
+                    active ? "text-primary" : "text-muted-foreground"
                   )}>
                     {item.label}
                   </span>
-                </Button>
-              </Link>
+                  {active && (
+                    <motion.div 
+                      layoutId="activeIndicator"
+                      className="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             );
           })}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

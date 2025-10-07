@@ -7,6 +7,7 @@ import { CustomIcons } from "@/components/icons";
 import { Link } from "react-router-dom";
 import { BookmarkPeep } from "./BookmarkPeep";
 import { toast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 interface Tweet {
   id: string;
@@ -98,47 +99,55 @@ export function TweetCard({ tweet }: TweetCardProps) {
 
   return (
     <>
-      <Card 
-        className={`paper-card hover:shadow-floating transition-smooth group cursor-pointer select-none active:scale-98 ${
-          longPressActive ? "scale-95 shadow-paper" : ""
-        }`}
-        onTouchStart={handleLongPressStart}
-        onTouchEnd={handleLongPressEnd}
-        onTouchMove={handleLongPressMove}
-        onMouseDown={handleLongPressStart}
-        onMouseUp={handleLongPressEnd}
-        onMouseMove={handleLongPressMove}
-        onMouseLeave={handleLongPressEnd}
+      <motion.div
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-      <div className="p-4">
+        <Card 
+          className={`paper-card hover:shadow-floating transition-smooth group cursor-pointer select-none ${
+            longPressActive ? "scale-95 shadow-paper" : ""
+          }`}
+          onTouchStart={handleLongPressStart}
+          onTouchEnd={handleLongPressEnd}
+          onTouchMove={handleLongPressMove}
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseMove={handleLongPressMove}
+          onMouseLeave={handleLongPressEnd}
+        >
+        <div className="p-3">
         {/* Bookmark Header */}
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-sakura rounded-full flex items-center justify-center text-lg seal-stamp">
+        <div className="flex items-start justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <motion.div 
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="w-9 h-9 bg-gradient-sakura rounded-full flex items-center justify-center text-base seal-stamp"
+            >
               {tweet.author.avatar}
-            </div>
+            </motion.div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-ink">{tweet.author.name}</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-semibold text-ink text-sm">{tweet.author.name}</span>
                 {tweet.author.verified && (
-                  <div className="w-5 h-5 bg-seal rounded-full flex items-center justify-center">
-                    <span className="text-xs text-white">✓</span>
+                  <div className="w-4 h-4 bg-seal rounded-full flex items-center justify-center">
+                    <span className="text-[10px] text-white">✓</span>
                   </div>
                 )}
-                <span className="text-muted-foreground">·</span>
-                <span className="text-muted-foreground text-sm">{tweet.timestamp}</span>
+                <span className="text-muted-foreground text-xs">·</span>
+                <span className="text-muted-foreground text-xs">{tweet.timestamp}</span>
               </div>
-              <span className="text-sm text-bamboo">{tweet.author.handle}</span>
+              <span className="text-xs text-bamboo">{tweet.author.handle}</span>
             </div>
           </div>
-          <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-smooth">
-            <MoreHorizontal className="w-4 h-4" />
+          <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-smooth">
+            <MoreHorizontal className="w-3.5 h-3.5" />
           </Button>
         </div>
 
         {/* Tweet Content */}
-        <div className="mb-4">
-          <p className="text-foreground leading-relaxed">{tweet.content}</p>
+        <div className="mb-3">
+          <p className="text-foreground text-sm leading-relaxed">{tweet.content}</p>
         </div>
 
         {/* Collection Badge */}
@@ -208,46 +217,54 @@ export function TweetCard({ tweet }: TweetCardProps) {
         )}
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-4 gap-2 pt-3 border-t border-border">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={handleBookmark}
-            className={`flex flex-col items-center gap-1 py-3 transition-bounce min-h-12 ${
-              isBookmarked ? "text-gold" : "text-muted-foreground hover:text-gold"
-            }`}
-          >
-            <CustomIcons.Bookmark className={`w-5 h-5 ${isBookmarked ? "fill-current" : ""}`} />
-            <span className="text-xs">Bookmark</span>
-          </Button>
+        <div className="grid grid-cols-4 gap-1 pt-2 border-t border-border/50">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={handleBookmark}
+              className={`flex flex-col items-center gap-0.5 py-2 w-full transition-bounce h-auto ${
+                isBookmarked ? "text-gold" : "text-muted-foreground hover:text-gold"
+              }`}
+            >
+              <CustomIcons.Bookmark className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`} />
+              <span className="text-[10px]">Save</span>
+            </Button>
+          </motion.div>
 
-          <Button variant="ghost" size="sm" className="flex flex-col items-center gap-1 py-3 text-muted-foreground hover:text-bamboo min-h-12">
-            <CustomIcons.Share className="w-5 h-5" />
-            <span className="text-xs">Share</span>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="ghost" size="sm" className="flex flex-col items-center gap-0.5 py-2 w-full text-muted-foreground hover:text-bamboo h-auto">
+              <CustomIcons.Share className="w-4 h-4" />
+              <span className="text-[10px]">Share</span>
+            </Button>
+          </motion.div>
 
-          <Button variant="ghost" size="sm" className="flex flex-col items-center gap-1 py-3 text-muted-foreground hover:text-seal min-h-12">
-            <CustomIcons.ActionBolt className="w-5 h-5" />
-            <span className="text-xs">Actionable</span>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="ghost" size="sm" className="flex flex-col items-center gap-0.5 py-2 w-full text-muted-foreground hover:text-seal h-auto">
+              <CustomIcons.ActionBolt className="w-4 h-4" />
+              <span className="text-[10px]">Action</span>
+            </Button>
+          </motion.div>
 
-          <Button variant="ghost" size="sm" className="flex flex-col items-center gap-1 py-3 text-muted-foreground hover:text-bamboo min-h-12">
-            <CustomIcons.BrainAI className="w-5 h-5" />
-            <span className="text-xs">Train AI</span>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="ghost" size="sm" className="flex flex-col items-center gap-0.5 py-2 w-full text-muted-foreground hover:text-bamboo h-auto">
+              <CustomIcons.BrainAI className="w-4 h-4" />
+              <span className="text-[10px]">AI</span>
+            </Button>
+          </motion.div>
         </div>
 
         {/* Source Badge */}
-        <div className="flex items-center justify-between pt-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">Source:</span>
+        <div className="flex items-center justify-between pt-2">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] text-muted-foreground">Source:</span>
             <div className="flex items-center gap-1">
               {tweet.source === 'whatsapp' ? (
                 <MessageSquare className="w-3 h-3 text-green-500" />
               ) : (
                 <Twitter className="w-3 h-3 text-blue-500" />
               )}
-              <span className="text-xs text-muted-foreground capitalize">
+              <span className="text-[10px] text-muted-foreground capitalize">
                 {tweet.source || 'twitter'}
               </span>
             </div>
@@ -255,6 +272,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
         </div>
       </div>
     </Card>
+      </motion.div>
 
     {/* Bookmark Peep Modal */}
     <BookmarkPeep 
