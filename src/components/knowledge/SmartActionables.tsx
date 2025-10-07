@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CheckCircle2, 
   Clock, 
@@ -10,7 +11,10 @@ import {
   Pause,
   RotateCcw,
   Star,
-  Target
+  Target,
+  Sparkles,
+  TrendingUp,
+  Filter
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -203,74 +207,137 @@ export function SmartActionables() {
     ));
   };
 
-  return (
-    <div className="space-y-6">
-      {/* Smart Actionables Header */}
-      <Card className="paper-card p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Zap className="w-5 h-5 text-primary" />
-          <h2 className="font-semibold text-ink">Smart Actionables</h2>
-          <Badge variant="secondary" className="ml-auto">
-            <Target className="w-3 h-3 mr-1" />
-            AI-Driven
-          </Badge>
-        </div>
-        
-        <p className="text-sm text-muted-foreground mb-4">
-          AI analyzes your bookmarks to suggest actionable next steps. Complete tasks to unlock more personalized suggestions.
-        </p>
+  const completionRate = Math.round(
+    (actionables.filter(a => a.status === 'completed').length / actionables.length) * 100
+  );
 
-        {/* Actionables Overview Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center p-3 bg-washi rounded-lg">
-            <div className="text-xl font-bold text-primary">{actionables.filter(a => a.status === 'pending').length}</div>
-            <div className="text-sm text-muted-foreground">Pending Tasks</div>
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="space-y-6"
+    >
+      {/* Hero Header */}
+      <motion.div 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sakura/20 via-washi to-bamboo/20 p-8"
+      >
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded-xl bg-gradient-sakura">
+              <Sparkles className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-ink">Smart Actionables</h2>
+              <p className="text-sm text-muted-foreground">AI-powered task suggestions from your content</p>
+            </div>
           </div>
-          <div className="text-center p-3 bg-washi rounded-lg">
-            <div className="text-xl font-bold text-bamboo">{actionables.filter(a => a.status === 'in-progress').length}</div>
-            <div className="text-sm text-muted-foreground">In Progress</div>
-          </div>
-          <div className="text-center p-3 bg-washi rounded-lg">
-            <div className="text-xl font-bold text-green-600">{actionables.filter(a => a.status === 'completed').length}</div>
-            <div className="text-sm text-muted-foreground">Completed</div>
-          </div>
-          <div className="text-center p-3 bg-washi rounded-lg">
-            <div className="text-xl font-bold text-purple-600">{actionables.filter(a => a.automationType).length}</div>
-            <div className="text-sm text-muted-foreground">Automated</div>
+          
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="p-4 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Clock className="w-4 h-4 text-primary" />
+                <span className="text-xs text-muted-foreground">Pending</span>
+              </div>
+              <div className="text-2xl font-bold text-ink">
+                {actionables.filter(a => a.status === 'pending').length}
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="p-4 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Play className="w-4 h-4 text-bamboo" />
+                <span className="text-xs text-muted-foreground">Active</span>
+              </div>
+              <div className="text-2xl font-bold text-bamboo">
+                {actionables.filter(a => a.status === 'in-progress').length}
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="p-4 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle2 className="w-4 h-4 text-bamboo" />
+                <span className="text-xs text-muted-foreground">Done</span>
+              </div>
+              <div className="text-2xl font-bold text-bamboo">
+                {actionables.filter(a => a.status === 'completed').length}
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="p-4 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="w-4 h-4 text-gold" />
+                <span className="text-xs text-muted-foreground">Rate</span>
+              </div>
+              <div className="text-2xl font-bold text-ink">{completionRate}%</div>
+            </motion.div>
           </div>
         </div>
-      </Card>
+      </motion.div>
 
       {/* Filter Controls */}
-      <div className="flex items-center gap-2">
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="flex items-center gap-2 flex-wrap"
+      >
+        <Filter className="w-4 h-4 text-muted-foreground" />
         <span className="text-sm font-medium text-ink">Filter:</span>
-        {['all', 'pending', 'in-progress', 'completed'].map((status) => (
-          <Button
-            key={status}
-            variant={filter === status ? "default" : "outline"}
-            size="sm"
-            onClick={() => setFilter(status as any)}
-            className={filter === status ? "bg-gradient-sakura text-white" : ""}
-          >
-            {status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ')}
-          </Button>
+        {['all', 'pending', 'in-progress', 'completed'].map((status, index) => (
+          <motion.div key={status} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant={filter === status ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilter(status as any)}
+              className={filter === status ? "bg-gradient-sakura text-white" : ""}
+            >
+              {status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ')}
+            </Button>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Actionables List */}
-      <div className="space-y-4">
-        {filteredActionables.map((actionable) => {
+      <AnimatePresence mode="popLayout">
+        {filteredActionables.map((actionable, index) => {
           const TypeIcon = getTypeIcon(actionable.type);
           
           return (
-            <Card key={actionable.id} className="paper-card p-6">
-              <div className="space-y-4">
-                {/* Actionable Header */}
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-3 flex-1">
-                    <div className={`p-2 rounded-lg ${getPriorityColor(actionable.priority)}`}>
-                      <TypeIcon className="w-4 h-4" />
-                    </div>
+            <motion.div
+              key={actionable.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ delay: index * 0.05 }}
+              layout
+            >
+              <Card className="paper-card p-6 hover:shadow-lg transition-shadow">
+                <div className="space-y-4">
+                  {/* Actionable Header */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-3 flex-1">
+                      <motion.div 
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                        className={`p-3 rounded-xl ${getPriorityColor(actionable.priority)}`}
+                      >
+                        <TypeIcon className="w-5 h-5" />
+                      </motion.div>
                     
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
@@ -292,10 +359,20 @@ export function SmartActionables() {
                       
                       {/* Progress Bar */}
                       {actionable.progress > 0 && (
-                        <div className="flex items-center gap-2 mb-2">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: '100%' }}
+                          className="flex items-center gap-2 mb-2"
+                        >
                           <Progress value={actionable.progress} className="flex-1 h-2" />
-                          <span className="text-xs text-muted-foreground">{actionable.progress}%</span>
-                        </div>
+                          <motion.span 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="text-xs font-semibold text-bamboo"
+                          >
+                            {actionable.progress}%
+                          </motion.span>
+                        </motion.div>
                       )}
                     </div>
                   </div>
@@ -332,69 +409,89 @@ export function SmartActionables() {
                   ))}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center gap-2 pt-2 border-t border-border">
-                  {actionable.status !== 'completed' && (
-                    <Button
-                      size="sm"
-                      onClick={() => toggleActionableProgress(actionable.id)}
-                      className={actionable.status === 'in-progress' 
-                        ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200" 
-                        : "bg-gradient-bamboo text-white"
-                      }
-                    >
-                      {actionable.status === 'in-progress' ? (
-                        <>
-                          <Pause className="w-3 h-3 mr-1" />
-                          Pause
-                        </>
-                      ) : (
-                        <>
-                          <Play className="w-3 h-3 mr-1" />
-                          Start
-                        </>
-                      )}
-                    </Button>
-                  )}
-                  
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => toggleActionableStatus(actionable.id)}
-                  >
-                    {actionable.status === 'completed' ? (
-                      <>
-                        <RotateCcw className="w-3 h-3 mr-1" />
-                        Reopen
-                      </>
-                    ) : (
-                      <>
-                        <CheckCircle2 className="w-3 h-3 mr-1" />
-                        Complete
-                      </>
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-2 pt-2 border-t border-border">
+                    {actionable.status !== 'completed' && (
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Button
+                          size="sm"
+                          onClick={() => toggleActionableProgress(actionable.id)}
+                          className={actionable.status === 'in-progress' 
+                            ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200" 
+                            : "bg-gradient-bamboo text-white"
+                          }
+                        >
+                          {actionable.status === 'in-progress' ? (
+                            <>
+                              <Pause className="w-3 h-3 mr-1" />
+                              Pause
+                            </>
+                          ) : (
+                            <>
+                              <Play className="w-3 h-3 mr-1" />
+                              Start
+                            </>
+                          )}
+                        </Button>
+                      </motion.div>
                     )}
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm">
-                    View Sources
-                  </Button>
+                    
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => toggleActionableStatus(actionable.id)}
+                      >
+                        {actionable.status === 'completed' ? (
+                          <>
+                            <RotateCcw className="w-3 h-3 mr-1" />
+                            Reopen
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 className="w-3 h-3 mr-1" />
+                            Complete
+                          </>
+                        )}
+                      </Button>
+                    </motion.div>
+                    
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Button variant="ghost" size="sm">
+                        View Sources
+                      </Button>
+                    </motion.div>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           );
         })}
-      </div>
+      </AnimatePresence>
 
       {/* AI Suggestions Footer */}
-      <Card className="paper-card p-4 bg-gradient-to-r from-washi to-background">
-        <div className="flex items-center gap-2 text-sm">
-          <Zap className="w-4 h-4 text-primary" />
-          <span className="text-muted-foreground">
-            AI will generate new actionables as you save more bookmarks. 
-            Complete tasks to improve suggestion accuracy.
-          </span>
-        </div>
-      </Card>
-    </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <Card className="paper-card p-6 bg-gradient-to-r from-sakura/10 via-washi/50 to-bamboo/10 border-2 border-primary/20">
+          <div className="flex items-start gap-3">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles className="w-5 h-5 text-primary" />
+            </motion.div>
+            <div>
+              <h4 className="font-semibold text-ink mb-1">AI-Powered Insights</h4>
+              <p className="text-sm text-muted-foreground">
+                Smart actionables are generated from your saved content. Complete tasks to unlock more personalized suggestions and improve accuracy.
+              </p>
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    </motion.div>
   );
 }

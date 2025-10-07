@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +15,11 @@ import {
   Lightbulb,
   AlertTriangle,
   Award,
-  Activity
+  Activity,
+  Zap,
+  BookOpen,
+  Code,
+  Sparkles
 } from 'lucide-react';
 
 interface LearningPattern {
@@ -190,214 +195,373 @@ export function LearningAnalytics() {
   );
 
   return (
-    <div className="space-y-6">
-      {/* Overview Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-4 h-4 text-bamboo" />
-            <span className="text-sm text-muted-foreground">This Week</span>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="space-y-6"
+    >
+      {/* Hero Analytics Header */}
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-bamboo/20 via-washi to-sakura/20 p-8"
+      >
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-xl bg-gradient-bamboo">
+              <BarChart3 className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-ink">Learning Analytics</h2>
+              <p className="text-sm text-muted-foreground">Track your progress and insights</p>
+            </div>
           </div>
-          <div className="text-2xl font-bold text-ink">{totalHoursThisWeek.toFixed(1)}h</div>
-          <div className="text-xs text-bamboo">+12% from last week</div>
-        </Card>
 
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Brain className="w-4 h-4 text-ink" />
-            <span className="text-sm text-muted-foreground">Retention</span>
-          </div>
-          <div className="text-2xl font-bold text-ink">76%</div>
-          <div className="text-xs text-bamboo">+3% improvement</div>
-        </Card>
+          {/* Key Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <Clock className="w-5 h-5 text-bamboo" />
+                <Badge variant="secondary" className="text-xs bg-bamboo/10 text-bamboo">+12%</Badge>
+              </div>
+              <div className="text-3xl font-bold text-ink mb-1">{totalHoursThisWeek.toFixed(1)}h</div>
+              <div className="text-xs text-muted-foreground">This Week</div>
+            </motion.div>
 
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Target className="w-4 h-4 text-bamboo" />
-            <span className="text-sm text-muted-foreground">Goals</span>
-          </div>
-          <div className="text-2xl font-bold text-ink">
-            {goals.filter(g => g.status === 'completed').length}/{goals.length}
-          </div>
-          <div className="text-xs text-muted-foreground">Completed</div>
-        </Card>
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <Brain className="w-5 h-5 text-primary" />
+                <Badge variant="secondary" className="text-xs bg-primary/10 text-primary">+3%</Badge>
+              </div>
+              <div className="text-3xl font-bold text-ink mb-1">76%</div>
+              <div className="text-xs text-muted-foreground">Retention Rate</div>
+            </motion.div>
 
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Award className="w-4 h-4 text-gold" />
-            <span className="text-sm text-muted-foreground">Streak</span>
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <Target className="w-5 h-5 text-seal" />
+                <Badge variant="secondary" className="text-xs bg-seal/10 text-seal">
+                  {Math.round((goals.filter(g => g.status === 'completed').length / goals.length) * 100)}%
+                </Badge>
+              </div>
+              <div className="text-3xl font-bold text-ink mb-1">
+                {goals.filter(g => g.status === 'completed').length}/{goals.length}
+              </div>
+              <div className="text-xs text-muted-foreground">Goals Completed</div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-background/80 backdrop-blur border border-border"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <Award className="w-5 h-5 text-gold" />
+                <Sparkles className="w-4 h-4 text-gold" />
+              </div>
+              <div className="text-3xl font-bold text-ink mb-1">12</div>
+              <div className="text-xs text-muted-foreground">Day Streak</div>
+            </motion.div>
           </div>
-          <div className="text-2xl font-bold text-ink">12</div>
-          <div className="text-xs text-muted-foreground">Days</div>
-        </Card>
-      </div>
+        </div>
+      </motion.div>
 
       {/* Detailed Analytics */}
-      <Tabs defaultValue="patterns" className="space-y-4">
-        <TabsList className="grid grid-cols-3 bg-washi">
-          <TabsTrigger value="patterns">Learning Patterns</TabsTrigger>
-          <TabsTrigger value="gaps">Knowledge Gaps</TabsTrigger>
-          <TabsTrigger value="goals">Progress Tracking</TabsTrigger>
-        </TabsList>
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <Tabs defaultValue="patterns" className="space-y-4">
+          <TabsList className="grid grid-cols-3 bg-washi p-1 rounded-xl">
+            <TabsTrigger value="patterns" className="rounded-lg">
+              <Activity className="w-4 h-4 mr-2" />
+              Patterns
+            </TabsTrigger>
+            <TabsTrigger value="gaps" className="rounded-lg">
+              <AlertTriangle className="w-4 h-4 mr-2" />
+              Gaps
+            </TabsTrigger>
+            <TabsTrigger value="goals" className="rounded-lg">
+              <Target className="w-4 h-4 mr-2" />
+              Goals
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Learning Patterns */}
-        <TabsContent value="patterns" className="space-y-4">
-          <Card className="paper-card p-6">
-            <h4 className="font-semibold text-ink mb-4">Learning Behavior Analysis</h4>
-            
-            <div className="space-y-4">
-              {patterns.map((pattern, index) => (
-                <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-washi">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h5 className="font-medium text-ink">{pattern.category}</h5>
-                      {getTrendIcon(pattern.trend)}
+          {/* Learning Patterns */}
+          <TabsContent value="patterns" className="space-y-4">
+            <Card className="paper-card p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h4 className="font-semibold text-ink flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-primary" />
+                  Learning Behavior Analysis
+                </h4>
+              </div>
+              
+              <div className="space-y-4">
+                {patterns.map((pattern, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.01 }}
+                    className="p-5 rounded-xl bg-gradient-to-r from-washi to-background border border-border"
+                  >
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-3">
+                        <h5 className="font-semibold text-ink text-lg">{pattern.category}</h5>
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.3 + index * 0.1 }}
+                        >
+                          {getTrendIcon(pattern.trend)}
+                        </motion.div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="text-center p-3 rounded-lg bg-background/50">
+                          <Clock className="w-4 h-4 text-bamboo mx-auto mb-1" />
+                          <div className="text-xs text-muted-foreground mb-1">Time Spent</div>
+                          <div className="font-bold text-ink">{pattern.timeSpent}h</div>
+                        </div>
+                        <div className="text-center p-3 rounded-lg bg-background/50">
+                          <BookOpen className="w-4 h-4 text-primary mx-auto mb-1" />
+                          <div className="text-xs text-muted-foreground mb-1">Items</div>
+                          <div className="font-bold text-ink">{pattern.itemsConsumed}</div>
+                        </div>
+                        <div className="text-center p-3 rounded-lg bg-background/50">
+                          <Brain className="w-4 h-4 text-seal mx-auto mb-1" />
+                          <div className="text-xs text-muted-foreground mb-1">Retention</div>
+                          <div className="font-bold text-ink">{Math.round(pattern.retentionRate * 100)}%</div>
+                        </div>
+                        <div className="text-center p-3 rounded-lg bg-background/50">
+                          <Calendar className="w-4 h-4 text-gold mx-auto mb-1" />
+                          <div className="text-xs text-muted-foreground mb-1">Best Time</div>
+                          <div className="font-bold text-ink">{pattern.preferredTime}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Weekly Activity Chart */}
+            <Card className="paper-card p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h4 className="font-semibold text-ink flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-bamboo" />
+                  Weekly Activity Breakdown
+                </h4>
+                <div className="flex items-center gap-4 text-xs">
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 rounded-full bg-bamboo" />
+                    <span>Reading</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 rounded-full bg-seal" />
+                    <span>Practicing</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 rounded-full bg-gold" />
+                    <span>Creating</span>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                {weeklyActivity.map((day, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="flex items-center gap-4"
+                  >
+                    <div className="w-20 text-sm font-medium text-ink">
+                      {new Date(day.date).toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' })}
+                    </div>
+                    <div className="flex-1 space-y-2">
+                      <div className="flex gap-1 h-8 rounded-lg overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${(day.reading / 5) * 100}%` }}
+                          transition={{ delay: 0.2 + index * 0.05, duration: 0.5 }}
+                          className="bg-gradient-bamboo flex items-center justify-center text-xs text-white font-medium"
+                        >
+                          {day.reading > 0.5 && `${day.reading}h`}
+                        </motion.div>
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${(day.practicing / 5) * 100}%` }}
+                          transition={{ delay: 0.3 + index * 0.05, duration: 0.5 }}
+                          className="bg-seal flex items-center justify-center text-xs text-white font-medium"
+                        >
+                          {day.practicing > 0.5 && `${day.practicing}h`}
+                        </motion.div>
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${(day.creating / 5) * 100}%` }}
+                          transition={{ delay: 0.4 + index * 0.05, duration: 0.5 }}
+                          className="bg-gold flex items-center justify-center text-xs text-white font-medium"
+                        >
+                          {day.creating > 0.5 && `${day.creating}h`}
+                        </motion.div>
+                      </div>
+                      <div className="text-xs text-muted-foreground text-right">
+                        Total: {(day.reading + day.practicing + day.creating).toFixed(1)}h
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
+
+          {/* Knowledge Gaps */}
+          <TabsContent value="gaps" className="space-y-4">
+            <Card className="paper-card p-6">
+              <div className="flex items-center gap-2 mb-6">
+                <AlertTriangle className="w-5 h-5 text-gold" />
+                <h4 className="font-semibold text-ink">Identified Knowledge Gaps</h4>
+                <Badge variant="secondary" className="ml-auto">
+                  {knowledgeGaps.length} Areas
+                </Badge>
+              </div>
+              
+              <div className="space-y-4">
+                {knowledgeGaps.map((gap, index) => (
+                  <motion.div 
+                    key={gap.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.01 }}
+                    className="p-5 rounded-xl bg-gradient-to-br from-washi to-background border border-border"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-ink text-lg mb-2">{gap.topic}</h5>
+                        <div className="flex items-center gap-2">
+                          <Badge className={`${getSeverityColor(gap.severity)} font-semibold`}>
+                            {gap.severity} priority
+                          </Badge>
+                          <Badge variant="outline" className="text-xs">
+                            <Lightbulb className="w-3 h-3 mr-1" />
+                            {gap.relatedContent} resources
+                          </Badge>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                      <div>
-                        <span className="text-muted-foreground">Time Spent</span>
-                        <div className="font-semibold">{pattern.timeSpent}h</div>
+                    <div className="p-4 rounded-lg bg-background/50">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Zap className="w-4 h-4 text-primary" />
+                        <h6 className="text-sm font-semibold text-ink">Recommended Actions:</h6>
                       </div>
-                      <div>
-                        <span className="text-muted-foreground">Items</span>
-                        <div className="font-semibold">{pattern.itemsConsumed}</div>
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">Retention</span>
-                        <div className="font-semibold">{Math.round(pattern.retentionRate * 100)}%</div>
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">Best Time</span>
-                        <div className="font-semibold">{pattern.preferredTime}</div>
-                      </div>
+                      <ul className="space-y-2">
+                        {gap.suggestedActions.map((action, idx) => (
+                          <motion.li 
+                            key={idx}
+                            initial={{ x: -10, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 * idx }}
+                            className="flex items-start gap-3 text-sm text-muted-foreground"
+                          >
+                            <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <span className="text-xs font-bold text-primary">{idx + 1}</span>
+                            </div>
+                            <span>{action}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
 
-          {/* Weekly Activity Chart */}
-          <Card className="paper-card p-6">
-            <h4 className="font-semibold text-ink mb-4">Weekly Activity</h4>
-            <div className="space-y-3">
-              {weeklyActivity.map((day, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <div className="w-16 text-sm text-muted-foreground">
-                    {new Date(day.date).toLocaleDateString('en', { weekday: 'short' })}
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <div className="flex items-center justify-between text-xs">
-                      <span>Reading: {day.reading}h</span>
-                      <span>Practicing: {day.practicing}h</span>
-                      <span>Creating: {day.creating}h</span>
-                    </div>
-                    <div className="flex gap-1 h-2">
-                      <div 
-                        className="bg-bamboo rounded-sm"
-                        style={{ width: `${(day.reading / 5) * 100}%` }}
-                      />
-                      <div 
-                        className="bg-seal rounded-sm"
-                        style={{ width: `${(day.practicing / 5) * 100}%` }}
-                      />
-                      <div 
-                        className="bg-gold rounded-sm"
-                        style={{ width: `${(day.creating / 5) * 100}%` }}
-                      />
-                    </div>
-                  </div>
+          {/* Progress Tracking */}
+          <TabsContent value="goals" className="space-y-4">
+            <Card className="paper-card p-6">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Target className="w-5 h-5 text-seal" />
+                  <h4 className="font-semibold text-ink">Learning Goals</h4>
                 </div>
-              ))}
-            </div>
-          </Card>
-        </TabsContent>
-
-        {/* Knowledge Gaps */}
-        <TabsContent value="gaps" className="space-y-4">
-          <Card className="paper-card p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <AlertTriangle className="w-5 h-5 text-gold" />
-              <h4 className="font-semibold text-ink">Identified Knowledge Gaps</h4>
-            </div>
-            
-            <div className="space-y-4">
-              {knowledgeGaps.map((gap) => (
-                <div key={gap.id} className="p-4 rounded-lg bg-washi">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h5 className="font-medium text-ink">{gap.topic}</h5>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge className={getSeverityColor(gap.severity)}>
-                          {gap.severity} priority
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {gap.relatedContent} related items
-                        </span>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button size="sm" className="bg-gradient-bamboo text-white">
+                    <Target className="w-4 h-4 mr-2" />
+                    New Goal
+                  </Button>
+                </motion.div>
+              </div>
+              
+              <div className="space-y-4">
+                {goals.map((goal, index) => (
+                  <motion.div 
+                    key={goal.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.01 }}
+                    className="p-5 rounded-xl bg-gradient-to-r from-washi to-background border border-border"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h5 className="font-semibold text-ink text-lg">{goal.title}</h5>
+                          <Badge className={`${getGoalStatusColor(goal.status)} font-semibold`}>
+                            {goal.status.replace('_', ' ')}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-4 text-sm">
+                          <Badge variant="outline" className="text-xs">
+                            <Code className="w-3 h-3 mr-1" />
+                            {goal.category}
+                          </Badge>
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Calendar className="w-3 h-3" />
+                            {goal.targetDate.toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <div>
-                    <h6 className="text-sm font-medium text-ink mb-2">Suggested Actions:</h6>
-                    <ul className="space-y-1">
-                      {gap.suggestedActions.map((action, index) => (
-                        <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-current" />
-                          {action}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </TabsContent>
-
-        {/* Progress Tracking */}
-        <TabsContent value="goals" className="space-y-4">
-          <Card className="paper-card p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="font-semibold text-ink">Learning Goals</h4>
-              <Button size="sm">
-                <Target className="w-4 h-4 mr-2" />
-                New Goal
-              </Button>
-            </div>
-            
-            <div className="space-y-4">
-              {goals.map((goal) => (
-                <div key={goal.id} className="p-4 rounded-lg bg-washi">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h5 className="font-medium text-ink">{goal.title}</h5>
-                        <Badge className={getGoalStatusColor(goal.status)}>
-                          {goal.status.replace('_', ' ')}
-                        </Badge>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground font-medium">Progress</span>
+                        <span className="font-bold text-ink text-lg">{goal.progress}%</span>
                       </div>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <span>{goal.category}</span>
-                        <span>Due: {goal.targetDate.toLocaleDateString()}</span>
+                      <div className="relative">
+                        <Progress value={goal.progress} className="h-3" />
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${goal.progress}%` }}
+                          transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
+                          className="absolute top-0 left-0 h-3 bg-gradient-bamboo rounded-full"
+                          style={{ maxWidth: '100%' }}
+                        />
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Progress</span>
-                      <span className="font-semibold text-ink">{goal.progress}%</span>
-                    </div>
-                    <Progress value={goal.progress} className="h-2" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </motion.div>
+    </motion.div>
   );
 }
