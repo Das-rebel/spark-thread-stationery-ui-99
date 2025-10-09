@@ -20,7 +20,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         {location.pathname !== "/" && <Header />}
         
         <GestureHandler enableBackGesture={true}>
-          <main className="mobile-optimized scroll-smooth scrollbar-hide">
+          <main className="scroll-smooth scrollbar-hide pb-20">
             {children}
           </main>
         </GestureHandler>

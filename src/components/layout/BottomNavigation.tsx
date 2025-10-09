@@ -60,10 +60,10 @@ export function BottomNavigation() {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border/50"
-      style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}
+      className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-lg border-t border-border/50 shadow-elegant"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <div className="max-w-2xl mx-auto px-1 py-2">
+      <div className="max-w-2xl mx-auto px-2 py-1.5">
         <div className="flex items-center justify-around">
           {navItems.map((item, index) => {
             const active = isActive(item.path);
@@ -77,7 +77,7 @@ export function BottomNavigation() {
                 transition={{ delay: index * 0.05 }}
                 className="flex-1"
               >
-                <Link to={item.path} className="flex flex-col items-center gap-0.5 py-2 px-2 rounded-xl transition-all duration-200 group">
+                <Link to={item.path} className="flex flex-col items-center gap-1 py-2 px-1 rounded-xl transition-all duration-200 group relative">
                   <motion.div 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -85,7 +85,7 @@ export function BottomNavigation() {
                       "p-2 rounded-xl transition-all relative",
                       active
                         ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground group-hover:bg-accent group-hover:text-primary"
+                        : "text-muted-foreground group-hover:bg-muted group-hover:text-foreground"
                     )}
                   >
                     <Icon className="w-5 h-5" />
@@ -93,7 +93,7 @@ export function BottomNavigation() {
                       <motion.div 
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="absolute -top-1 -right-1 w-4 h-4 bg-seal text-white text-[10px] rounded-full flex items-center justify-center font-bold min-w-4"
+                        className="absolute -top-1 -right-1 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] rounded-full flex items-center justify-center font-bold"
                       >
                         {item.badge > 9 ? '9+' : item.badge}
                       </motion.div>
@@ -108,8 +108,8 @@ export function BottomNavigation() {
                   {active && (
                     <motion.div 
                       layoutId="activeIndicator"
-                      className="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                 </Link>

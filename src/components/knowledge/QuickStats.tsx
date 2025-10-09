@@ -43,17 +43,15 @@ export function QuickStats() {
       {stats.map((stat) => {
         const IconComponent = stat.icon;
         return (
-          <Card key={stat.label} className="paper-card p-4 hover:shadow-paper transition-all">
-            <div className={`w-10 h-10 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center mb-3`}>
-              <IconComponent className={`w-5 h-5 ${stat.iconColor}`} />
+          <Card key={stat.label} className="paper-card p-3 hover:shadow-elegant transition-all hover:-translate-y-0.5">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-2">
+              <IconComponent className="w-5 h-5 text-primary" />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               <span className="text-xs text-muted-foreground block truncate">{stat.label}</span>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-ink">{stat.value}</span>
-                <span className={`text-xs font-medium ${
-                  stat.change === 'New' ? 'text-orange-600' : 'text-green-600'
-                }`}>
+                <span className="text-2xl font-bold text-foreground">{stat.value}</span>
+                <span className="text-xs font-medium text-primary">
                   {stat.change}
                 </span>
               </div>
