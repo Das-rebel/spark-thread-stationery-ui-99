@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { 
   Trophy, 
   Star, 
@@ -54,10 +56,10 @@ interface KnowledgeStats {
 }
 
 const rarityColors = {
-  common: 'bg-gray-500',
-  rare: 'bg-blue-500',
-  epic: 'bg-purple-500',
-  legendary: 'bg-gradient-to-r from-yellow-400 to-orange-500'
+  common: 'bg-muted',
+  rare: 'bg-gradient-bamboo',
+  epic: 'bg-gradient-sakura',
+  legendary: 'bg-gradient-gold'
 };
 
 const categoryIcons = {
@@ -172,95 +174,117 @@ export function GamificationHub() {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 pb-6">
       {/* Celebration Modal */}
-      {showCelebration && recentAchievement && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <Card className="paper-card p-8 max-w-md mx-4 text-center animate-scale-in">
-            <div className="space-y-4">
-              <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto animate-bounce">
+      <Dialog open={showCelebration} onOpenChange={setShowCelebration}>
+        <DialogContent className="paper-card max-w-md">
+          <DialogHeader>
+            <DialogTitle className="sr-only">Achievement Unlocked</DialogTitle>
+            <DialogDescription className="sr-only">
+              You've unlocked a new achievement
+            </DialogDescription>
+          </DialogHeader>
+          {recentAchievement && (
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="space-y-4 text-center p-4"
+            >
+              <motion.div 
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1 }}
+                className="w-20 h-20 bg-gradient-gold rounded-full flex items-center justify-center mx-auto shadow-floating"
+              >
                 <Trophy className="w-10 h-10 text-white" />
-              </div>
+              </motion.div>
               <h2 className="text-2xl font-bold text-ink">Achievement Unlocked!</h2>
               <div className="space-y-2">
                 <Badge className={cn("text-white", rarityColors[recentAchievement.rarity])}>
                   {recentAchievement.rarity.toUpperCase()}
                 </Badge>
-                <h3 className="font-semibold">{recentAchievement.title}</h3>
+                <h3 className="font-semibold text-ink">{recentAchievement.title}</h3>
                 <p className="text-sm text-muted-foreground">{recentAchievement.description}</p>
                 <div className="flex items-center justify-center gap-2">
-                  <Star className="w-4 h-4 text-yellow-500" />
-                  <span className="font-medium">+{recentAchievement.points} XP</span>
+                  <Star className="w-4 h-4 text-gold" />
+                  <span className="font-medium text-ink">+{recentAchievement.points} XP</span>
                 </div>
               </div>
-              <Button onClick={() => setShowCelebration(false)} className="w-full">
+              <Button onClick={() => setShowCelebration(false)} className="w-full interactive-button">
                 Awesome!
               </Button>
-            </div>
-          </Card>
-        </div>
-      )}
+            </motion.div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Header Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-sakura rounded-xl flex items-center justify-center">
-              <Trophy className="w-5 h-5 text-white" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Card className="paper-card p-4 hover-lift">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-sakura rounded-xl flex items-center justify-center shadow-elegant">
+                <Trophy className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Level</p>
+                <p className="text-xl md:text-2xl font-bold text-ink">{knowledgeStats.level}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Level</p>
-              <p className="text-2xl font-bold text-ink">{knowledgeStats.level}</p>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
 
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-bamboo rounded-xl flex items-center justify-center">
-              <Flame className="w-5 h-5 text-white" />
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Card className="paper-card p-4 hover-lift">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-seal rounded-xl flex items-center justify-center shadow-elegant">
+                <Flame className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Streak</p>
+                <p className="text-xl md:text-2xl font-bold text-ink">{learningStreak.current}d</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Streak</p>
-              <p className="text-2xl font-bold text-ink">{learningStreak.current}d</p>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
 
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center">
-              <Star className="w-5 h-5 text-white" />
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Card className="paper-card p-4 hover-lift">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center shadow-elegant">
+                <Star className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">XP</p>
+                <p className="text-xl md:text-2xl font-bold text-ink">{knowledgeStats.currentXP.toLocaleString()}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">XP</p>
-              <p className="text-2xl font-bold text-ink">{knowledgeStats.currentXP.toLocaleString()}</p>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
 
-        <Card className="paper-card p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-ink rounded-xl flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Card className="paper-card p-4 hover-lift">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-elegant">
+                <Brain className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Score</p>
+                <p className="text-xl md:text-2xl font-bold text-ink">{knowledgeStats.knowledgeScore}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Knowledge Score</p>
-              <p className="text-2xl font-bold text-ink">{knowledgeStats.knowledgeScore}</p>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
       </div>
 
       {/* Progress Section */}
-      <Card className="paper-card p-6 border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
+      <Card className="paper-card p-4 md:p-6 border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-elegant">
             <TrendingUp className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-ink">Learning Progress</h3>
-            <p className="text-sm text-muted-foreground">Track your knowledge journey</p>
+            <h3 className="text-lg md:text-xl font-bold text-ink">Learning Progress</h3>
+            <p className="text-xs md:text-sm text-muted-foreground">Track your knowledge journey</p>
           </div>
         </div>
         
@@ -283,61 +307,73 @@ export function GamificationHub() {
           </div>
 
           {/* Streak Progress */}
-          <div className="flex items-center justify-between p-5 bg-gradient-to-r from-orange-100 to-red-50 rounded-xl border border-orange-200">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+          <motion.div 
+            whileHover={{ scale: 1.01 }}
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 p-4 bg-gradient-seal/10 rounded-xl border border-seal/20"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-seal rounded-xl flex items-center justify-center shadow-elegant">
                 <Flame className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="font-bold text-orange-700 text-lg">
+                <p className="font-bold text-ink text-base md:text-lg">
                   {learningStreak.current} Day Streak! 🔥
                 </p>
-                <p className="text-sm text-orange-600">
+                <p className="text-xs md:text-sm text-muted-foreground">
                   Personal best: {learningStreak.longest} days
                 </p>
               </div>
             </div>
-            <Badge variant="outline" className="border-orange-300 text-orange-700 bg-orange-50">
+            <Badge variant="outline" className="border-primary/20 text-muted-foreground bg-background">
               {learningStreak.lastActivity}
             </Badge>
-          </div>
+          </motion.div>
 
           {/* Weekly Stats */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-white/50 rounded-xl border border-primary/10">
-              <p className="text-2xl font-bold text-ink">{knowledgeStats.totalNodes}</p>
-              <p className="text-sm text-muted-foreground font-medium">Total Nodes</p>
-            </div>
-            <div className="text-center p-4 bg-white/50 rounded-xl border border-primary/10">
-              <p className="text-2xl font-bold text-ink">{knowledgeStats.totalConnections}</p>
-              <p className="text-sm text-muted-foreground font-medium">Connections</p>
-            </div>
-            <div className="text-center p-4 bg-white/50 rounded-xl border border-primary/10">
-              <p className="text-2xl font-bold text-green-600">+{knowledgeStats.weeklyGrowth}</p>
-              <p className="text-sm text-muted-foreground font-medium">This Week</p>
-            </div>
+          <div className="grid grid-cols-3 gap-2 md:gap-4">
+            <motion.div 
+              whileHover={{ y: -2 }}
+              className="text-center p-3 md:p-4 bg-background/50 rounded-xl border border-primary/10 hover-lift"
+            >
+              <p className="text-xl md:text-2xl font-bold text-ink">{knowledgeStats.totalNodes}</p>
+              <p className="text-xs md:text-sm text-muted-foreground font-medium">Nodes</p>
+            </motion.div>
+            <motion.div 
+              whileHover={{ y: -2 }}
+              className="text-center p-3 md:p-4 bg-background/50 rounded-xl border border-primary/10 hover-lift"
+            >
+              <p className="text-xl md:text-2xl font-bold text-ink">{knowledgeStats.totalConnections}</p>
+              <p className="text-xs md:text-sm text-muted-foreground font-medium">Connections</p>
+            </motion.div>
+            <motion.div 
+              whileHover={{ y: -2 }}
+              className="text-center p-3 md:p-4 bg-background/50 rounded-xl border border-primary/10 hover-lift"
+            >
+              <p className="text-xl md:text-2xl font-bold text-bamboo">+{knowledgeStats.weeklyGrowth}</p>
+              <p className="text-xs md:text-sm text-muted-foreground font-medium">This Week</p>
+            </motion.div>
           </div>
         </div>
       </Card>
 
       {/* Achievements Section */}
-      <Card className="paper-card p-6 border border-gold/20 bg-gradient-to-br from-gold/5 to-transparent">
-        <div className="flex items-center justify-between mb-6">
+      <Card className="paper-card p-4 md:p-6 border border-gold/20 bg-gradient-to-br from-gold/5 to-transparent">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-gold rounded-xl flex items-center justify-center shadow-elegant">
               <Award className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-ink">Achievements</h3>
-              <p className="text-sm text-muted-foreground">Unlock rewards as you learn</p>
+              <h3 className="text-lg md:text-xl font-bold text-ink">Achievements</h3>
+              <p className="text-xs md:text-sm text-muted-foreground">Unlock rewards as you learn</p>
             </div>
           </div>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             <Button
               variant={selectedCategory === 'all' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setSelectedCategory('all')}
-              className="text-xs"
+              className="text-xs interactive-button h-8"
             >
               All
             </Button>
@@ -347,7 +383,8 @@ export function GamificationHub() {
                 variant={selectedCategory === category ? 'default' : 'ghost'}
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
-                className="text-xs"
+                className="text-xs interactive-button h-8 px-2"
+                title={category}
               >
                 <Icon className="w-3 h-3" />
               </Button>
