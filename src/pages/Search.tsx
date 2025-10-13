@@ -6,6 +6,7 @@ import { PageTransition } from "@/components/ui/page-transition";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { AdvancedSearchDialog } from "@/components/search/AdvancedSearchDialog";
 import { Search as SearchIcon, Brain, FileText, Video, Image, Link as LinkIcon, Filter, SortDesc } from "lucide-react";
 
 interface SearchResult {
@@ -135,18 +136,24 @@ export default function Search() {
 
           {/* Search Interface */}
           <div className="space-y-4">
-            <EnhancedSearch
-              placeholder="Search articles, videos, notes..."
-              onSearch={handleSearch}
-              autoFocus={true}
-            />
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <EnhancedSearch
+                  placeholder="Search articles, videos, notes..."
+                  onSearch={handleSearch}
+                  autoFocus={true}
+                />
+              </div>
+              <AdvancedSearchDialog 
+                onSearch={(filters) => {
+                  console.log('Advanced search:', filters);
+                  handleSearch(filters.query);
+                }}
+              />
+            </div>
             
             {/* Search Filters */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2">
-              <Button variant="outline" size="sm" className="flex-shrink-0">
-                <Filter className="w-4 h-4 mr-2" />
-                Filter
-              </Button>
               <Button variant="outline" size="sm" className="flex-shrink-0">
                 <SortDesc className="w-4 h-4 mr-2" />
                 Sort

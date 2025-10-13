@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AppLayout } from "@/components/layout/AppLayout";
+import { ExportImportDialog } from "@/components/export/ExportImportDialog";
 import { UserGreeting } from "@/components/user/UserGreeting";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -275,16 +276,7 @@ export default function UserSettings() {
                   {/* Data Management */}
                   <div className="space-y-4">
                     <h4 className="font-medium text-ink">Data Management</h4>
-                    <div className="grid grid-cols-2 gap-3">
-                      <Button variant="outline" className="flex flex-col gap-2 h-16">
-                        <Upload className="w-5 h-5" />
-                        <span className="text-xs">Export Data</span>
-                      </Button>
-                      <Button variant="outline" className="flex flex-col gap-2 h-16">
-                        <Download className="w-5 h-5" />
-                        <span className="text-xs">Import Data</span>
-                      </Button>
-                    </div>
+                    <ExportImportDialog />
                   </div>
                 </div>
               </Card>
