@@ -95,7 +95,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border" role="banner">
       <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link 
