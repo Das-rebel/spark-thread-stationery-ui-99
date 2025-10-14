@@ -111,7 +111,11 @@ export function useBookmarks() {
 
   const addBookmark = async (newBookmark: Partial<Tweet>) => {
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('User not authenticated');
+
       const bookmarkData = {
+        user_id: user.id,
         title: newBookmark.content || '',
         description: newBookmark.content || '',
         author_name: newBookmark.author?.name,

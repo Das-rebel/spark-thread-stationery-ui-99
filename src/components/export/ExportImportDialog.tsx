@@ -5,6 +5,20 @@ import { Download, Upload, FileJson, CheckCircle2, AlertCircle } from 'lucide-re
 import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { z } from 'zod';
+import { toast as sonnerToast } from 'sonner';
+
+const importDataSchema = z.object({
+  version: z.string(),
+  exportDate: z.string(),
+  data: z.object({
+    bookmarks: z.string().optional(),
+    collections: z.string().optional(),
+    notes: z.string().optional(),
+    settings: z.string().optional(),
+    interests: z.string().optional(),
+  }),
+});
 
 export function ExportImportDialog() {
   const [isExporting, setIsExporting] = useState(false);
@@ -58,24 +72,41 @@ export function ExportImportDialog() {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      sonnerToast.error('File too large. Maximum size is 10MB');
+      return;
+    }
+
+    // Validate file type
+    if (!file.name.endsWith('.json')) {
+      sonnerToast.error('Invalid file type. Please upload a JSON file');
+      return;
+    }
+
     setIsImporting(true);
     setImportStatus('idle');
 
     try {
       const text = await file.text();
-      const data = JSON.parse(text);
-
-      // Validate data structure
-      if (!data.version || !data.data) {
-        throw new Error('Invalid file format');
+      
+      // Validate JSON structure
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error('Invalid JSON format');
       }
 
-      // Import data to localStorage
-      if (data.data.bookmarks) localStorage.setItem('bookmarks', data.data.bookmarks);
-      if (data.data.collections) localStorage.setItem('collections', data.data.collections);
-      if (data.data.notes) localStorage.setItem('notes', data.data.notes);
-      if (data.data.settings) localStorage.setItem('userSettings', data.data.settings);
-      if (data.data.interests) localStorage.setItem('interests', data.data.interests);
+      // Validate data schema
+      const validatedData = importDataSchema.parse(data);
+
+      // Import the validated data (localStorage is temporary - should migrate to Supabase)
+      if (validatedData.data.bookmarks) localStorage.setItem('bookmarks', validatedData.data.bookmarks);
+      if (validatedData.data.collections) localStorage.setItem('collections', validatedData.data.collections);
+      if (validatedData.data.notes) localStorage.setItem('notes', validatedData.data.notes);
+      if (validatedData.data.settings) localStorage.setItem('userSettings', validatedData.data.settings);
+      if (validatedData.data.interests) localStorage.setItem('interests', validatedData.data.interests);
 
       setImportStatus('success');
       toast({
@@ -91,7 +122,7 @@ export function ExportImportDialog() {
       setImportStatus('error');
       toast({
         title: 'Import failed',
-        description: 'Failed to import data. Please check the file format.',
+        description: error instanceof Error ? error.message : 'Failed to import data. Please check the file format.',
         variant: 'destructive',
       });
     } finally {

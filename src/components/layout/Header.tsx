@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Menu, Brain, RefreshCw, CheckCircle, XCircle, Clock, Twitter, MessageSquare, Globe, Settings, Info, Network, Home } from "lucide-react";
+import { Menu, Brain, RefreshCw, CheckCircle, XCircle, Clock, Twitter, MessageSquare, Globe, Settings, Info, Network, Home, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { NetworkStatus } from "@/components/ui/offline-indicator";
 import { useAccessibilityAnnouncer } from "@/components/ui/accessibility-announcer";
+import { useAuth } from "@/hooks/use-auth";
+import { toast } from "sonner";
 
 interface Source {
   id: string;
@@ -52,6 +54,13 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [refreshing, setRefreshing] = useState<string | null>(null);
   const { announceMessage } = useAccessibilityAnnouncer();
+  const { signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success('Signed out successfully');
+    setIsMenuOpen(false);
+  };
 
   const handleRefresh = async (sourceId: string) => {
     setRefreshing(sourceId);
@@ -234,6 +243,14 @@ export function Header() {
                   <Button variant="ghost" className="w-full justify-start gap-3 text-sm">
                     <Info className="w-4 h-4" />
                     About
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start gap-3 text-sm text-red-600 hover:text-red-700 hover:bg-red-50"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
                   </Button>
                 </div>
               </div>

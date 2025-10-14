@@ -11,10 +11,12 @@ import { OfflineIndicator } from "@/components/ui/offline-indicator";
 import { useKeyboardNavigation } from "@/hooks/use-keyboard-navigation";
 import { PageLoadingFallback } from "@/components/ui/page-loading-fallback";
 import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
+import { AuthProvider, RequireAuth } from "@/hooks/use-auth";
 
 // Eager load critical routes
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
 
 // Lazy load other routes for code splitting
 const KnowledgeHub = lazy(() => import("./pages/KnowledgeHub"));
@@ -54,22 +56,22 @@ function AppRoutes() {
   return (
     <Suspense fallback={<PageLoadingFallback />}>
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/knowledge" element={<KnowledgeHub />} />
-        <Route path="/add" element={<Add />} />
-        
-        <Route path="/search" element={<Search />} />
-        <Route path="/document/:documentId" element={<Document />} />
-        <Route path="/review" element={<Review />} />
-        <Route path="/twitter" element={<TwitterHome />} />
-        <Route path="/twitter/explore" element={<TwitterExplore />} />
-        <Route path="/twitter/notifications" element={<TwitterNotifications />} />
-        <Route path="/twitter/search" element={<TwitterSearch />} />
-        <Route path="/twitter/settings" element={<UserSettings />} />
-        <Route path="/twitter/thread/:threadId" element={<ThreadView />} />
-        <Route path="/twitter/compose" element={<TweetCompose />} />
-        <Route path="/twitter/messages" element={<TwitterMessages />} />
-        <Route path="/twitter/profile" element={<TwitterProfile />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={<RequireAuth><Index /></RequireAuth>} />
+        <Route path="/knowledge" element={<RequireAuth><KnowledgeHub /></RequireAuth>} />
+        <Route path="/add" element={<RequireAuth><Add /></RequireAuth>} />
+        <Route path="/search" element={<RequireAuth><Search /></RequireAuth>} />
+        <Route path="/document/:documentId" element={<RequireAuth><Document /></RequireAuth>} />
+        <Route path="/review" element={<RequireAuth><Review /></RequireAuth>} />
+        <Route path="/twitter" element={<RequireAuth><TwitterHome /></RequireAuth>} />
+        <Route path="/twitter/explore" element={<RequireAuth><TwitterExplore /></RequireAuth>} />
+        <Route path="/twitter/notifications" element={<RequireAuth><TwitterNotifications /></RequireAuth>} />
+        <Route path="/twitter/search" element={<RequireAuth><TwitterSearch /></RequireAuth>} />
+        <Route path="/twitter/settings" element={<RequireAuth><UserSettings /></RequireAuth>} />
+        <Route path="/twitter/thread/:threadId" element={<RequireAuth><ThreadView /></RequireAuth>} />
+        <Route path="/twitter/compose" element={<RequireAuth><TweetCompose /></RequireAuth>} />
+        <Route path="/twitter/messages" element={<RequireAuth><TwitterMessages /></RequireAuth>} />
+        <Route path="/twitter/profile" element={<RequireAuth><TwitterProfile /></RequireAuth>} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -93,7 +95,9 @@ function AppContent() {
         }}
       >
         <BrowserRouter>
-          <AppRoutes />
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
         </BrowserRouter>
       </PullToRefresh>
     </>

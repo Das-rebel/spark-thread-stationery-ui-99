@@ -99,7 +99,7 @@ export type Database = {
           title: string
           updated_at: string | null
           url: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           author_avatar?: string | null
@@ -133,7 +133,7 @@ export type Database = {
           title: string
           updated_at?: string | null
           url?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           author_avatar?: string | null
@@ -167,7 +167,7 @@ export type Database = {
           title?: string
           updated_at?: string | null
           url?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -181,7 +181,7 @@ export type Database = {
           is_public: boolean | null
           name: string
           updated_at: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           color?: string | null
@@ -192,7 +192,7 @@ export type Database = {
           is_public?: boolean | null
           name: string
           updated_at?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           color?: string | null
@@ -203,7 +203,7 @@ export type Database = {
           is_public?: boolean | null
           name?: string
           updated_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -291,7 +291,7 @@ export type Database = {
           mood: string | null
           notes: string | null
           reading_time_minutes: number | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           activity_date?: string | null
@@ -303,7 +303,7 @@ export type Database = {
           mood?: string | null
           notes?: string | null
           reading_time_minutes?: number | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           activity_date?: string | null
@@ -315,7 +315,7 @@ export type Database = {
           mood?: string | null
           notes?: string | null
           reading_time_minutes?: number | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -403,7 +403,7 @@ export type Database = {
           progress_percentage: number | null
           title: string
           updated_at: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string | null
@@ -417,7 +417,7 @@ export type Database = {
           progress_percentage?: number | null
           title: string
           updated_at?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string | null
@@ -431,7 +431,7 @@ export type Database = {
           progress_percentage?: number | null
           title?: string
           updated_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -444,7 +444,7 @@ export type Database = {
           longest_streak: number | null
           streak_type: string | null
           updated_at: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string | null
@@ -454,7 +454,7 @@ export type Database = {
           longest_streak?: number | null
           streak_type?: string | null
           updated_at?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string | null
@@ -464,7 +464,7 @@ export type Database = {
           longest_streak?: number | null
           streak_type?: string | null
           updated_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -481,7 +481,7 @@ export type Database = {
           suggested_content_ids: string[] | null
           title: string
           updated_at: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           action_type: string
@@ -495,7 +495,7 @@ export type Database = {
           suggested_content_ids?: string[] | null
           title: string
           updated_at?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           action_type?: string
@@ -509,7 +509,7 @@ export type Database = {
           suggested_content_ids?: string[] | null
           title?: string
           updated_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -522,7 +522,7 @@ export type Database = {
           id: string
           preferences: Json | null
           updated_at: string | null
-          user_id: string | null
+          user_id: string
           username: string | null
         }
         Insert: {
@@ -533,7 +533,7 @@ export type Database = {
           id?: string
           preferences?: Json | null
           updated_at?: string | null
-          user_id?: string | null
+          user_id: string
           username?: string | null
         }
         Update: {
@@ -544,8 +544,29 @@ export type Database = {
           id?: string
           preferences?: Json | null
           updated_at?: string | null
-          user_id?: string | null
+          user_id?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
@@ -673,6 +694,13 @@ export type Database = {
         Args: { user_uuid: string }
         Returns: undefined
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       track_daily_activity: {
         Args: { user_uuid: string }
         Returns: undefined
@@ -683,7 +711,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -810,6 +838,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
