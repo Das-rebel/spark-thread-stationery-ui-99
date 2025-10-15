@@ -16,6 +16,9 @@ import {
   FileUp
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { urlSchema, noteSchema } from '@/lib/validation';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 export function AddContent() {
   const [activeTab, setActiveTab] = useState('url');
@@ -26,12 +29,47 @@ export function AddContent() {
 
   const handleCapture = async (type: string, data: any) => {
     setIsProcessing(true);
-    // UI feedback - actual processing would be handled by backend
-    setTimeout(() => {
+    
+    try {
+      // Validate based on type
+      if (type === 'url' || type === 'youtube') {
+        urlSchema.parse(data.url);
+      } else if (type === 'note') {
+        noteSchema.parse({ title: data.title, content: data.content, tags: '' });
+      } else if (type === 'pdf') {
+        // Validate file
+        const file = data.file;
+        if (!file || file.type !== 'application/pdf') {
+          throw new Error('Invalid file type. Please upload a PDF file.');
+        }
+        if (file.size > 25 * 1024 * 1024) {
+          throw new Error('File too large. Maximum size is 25MB.');
+        }
+      }
+      
+      // Mock success - actual processing would be handled by backend
+      toast.success('Content captured successfully!');
+      
+      // Reset form
+      if (type === 'url' || type === 'youtube') {
+        setUrl('');
+      } else if (type === 'note') {
+        setNoteTitle('');
+        setNoteContent('');
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        error.errors.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('Failed to capture content');
+      }
+    } finally {
       setIsProcessing(false);
-      // Mock success - would redirect to created card
-      console.log(`Processing ${type}:`, data);
-    }, 2000);
+    }
   };
 
   const captureTypes = [

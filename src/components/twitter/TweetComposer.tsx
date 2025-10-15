@@ -5,6 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import { Image, Smile, MapPin, Calendar, Hash, Link, Tag } from "lucide-react";
+import { bookmarkSchema } from "@/lib/validation";
+import { toast } from "sonner";
+import { z } from "zod";
 
 interface TweetComposerProps {
   compact?: boolean;
@@ -17,12 +20,28 @@ export function TweetComposer({ compact = false }: TweetComposerProps) {
   const maxLength = 500;
 
   const handleSubmit = () => {
-    if (bookmarkText.trim() || bookmarkUrl.trim()) {
+    try {
+      // Validate bookmark data
+      const validatedData = bookmarkSchema.parse({
+        url: bookmarkUrl || undefined,
+        title: bookmarkText || 'Untitled bookmark',
+        content: bookmarkText || undefined,
+        tags: tags,
+      });
+      
       // Handle bookmark submission
-      console.log("Bookmark submitted:", { text: bookmarkText, url: bookmarkUrl, tags });
+      toast.success("Bookmark saved successfully!");
       setBookmarkText("");
       setBookmarkUrl("");
       setTags("");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        error.errors.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else {
+        toast.error("Failed to save bookmark");
+      }
     }
   };
 
