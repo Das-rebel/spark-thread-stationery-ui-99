@@ -2,6 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import { Button } from './button';
 import { Card } from './card';
+import { analytics } from '@/lib/analytics';
 
 interface Props {
   children: ReactNode;
@@ -29,6 +30,9 @@ export class ErrorBoundary extends Component<Props, State> {
       error,
       errorInfo
     });
+    
+    // Track error in analytics
+    analytics.errorOccurred(error, errorInfo.componentStack || 'unknown');
     
     // Log error to monitoring service
     console.error('ErrorBoundary caught an error:', error, errorInfo);
