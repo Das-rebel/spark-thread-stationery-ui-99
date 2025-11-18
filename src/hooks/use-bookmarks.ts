@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
+import { analytics } from '@/lib/analytics';
 
 export interface Tweet {
   id: string;
@@ -143,6 +144,9 @@ export function useBookmarks() {
 
       const transformedBookmark = transformBookmarkToTweet(data);
       setBookmarks(prev => [transformedBookmark, ...prev]);
+      
+      // Track bookmark creation
+      analytics.bookmarkCreated(data.id, data.source_platform || 'unknown');
       
       toast({
         title: "Bookmark added! 🔖",

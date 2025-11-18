@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
+import { analytics } from '@/lib/analytics';
 
 interface AuthContextType {
   user: User | null;
@@ -26,6 +27,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+        
+        // Track auth events
+        if (session?.user) {
+          analytics.setUser(session.user.id);
+          if (event === 'SIGNED_IN') {
+            analytics.track('user_signed_in');
+          }
+        } else {
+          analytics.setUser(null);
+          if (event === 'SIGNED_OUT') {
+            analytics.track('user_signed_out');
+          }
+        }
       }
     );
 
