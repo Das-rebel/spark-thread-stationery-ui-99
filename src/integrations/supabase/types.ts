@@ -682,14 +682,8 @@ export type Database = {
       }
     }
     Functions: {
-      extract_domain_from_url: {
-        Args: { url_input: string }
-        Returns: string
-      }
-      format_time_ago: {
-        Args: { timestamp_input: string }
-        Returns: string
-      }
+      extract_domain_from_url: { Args: { url_input: string }; Returns: string }
+      format_time_ago: { Args: { timestamp_input: string }; Returns: string }
       generate_smart_actionables: {
         Args: { user_uuid: string }
         Returns: undefined
@@ -701,10 +695,7 @@ export type Database = {
         }
         Returns: boolean
       }
-      track_daily_activity: {
-        Args: { user_uuid: string }
-        Returns: undefined
-      }
+      track_daily_activity: { Args: { user_uuid: string }; Returns: undefined }
       update_learning_streak: {
         Args: { user_uuid: string }
         Returns: undefined
