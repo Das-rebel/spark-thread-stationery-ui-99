@@ -342,6 +342,32 @@ export default function Auth() {
                         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Sign In
                       </Button>
+                      
+                      <div className="relative my-4">
+                        <div className="absolute inset-0 flex items-center">
+                          <span className="w-full border-t" />
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                          <span className="bg-card px-2 text-muted-foreground">
+                            Or try demo
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full border-bamboo/30 hover:bg-bamboo/10"
+                        onClick={() => {
+                          setEmail('demo@example.com');
+                          setPassword('Demo123456');
+                          toast.info('Demo credentials filled. Click Sign In to continue.');
+                        }}
+                        disabled={loading}
+                      >
+                        <span className="mr-2">🎭</span>
+                        Try Demo Account
+                      </Button>
                     </motion.form>
                   </TabsContent>
 
