@@ -98,17 +98,17 @@ export default function Search() {
   const getTypeColor = (type: SearchResult['type']) => {
     switch (type) {
       case 'article':
-        return 'text-blue-500 bg-blue-500/10';
+        return 'text-primary bg-primary/10';
       case 'video':
-        return 'text-red-500 bg-red-500/10';
+        return 'text-destructive bg-destructive/10';
       case 'image':
-        return 'text-green-500 bg-green-500/10';
+        return 'text-bamboo bg-bamboo/10';
       case 'link':
-        return 'text-purple-500 bg-purple-500/10';
+        return 'text-accent bg-accent/10';
       case 'note':
         return 'text-sakura bg-sakura/10';
       default:
-        return 'text-gray-500 bg-gray-500/10';
+        return 'text-muted-foreground bg-muted';
     }
   };
 

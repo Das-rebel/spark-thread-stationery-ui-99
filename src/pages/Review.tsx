@@ -77,9 +77,9 @@ export default function Review() {
   };
 
   const difficultyColors = {
-    easy: 'text-green-600 bg-green-100',
-    medium: 'text-yellow-600 bg-yellow-100',
-    hard: 'text-red-600 bg-red-100'
+    easy: 'text-bamboo bg-bamboo/10',
+    medium: 'text-gold bg-gold/10',
+    hard: 'text-destructive bg-destructive/10'
   };
 
   const typeIcons = {
@@ -101,12 +101,12 @@ export default function Review() {
               </Button>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1 text-sm">
-                  <Flame className="w-4 h-4 text-orange-500" />
+                  <Flame className="w-4 h-4 text-accent" />
                   <span className="font-medium">{streak}</span>
                   <span className="text-muted-foreground">day streak</span>
                 </div>
                 <div className="flex items-center gap-1 text-sm">
-                  <Calendar className="w-4 h-4 text-blue-500" />
+                  <Calendar className="w-4 h-4 text-primary" />
                   <span className="font-medium">{todayReviews}</span>
                   <span className="text-muted-foreground">reviewed today</span>
                 </div>
@@ -163,12 +163,12 @@ export default function Review() {
               {showAnswer && (
                 <div className="space-y-3 border-t pt-6">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
+                    <CheckCircle className="w-4 h-4 text-bamboo" />
                     <span>Answer revealed</span>
                   </div>
-                  <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
+                  <div className="bg-bamboo/10 border border-bamboo/20 p-4 rounded-lg">
                     <div className="prose prose-sm max-w-none">
-                      <div className="text-green-900 whitespace-pre-wrap leading-relaxed">
+                      <div className="text-foreground whitespace-pre-wrap leading-relaxed">
                         {currentCard.answer}
                       </div>
                     </div>
@@ -209,9 +209,9 @@ export default function Review() {
                         variant="outline"
                         size="lg"
                         onClick={() => handleGrade('hard')}
-                        className="flex flex-col items-center gap-1 h-16 border-red-200 hover:bg-red-50"
+                        className="flex flex-col items-center gap-1 h-16 border-destructive/20 hover:bg-destructive/10"
                       >
-                        <XCircle className="w-4 h-4 text-red-500" />
+                        <XCircle className="w-4 h-4 text-destructive" />
                         <span className="text-xs">Hard</span>
                         <span className="text-xs text-muted-foreground">1 day</span>
                       </Button>
@@ -219,9 +219,9 @@ export default function Review() {
                         variant="outline"
                         size="lg"
                         onClick={() => handleGrade('good')}
-                        className="flex flex-col items-center gap-1 h-16 border-yellow-200 hover:bg-yellow-50"
+                        className="flex flex-col items-center gap-1 h-16 border-gold/20 hover:bg-gold/10"
                       >
-                        <AlertCircle className="w-4 h-4 text-yellow-500" />
+                        <AlertCircle className="w-4 h-4 text-gold" />
                         <span className="text-xs">Good</span>
                         <span className="text-xs text-muted-foreground">3 days</span>
                       </Button>
@@ -229,9 +229,9 @@ export default function Review() {
                         variant="outline"
                         size="lg"
                         onClick={() => handleGrade('easy')}
-                        className="flex flex-col items-center gap-1 h-16 border-green-200 hover:bg-green-50"
+                        className="flex flex-col items-center gap-1 h-16 border-bamboo/20 hover:bg-bamboo/10"
                       >
-                        <Trophy className="w-4 h-4 text-green-500" />
+                        <Trophy className="w-4 h-4 text-bamboo" />
                         <span className="text-xs">Easy</span>
                         <span className="text-xs text-muted-foreground">7 days</span>
                       </Button>
@@ -244,13 +244,13 @@ export default function Review() {
 
           {/* Session Complete */}
           {currentCardIndex >= reviewCards.length - 1 && showAnswer && (
-            <Card className="mt-4 paper-card bg-green-50 border-green-200">
+            <Card className="mt-4 paper-card bg-bamboo/10 border-bamboo/20">
               <CardContent className="p-6 text-center space-y-3">
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 bg-bamboo rounded-full flex items-center justify-center mx-auto">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-bold text-green-900">Session Complete!</h3>
-                <p className="text-sm text-green-700">
+                <h3 className="font-bold text-foreground">Session Complete!</h3>
+                <p className="text-sm text-muted-foreground">
                   Great job! You've completed today's review session.
                 </p>
                 <Button variant="sakura" className="mt-4">
