@@ -1,0 +1,38 @@
+# React-specific task configuration template
+# This file provides common React development workflows
+# for frontend developers.
+
+react:
+  component_creation:
+    description: Create a new React component
+    steps:
+      - Create a new component file
+      - Define and export the component
+      - Add basic props if required
+
+  hooks_development:
+    description: Develop a custom React hook
+    steps:
+      - Create a hook file using use prefix
+      - Implement reusable logic
+      - Export the hook
+
+  state_management:
+    description: Manage component state
+    steps:
+      - Initialize state using useState or useReducer
+      - Update state based on user actions
+      - Handle side effects using useEffect
+
+  testing_components:
+    description: Test React components
+    steps:
+      - Render component using a test library
+      - Assert expected UI behavior
+      - Test user interactions
+
+# Example workflow:
+# 1. Create a component
+# 2. Add required hooks
+# 3. Manage component state
+# 4. Write component tests
