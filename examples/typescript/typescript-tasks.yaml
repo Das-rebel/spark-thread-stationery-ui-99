@@ -1,0 +1,32 @@
+# TypeScript-specific task configuration template
+# Example config file: tmpld-typescript.yaml
+# This template helps developers adopt TypeScript best practices.
+
+typescript:
+  interface_generation:
+    description: Generate TypeScript interfaces
+    steps:
+      - Identify data structure
+      - Define interface
+      - Export interface for reuse
+
+  type_definition_creation:
+    description: Create reusable type definitions
+    steps:
+      - Define type aliases or unions
+      - Replace inline types
+      - Improve readability and reuse
+
+  typing_existing_code:
+    description: Add types to existing JavaScript code
+    steps:
+      - Enable strict mode
+      - Add types incrementally
+      - Resolve type errors
+
+  type_safety_testing:
+    description: Ensure type safety
+    steps:
+      - Enable strict compiler options
+      - Avoid unsafe any usage
+      - Validate build passes without errors

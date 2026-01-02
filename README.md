@@ -349,3 +349,5 @@ MIT License - see LICENSE file for details
 
 Built with [Lovable](https://lovable.dev) - The AI-powered app builder  
 Powered by [Supabase](https://supabase.com) - Open source Firebase alternative
+### TypeScript
+- `examples/typescript/typescript-tasks.yaml` – TypeScript-specific task patterns
