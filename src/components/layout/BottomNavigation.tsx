@@ -59,61 +59,52 @@ export function BottomNavigation() {
     <motion.nav 
       initial={{ y: 100 }}
       animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-lg border-t border-border/50 shadow-elegant"
+      transition={{ type: "spring", stiffness: 400, damping: 35 }}
+      className="fixed bottom-0 left-0 right-0 z-50 bg-card/98 backdrop-blur-xl border-t border-border/30"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <div className="max-w-2xl mx-auto px-2 py-1.5">
+      <div className="max-w-2xl mx-auto px-4 py-2">
         <div className="flex items-center justify-around">
-          {navItems.map((item, index) => {
+          {navItems.map((item) => {
             const active = isActive(item.path);
             const Icon = item.icon;
             
             return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="flex-1"
+              <Link 
+                key={item.id} 
+                to={item.path} 
+                className="flex flex-col items-center gap-1 py-1.5 px-3 rounded-xl transition-all duration-200 group relative min-w-[56px]"
               >
-                <Link to={item.path} className="flex flex-col items-center gap-1 py-2 px-1 rounded-xl transition-all duration-200 group relative">
-                  <motion.div 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={cn(
-                      "p-2 rounded-xl transition-all relative",
-                      active
-                        ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground group-hover:bg-muted group-hover:text-foreground"
-                    )}
-                  >
-                    <Icon className="w-5 h-5" />
-                    {item.badge && (
-                      <motion.div 
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="absolute -top-1 -right-1 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] rounded-full flex items-center justify-center font-bold"
-                      >
-                        {item.badge > 9 ? '9+' : item.badge}
-                      </motion.div>
-                    )}
-                  </motion.div>
-                  <span className={cn(
-                    "text-[10px] font-medium transition-all",
-                    active ? "text-primary" : "text-muted-foreground"
-                  )}>
-                    {item.label}
-                  </span>
-                  {active && (
-                    <motion.div 
-                      layoutId="activeIndicator"
-                      className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
+                <motion.div 
+                  whileTap={{ scale: 0.9 }}
+                  className={cn(
+                    "p-2 rounded-xl transition-all duration-200",
+                    active
+                      ? "bg-primary/12 text-primary"
+                      : "text-muted-foreground group-hover:text-foreground"
                   )}
-                </Link>
-              </motion.div>
+                >
+                  <Icon className={cn("w-5 h-5 transition-all", active && "stroke-[2.5]")} />
+                  {item.badge && (
+                    <div className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] rounded-full flex items-center justify-center font-bold">
+                      {item.badge > 9 ? '9+' : item.badge}
+                    </div>
+                  )}
+                </motion.div>
+                <span className={cn(
+                  "text-[11px] font-medium transition-all",
+                  active ? "text-primary" : "text-muted-foreground"
+                )}>
+                  {item.label}
+                </span>
+                {active && (
+                  <motion.div 
+                    layoutId="navIndicator"
+                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </Link>
             );
           })}
         </div>
