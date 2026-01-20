@@ -5,30 +5,33 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-paper",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-paper",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-paper",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-paper",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline ink-brush-underline",
-        // Japanese Stationary Variants
-        ink: "bg-gradient-ink text-primary-foreground hover:shadow-deep transition-bounce shadow-paper",
-        sakura: "bg-gradient-sakura text-foreground hover:shadow-floating transition-bounce shadow-paper seal-stamp",
-        washi: "bg-washi text-foreground border border-border hover:shadow-deep transition-smooth shadow-paper washi-texture",
-        seal: "bg-seal text-primary-foreground hover:bg-seal/90 rounded-full shadow-deep transition-bounce",
-        bamboo: "bg-bamboo text-primary-foreground hover:bg-bamboo/90 shadow-paper",
-        floating: "paper-card-floating hover:shadow-floating transition-bounce bg-card text-card-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
+        outline: "border border-border bg-background hover:bg-muted hover:border-border/80",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-muted hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        // Material Design Variants
+        filled: "bg-primary text-primary-foreground hover:shadow-md",
+        tonal: "bg-primary/10 text-primary hover:bg-primary/20",
+        elevated: "bg-card text-foreground shadow-md hover:shadow-lg border-0",
+        // Japanese Theme Variants
+        ink: "bg-ink text-primary-foreground hover:bg-ink/90 shadow-sm",
+        sakura: "bg-sakura/20 text-foreground hover:bg-sakura/30 border border-sakura/30",
+        bamboo: "bg-bamboo text-primary-foreground hover:bg-bamboo/90 shadow-sm",
+        seal: "bg-seal text-primary-foreground hover:bg-seal/90 rounded-full shadow-sm",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-        floating: "h-12 px-6 py-3 rounded-lg",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-12 rounded-lg px-6 text-base",
+        icon: "h-10 w-10 rounded-lg",
+        "icon-sm": "h-8 w-8 rounded-md",
+        "icon-lg": "h-12 w-12 rounded-xl",
       },
     },
     defaultVariants: {

@@ -81,11 +81,11 @@ export function Header() {
   const getStatusIcon = (status: Source['status']) => {
     switch (status) {
       case 'connected':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 text-bamboo" />;
       case 'disconnected':
-        return <XCircle className="w-4 h-4 text-red-500" />;
+        return <XCircle className="w-4 h-4 text-destructive" />;
       case 'syncing':
-        return <Clock className="w-4 h-4 text-yellow-500 animate-pulse" />;
+        return <Clock className="w-4 h-4 text-primary animate-pulse" />;
     }
   };
 
@@ -104,7 +104,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border" role="banner">
+    <header className="sticky top-0 z-50 bg-card/98 backdrop-blur-xl border-b border-border/30" role="banner">
       <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link 
@@ -112,10 +112,10 @@ export function Header() {
           className="flex items-center gap-2 focus-ring rounded-lg p-1 -m-1"
           aria-label="Brain Spark Home"
         >
-          <div className="w-8 h-8 bg-gradient-sakura rounded-full flex items-center justify-center">
-            <Brain className="w-5 h-5 text-seal" />
+          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+            <Brain className="w-4 h-4 text-primary" />
           </div>
-          <span className="font-display font-semibold text-lg text-ink">Brain Spark</span>
+          <span className="font-semibold text-base text-foreground">Brain Spark</span>
         </Link>
 
         {/* Network Status */}
@@ -126,77 +126,66 @@ export function Header() {
           <SheetTrigger asChild>
             <Button 
               variant="ghost" 
-              size="icon" 
-              className="hover:bg-washi focus-ring"
+              size="icon-sm" 
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
             </Button>
           </SheetTrigger>
           
-          <SheetContent side="right" className="w-80 p-0">
-            <SheetHeader className="p-6 border-b border-border">
-              <SheetTitle className="flex items-center gap-2 font-display">
-                <Settings className="w-5 h-5 text-bamboo" />
+          <SheetContent side="right" className="w-80 p-0 bg-card">
+            <SheetHeader className="p-5 border-b border-border/50">
+              <SheetTitle className="flex items-center gap-2 text-base font-semibold">
+                <Settings className="w-4 h-4 text-primary" />
                 Sources & Settings
               </SheetTitle>
             </SheetHeader>
 
-            <div className="p-6 space-y-6">
+            <div className="p-5 space-y-6">
               {/* Sources Section */}
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-ink">Data Sources</h3>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-semibold text-foreground">Data Sources</h3>
                   <Button 
-                    variant="outline" 
+                    variant="ghost" 
                     size="sm"
                     onClick={() => {
                       sources.forEach(source => handleRefresh(source.id));
                     }}
-                    className="text-xs"
+                    className="text-xs h-7"
                   >
                     <RefreshCw className="w-3 h-3 mr-1" />
                     Sync All
                   </Button>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {sources.map((source) => (
-                    <Card key={source.id} className="paper-card p-4">
-                      <div className="flex items-center justify-between mb-3">
+                    <Card key={source.id} variant="outlined" className="p-3">
+                      <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 bg-gradient-sakura rounded-full flex items-center justify-center`}>
-                            <source.icon className={`w-4 h-4 ${source.color}`} />
+                          <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center">
+                            <source.icon className="w-4 h-4 text-foreground" />
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="font-medium text-sm">{source.name}</span>
+                              <span className="text-sm font-medium">{source.name}</span>
                               {getStatusIcon(source.status)}
                             </div>
-                            <p className="text-xs text-muted-foreground">{source.lastSync}</p>
+                            <p className="text-xs text-muted-foreground">{source.lastSync} • {source.count} items</p>
                           </div>
                         </div>
                         
                         <Button
                           variant="ghost"
-                          size="icon"
+                          size="icon-sm"
                           onClick={() => handleRefresh(source.id)}
                           disabled={refreshing === source.id}
-                          className="w-8 h-8"
                         >
                           <RefreshCw 
-                            className={`w-4 h-4 ${refreshing === source.id ? 'animate-spin' : ''}`} 
+                            className={`w-3.5 h-3.5 ${refreshing === source.id ? 'animate-spin' : ''}`} 
                           />
                         </Button>
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          {getStatusBadge(source.status)}
-                          <span className="text-xs text-muted-foreground">
-                            {source.count} items
-                          </span>
-                        </div>
                       </div>
                     </Card>
                   ))}
@@ -205,22 +194,22 @@ export function Header() {
 
               {/* Navigation Links */}
               <div>
-                <h3 className="font-semibold text-ink mb-4">Navigation</h3>
-                <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-foreground mb-3">Navigation</h3>
+                <div className="space-y-1">
                   <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="ghost" className="w-full justify-start gap-3 text-sm focus-ring">
+                    <Button variant="ghost" className="w-full justify-start gap-3 text-sm h-9">
                       <Home className="w-4 h-4" />
                       Home
                     </Button>
                   </Link>
                   <Link to="/knowledge" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="ghost" className="w-full justify-start gap-3 text-sm">
+                    <Button variant="ghost" className="w-full justify-start gap-3 text-sm h-9">
                       <Network className="w-4 h-4" />
                       Knowledge Hub
                     </Button>
                   </Link>
                   <Link to="/twitter" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="ghost" className="w-full justify-start gap-3 text-sm">
+                    <Button variant="ghost" className="w-full justify-start gap-3 text-sm h-9">
                       <Twitter className="w-4 h-4" />
                       Social Feed
                     </Button>
@@ -230,23 +219,23 @@ export function Header() {
 
               {/* Settings Links */}
               <div>
-                <h3 className="font-semibold text-ink mb-4">Settings</h3>
-                <div className="space-y-2">
-                  <Button variant="ghost" className="w-full justify-start gap-3 text-sm">
+                <h3 className="text-sm font-semibold text-foreground mb-3">Settings</h3>
+                <div className="space-y-1">
+                  <Button variant="ghost" className="w-full justify-start gap-3 text-sm h-9">
                     <Settings className="w-4 h-4" />
                     General Settings
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start gap-3 text-sm">
+                  <Button variant="ghost" className="w-full justify-start gap-3 text-sm h-9">
                     <Brain className="w-4 h-4" />
                     AI Training
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start gap-3 text-sm">
+                  <Button variant="ghost" className="w-full justify-start gap-3 text-sm h-9">
                     <Info className="w-4 h-4" />
                     About
                   </Button>
                   <Button 
                     variant="ghost" 
-                    className="w-full justify-start gap-3 text-sm text-red-600 hover:text-red-700 hover:bg-red-50"
+                    className="w-full justify-start gap-3 text-sm h-9 text-destructive hover:text-destructive hover:bg-destructive/10"
                     onClick={handleSignOut}
                   >
                     <LogOut className="w-4 h-4" />

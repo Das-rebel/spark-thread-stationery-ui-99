@@ -31,21 +31,21 @@ const Index = () => {
     <AppLayout>
       <div className="min-h-screen pb-20 safe-area-inset-bottom">
         {/* Header */}
-        <header className="sticky top-0 z-10 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+        <header className="sticky top-0 z-10 bg-card/98 backdrop-blur-xl border-b border-border/30">
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-sakura rounded-xl flex items-center justify-center shadow-paper">
-                <Brain className="w-6 h-6 text-foreground" />
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                <Brain className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Knowledge Hub</h1>
-                <p className="text-xs text-muted-foreground font-medium">AI learning companion</p>
+                <h1 className="text-lg font-semibold text-foreground">Knowledge Hub</h1>
+                <p className="text-xs text-muted-foreground">AI learning companion</p>
               </div>
             </div>
             <Button 
               onClick={() => navigate('/add')}
-              className="bg-gradient-sakura hover:shadow-floating shadow-sm"
-              size="sm"
+              variant="tonal"
+              size="icon"
               aria-label="Add new content"
             >
               <Plus className="w-5 h-5" />
@@ -53,13 +53,13 @@ const Index = () => {
           </div>
 
           {/* Platform Integration */}
-          <div className="px-4 pb-4">
+          <div className="px-4 pb-3">
             <PlatformIntegrationSimple />
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="p-4 space-y-6 pb-safe">
+        <main className="p-4 space-y-4 pb-safe">
           {/* Quick Stats */}
           <QuickStats />
 
@@ -73,19 +73,21 @@ const Index = () => {
           <div className="grid grid-cols-2 gap-3">
             <Button 
               onClick={() => navigate('/knowledge')}
-              className="h-24 bg-gradient-bamboo text-foreground hover:shadow-floating flex flex-col gap-2 transition-all hover:scale-[1.02] shadow-sm"
+              variant="tonal"
+              className="h-20 flex flex-col gap-2"
               aria-label="Search your knowledge base"
             >
-              <Search className="w-6 h-6" />
-              <span className="text-sm font-semibold">Search Knowledge</span>
+              <Search className="w-5 h-5" />
+              <span className="text-xs font-medium">Search Knowledge</span>
             </Button>
             <Button 
               onClick={() => navigate('/add')}
-              className="h-24 bg-gradient-seal text-foreground hover:shadow-floating flex flex-col gap-2 transition-all hover:scale-[1.02] shadow-sm"
+              variant="tonal"
+              className="h-20 flex flex-col gap-2"
               aria-label="Add new content to your knowledge base"
             >
-              <Zap className="w-6 h-6" />
-              <span className="text-sm font-semibold">Add Content</span>
+              <Zap className="w-5 h-5" />
+              <span className="text-xs font-medium">Add Content</span>
             </Button>
           </div>
         </main>
