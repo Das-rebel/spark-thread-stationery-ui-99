@@ -62,22 +62,22 @@ export function TwitterFeed() {
         <div className="h-full overflow-y-auto scrollbar-hide pb-24">
           {/* Header */}
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border px-4 py-3 z-10"
+            className="sticky top-0 bg-background/80 backdrop-blur-lg border-b border-border/50 px-4 py-3 z-10"
           >
-            <h2 className="text-lg font-semibold text-ink">Collections</h2>
+            <h2 className="text-lg font-semibold text-foreground">Collections</h2>
             <p className="text-xs text-muted-foreground">Your curated knowledge</p>
           </motion.div>
 
           {/* Compose Bookmark Section */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-3"
+            className="p-4"
           >
-            <Card className="paper-card p-3">
+            <Card className="bg-card border border-border/50 rounded-xl p-4 shadow-sm">
               <TweetComposer compact />
             </Card>
           </motion.div>
@@ -86,19 +86,18 @@ export function TwitterFeed() {
           {loading && (
             <div className="p-4 space-y-4">
               {[...Array(3)].map((_, i) => (
-                <Card key={i} className="paper-card p-4">
+                <Card key={i} className="bg-card border border-border/50 rounded-xl p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <Skeleton className="w-10 h-10 rounded-full" />
                     <div className="flex-1">
-                      <Skeleton className="h-4 w-32 mb-1" />
+                      <Skeleton className="h-4 w-32 mb-1.5" />
                       <Skeleton className="h-3 w-20" />
                     </div>
                   </div>
-                  <Skeleton className="h-16 w-full mb-4" />
-                  <div className="grid grid-cols-4 gap-2 pt-3 border-t border-border">
-                    {[...Array(4)].map((_, j) => (
-                      <Skeleton key={j} className="h-12 w-full" />
-                    ))}
+                  <Skeleton className="h-16 w-full mb-3" />
+                  <div className="flex gap-2 pt-3 border-t border-border/30">
+                    <Skeleton className="h-8 w-20 rounded-full" />
+                    <Skeleton className="h-8 w-20 rounded-full" />
                   </div>
                 </Card>
               ))}
@@ -124,11 +123,11 @@ export function TwitterFeed() {
           {/* Empty State */}
           {!loading && bookmarks.length === 0 && (
             <div className="p-4">
-              <Card className="paper-card p-8 text-center">
-                <p className="text-muted-foreground mb-4">No bookmarks found</p>
-                <div className="w-16 h-16 mx-auto bg-gradient-sakura rounded-full flex items-center justify-center mb-4">
+              <Card className="bg-card border border-border/50 rounded-xl p-8 text-center">
+                <div className="w-14 h-14 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
                   <span className="text-2xl">📚</span>
                 </div>
+                <p className="text-foreground font-medium mb-1">No bookmarks yet</p>
                 <p className="text-sm text-muted-foreground">
                   Start saving content to build your knowledge collection
                 </p>
@@ -139,11 +138,11 @@ export function TwitterFeed() {
           {/* Load More - Only show when we have bookmarks */}
           {!loading && bookmarks.length > 0 && (
             <div className="p-4">
-              <Card className="paper-card p-8 text-center">
-                <p className="text-muted-foreground mb-4">You've caught up with all your bookmarks!</p>
-                <div className="w-16 h-16 mx-auto bg-gradient-sakura rounded-full flex items-center justify-center">
-                  <span className="text-2xl">📚</span>
+              <Card className="bg-card border border-border/50 rounded-xl p-6 text-center">
+                <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                  <span className="text-xl">✓</span>
                 </div>
+                <p className="text-muted-foreground text-sm">You've caught up with all your bookmarks!</p>
               </Card>
             </div>
           )}

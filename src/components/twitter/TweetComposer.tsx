@@ -47,59 +47,60 @@ export function TweetComposer({ compact = false }: TweetComposerProps) {
 
   if (compact) {
     return (
-      <div className="space-y-4">
-        <div className="flex gap-4">
-          <div className="w-12 h-12 bg-gradient-sakura rounded-full flex items-center justify-center text-xl">
+      <div className="space-y-3">
+        <div className="flex gap-3">
+          <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-lg flex-shrink-0">
             🧠
           </div>
-          <div className="flex-1 space-y-3">
+          <div className="flex-1 space-y-2">
             <Input
               placeholder="Paste URL to bookmark..."
               value={bookmarkUrl}
               onChange={(e) => setBookmarkUrl(e.target.value)}
-              className="border-border bg-washi"
+              className="h-9 bg-muted/50 border-border/50 rounded-lg text-sm focus-visible:ring-1 focus-visible:ring-primary"
             />
             <Textarea
-              placeholder="Add your thoughts about this bookmark..."
+              placeholder="Add your thoughts..."
               value={bookmarkText}
               onChange={(e) => setBookmarkText(e.target.value)}
-              className="min-h-[60px] border-none bg-transparent resize-none placeholder:text-muted-foreground focus-visible:ring-0"
+              className="min-h-[50px] bg-transparent border-none resize-none placeholder:text-muted-foreground focus-visible:ring-0 text-sm p-0"
               maxLength={maxLength}
             />
             <Input
-              placeholder="Add tags (#tech #article #research)..."
+              placeholder="Tags: #tech #article..."
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              className="border-none bg-transparent text-sm placeholder:text-muted-foreground focus-visible:ring-0"
+              className="h-8 bg-transparent border-none text-xs placeholder:text-muted-foreground focus-visible:ring-0 p-0"
             />
           </div>
         </div>
         
-        <div className="flex items-center justify-between pl-16">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-bamboo hover:text-seal">
-              <Link className="w-5 h-5" />
+        <div className="flex items-center justify-between pl-13">
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10">
+              <Link className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-bamboo hover:text-seal">
-              <Tag className="w-5 h-5" />
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10">
+              <Tag className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-bamboo hover:text-seal">
-              <Image className="w-5 h-5" />
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10">
+              <Image className="w-4 h-4" />
             </Button>
           </div>
           
-          <div className="flex items-center gap-4">
-            <span className={`text-sm ${
-              bookmarkText.length > maxLength * 0.9 ? "text-seal" : "text-muted-foreground"
+          <div className="flex items-center gap-3">
+            <span className={`text-xs ${
+              bookmarkText.length > maxLength * 0.9 ? "text-destructive" : "text-muted-foreground"
             }`}>
               {maxLength - bookmarkText.length}
             </span>
             <Button 
-              variant="ink" 
+              size="sm"
               onClick={handleSubmit}
               disabled={!bookmarkText.trim() && !bookmarkUrl.trim() || bookmarkText.length > maxLength}
+              className="h-8 px-4 rounded-full"
             >
-              Save Bookmark
+              Save
             </Button>
           </div>
         </div>
