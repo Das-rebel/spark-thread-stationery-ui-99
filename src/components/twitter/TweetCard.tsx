@@ -100,13 +100,13 @@ export function TweetCard({ tweet }: TweetCardProps) {
   return (
     <>
       <motion.div
-        whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        whileHover={{ y: -1 }}
+        whileTap={{ scale: 0.99 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
         <Card 
-          className={`paper-card hover:shadow-floating transition-smooth group cursor-pointer select-none ${
-            longPressActive ? "scale-95 shadow-paper" : ""
+          className={`bg-card border border-border/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer select-none ${
+            longPressActive ? "scale-[0.98] shadow-sm" : ""
           }`}
           onTouchStart={handleLongPressStart}
           onTouchEnd={handleLongPressEnd}
@@ -116,32 +116,31 @@ export function TweetCard({ tweet }: TweetCardProps) {
           onMouseMove={handleLongPressMove}
           onMouseLeave={handleLongPressEnd}
         >
-        <div className="p-3">
+        <div className="p-4">
         {/* Bookmark Header */}
-        <div className="flex items-start justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <motion.div 
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="w-9 h-9 bg-gradient-sakura rounded-full flex items-center justify-center text-base seal-stamp"
-            >
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-lg">
               {tweet.author.avatar}
-            </motion.div>
+            </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-ink text-sm">{tweet.author.name}</span>
+                <span className="font-semibold text-foreground text-sm">{tweet.author.name}</span>
                 {tweet.author.verified && (
-                  <div className="w-4 h-4 bg-seal rounded-full flex items-center justify-center">
-                    <span className="text-[10px] text-white">✓</span>
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                    <span className="text-[10px] text-primary-foreground">✓</span>
                   </div>
                 )}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs text-muted-foreground">{tweet.author.handle}</span>
                 <span className="text-muted-foreground text-xs">·</span>
                 <span className="text-muted-foreground text-xs">{tweet.timestamp}</span>
               </div>
-              <span className="text-xs text-bamboo">{tweet.author.handle}</span>
             </div>
           </div>
-          <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-smooth">
-            <MoreHorizontal className="w-3.5 h-3.5" />
+          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
           </Button>
         </div>
 
@@ -154,28 +153,28 @@ export function TweetCard({ tweet }: TweetCardProps) {
         {tweet.hasThread && (
           <Link to={`/twitter/thread/${tweet.id}`}>
             <Badge 
-              variant="secondary" 
-              className="mb-4 hover:bg-gradient-sakura transition-smooth cursor-pointer thread-swipe"
+              variant="info" 
+              className="mb-3 cursor-pointer hover:bg-primary/20 transition-colors"
             >
               <MessageCircle className="w-3 h-3 mr-1" />
-              {tweet.threadCount} bookmark collection
+              {tweet.threadCount} in collection
             </Badge>
           </Link>
         )}
 
         {/* Images */}
         {tweet.images.length > 0 && (
-          <div className={`mb-4 rounded-lg overflow-hidden shadow-paper ${
-            tweet.images.length === 1 ? "max-h-96" : 
-            tweet.images.length === 2 ? "grid grid-cols-2 gap-2 max-h-64" :
-            "grid grid-cols-2 gap-2 max-h-64"
+          <div className={`mb-3 rounded-lg overflow-hidden border border-border/50 ${
+            tweet.images.length === 1 ? "max-h-80" : 
+            tweet.images.length === 2 ? "grid grid-cols-2 gap-0.5 max-h-56" :
+            "grid grid-cols-2 gap-0.5 max-h-56"
           }`}>
             {tweet.images.map((image, index) => (
               <img
                 key={index}
                 src={image}
                 alt={`Tweet image ${index + 1}`}
-                className="w-full h-full object-cover hover:scale-105 transition-smooth cursor-pointer"
+                className="w-full h-full object-cover hover:opacity-90 transition-opacity cursor-pointer"
                 onClick={() => setShowPreview(true)}
               />
             ))}
@@ -183,20 +182,20 @@ export function TweetCard({ tweet }: TweetCardProps) {
         )}
         {/* URL Preview */}
         {tweet.url && (
-          <div className="mb-4 p-4 bg-washi rounded-lg border border-border washi-texture hover:shadow-paper transition-smooth cursor-pointer group">
+          <div className="mb-3 p-3 bg-muted/50 rounded-lg border border-border/50 hover:bg-muted/70 transition-colors cursor-pointer group/url">
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-gradient-ink rounded-lg flex items-center justify-center flex-shrink-0">
-                <ExternalLink className="w-5 h-5 text-primary-foreground" />
+              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <ExternalLink className="w-5 h-5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs text-bamboo font-medium">{tweet.domain}</span>
-                  <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-seal transition-smooth" />
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-xs text-muted-foreground font-medium">{tweet.domain}</span>
+                  <ExternalLink className="w-3 h-3 text-muted-foreground group-hover/url:text-primary transition-colors" />
                 </div>
                 <p className="text-sm text-foreground font-medium line-clamp-2">
                   {tweet.content.split('.')[0]}...
                 </p>
-                <p className="text-xs text-muted-foreground mt-1 truncate">
+                <p className="text-xs text-muted-foreground mt-0.5 truncate">
                   {tweet.url}
                 </p>
               </div>
@@ -205,10 +204,10 @@ export function TweetCard({ tweet }: TweetCardProps) {
         )}
         {/* Bookmark Preview */}
         {showPreview && (
-          <div className="mb-4 p-4 bg-washi rounded-lg border border-border washi-texture">
-            <div className="flex items-center gap-2 mb-2">
-              <Bookmark className="w-4 h-4 text-bamboo" />
-              <span className="text-sm text-bamboo font-medium">Bookmark Preview</span>
+          <div className="mb-3 p-3 bg-muted/30 rounded-lg border border-border/50">
+            <div className="flex items-center gap-2 mb-1.5">
+              <Bookmark className="w-4 h-4 text-primary" />
+              <span className="text-sm text-primary font-medium">Preview</span>
             </div>
             <p className="text-sm text-muted-foreground">
               "{tweet.content.substring(0, 100)}..." • saved by {tweet.author.name}
@@ -217,57 +216,48 @@ export function TweetCard({ tweet }: TweetCardProps) {
         )}
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-4 gap-1 pt-2 border-t border-border/50">
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <div className="flex items-center justify-between pt-3 border-t border-border/30">
+          <div className="flex items-center gap-1">
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={handleBookmark}
-              className={`flex flex-col items-center gap-0.5 py-2 w-full transition-bounce h-auto ${
-                isBookmarked ? "text-gold" : "text-muted-foreground hover:text-gold"
+              className={`h-8 px-3 rounded-full transition-colors ${
+                isBookmarked ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-primary hover:bg-primary/10"
               }`}
             >
-              <CustomIcons.Bookmark className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`} />
-              <span className="text-[10px]">Save</span>
+              <CustomIcons.Bookmark className={`w-4 h-4 mr-1.5 ${isBookmarked ? "fill-current" : ""}`} />
+              <span className="text-xs font-medium">Save</span>
             </Button>
-          </motion.div>
 
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="ghost" size="sm" className="flex flex-col items-center gap-0.5 py-2 w-full text-muted-foreground hover:text-bamboo h-auto">
-              <CustomIcons.Share className="w-4 h-4" />
-              <span className="text-[10px]">Share</span>
+            <Button variant="ghost" size="sm" className="h-8 px-3 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted">
+              <CustomIcons.Share className="w-4 h-4 mr-1.5" />
+              <span className="text-xs font-medium">Share</span>
             </Button>
-          </motion.div>
+          </div>
 
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="ghost" size="sm" className="flex flex-col items-center gap-0.5 py-2 w-full text-muted-foreground hover:text-seal h-auto">
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10">
               <CustomIcons.ActionBolt className="w-4 h-4" />
-              <span className="text-[10px]">Action</span>
             </Button>
-          </motion.div>
 
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="ghost" size="sm" className="flex flex-col items-center gap-0.5 py-2 w-full text-muted-foreground hover:text-bamboo h-auto">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10">
               <CustomIcons.BrainAI className="w-4 h-4" />
-              <span className="text-[10px]">AI</span>
             </Button>
-          </motion.div>
+          </div>
         </div>
 
         {/* Source Badge */}
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center pt-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] text-muted-foreground">Source:</span>
-            <div className="flex items-center gap-1">
-              {tweet.source === 'whatsapp' ? (
-                <MessageSquare className="w-3 h-3 text-green-500" />
-              ) : (
-                <Twitter className="w-3 h-3 text-blue-500" />
-              )}
-              <span className="text-[10px] text-muted-foreground capitalize">
-                {tweet.source || 'twitter'}
-              </span>
-            </div>
+            {tweet.source === 'whatsapp' ? (
+              <MessageSquare className="w-3 h-3 text-muted-foreground" />
+            ) : (
+              <Twitter className="w-3 h-3 text-muted-foreground" />
+            )}
+            <span className="text-[10px] text-muted-foreground capitalize">
+              {tweet.source || 'twitter'}
+            </span>
           </div>
         </div>
       </div>

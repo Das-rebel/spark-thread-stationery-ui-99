@@ -133,49 +133,17 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-paper flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Decorative Japanese-themed SVG elements */}
-      <svg className="absolute inset-0 w-full h-full opacity-5 pointer-events-none" aria-hidden="true">
-        <defs>
-          <pattern id="sakura-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-            {/* Sakura blossom petals */}
-            <path d="M50,50 Q60,45 65,50 Q60,55 50,50" fill="hsl(var(--sakura))" opacity="0.3" />
-            <path d="M50,50 Q55,40 60,45 Q55,50 50,50" fill="hsl(var(--sakura))" opacity="0.3" transform="rotate(72 50 50)" />
-            <path d="M50,50 Q55,40 60,45 Q55,50 50,50" fill="hsl(var(--sakura))" opacity="0.3" transform="rotate(144 50 50)" />
-            <path d="M50,50 Q55,40 60,45 Q55,50 50,50" fill="hsl(var(--sakura))" opacity="0.3" transform="rotate(216 50 50)" />
-            <path d="M50,50 Q55,40 60,45 Q55,50 50,50" fill="hsl(var(--sakura))" opacity="0.3" transform="rotate(288 50 50)" />
-          </pattern>
-          <linearGradient id="bamboo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--bamboo))" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="hsl(var(--bamboo))" stopOpacity="0.05" />
-          </linearGradient>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#sakura-pattern)" />
-        
-        {/* Bamboo stalks on sides */}
-        <g opacity="0.15">
-          <rect x="5%" y="0" width="12" height="100%" fill="url(#bamboo-gradient)" rx="6" />
-          <line x1="5.5%" y1="15%" x2="5.5%" y2="15.5%" stroke="hsl(var(--bamboo))" strokeWidth="14" />
-          <line x1="5.5%" y1="40%" x2="5.5%" y2="40.5%" stroke="hsl(var(--bamboo))" strokeWidth="14" />
-          <line x1="5.5%" y1="70%" x2="5.5%" y2="70.5%" stroke="hsl(var(--bamboo))" strokeWidth="14" />
-          
-          <rect x="93%" y="0" width="12" height="100%" fill="url(#bamboo-gradient)" rx="6" />
-          <line x1="93.5%" y1="25%" x2="93.5%" y2="25.5%" stroke="hsl(var(--bamboo))" strokeWidth="14" />
-          <line x1="93.5%" y1="55%" x2="93.5%" y2="55.5%" stroke="hsl(var(--bamboo))" strokeWidth="14" />
-          <line x1="93.5%" y1="85%" x2="93.5%" y2="85.5%" stroke="hsl(var(--bamboo))" strokeWidth="14" />
-        </g>
-        
-        {/* Floating sakura petals */}
-        <g className="animate-float-slow" opacity="0.2">
-          <path d="M20,10 Q25,8 28,10 Q25,12 20,10 Z" fill="hsl(var(--sakura))" />
-          <path d="M80,30 Q85,28 88,30 Q85,32 80,30 Z" fill="hsl(var(--sakura))" />
-          <path d="M15,60 Q20,58 23,60 Q20,62 15,60 Z" fill="hsl(var(--sakura))" />
-          <path d="M90,80 Q95,78 98,80 Q95,82 90,80 Z" fill="hsl(var(--sakura))" />
-        </g>
-      </svg>
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
+          backgroundSize: '24px 24px'
+        }} />
+      </div>
 
       {/* Main auth card */}
-      <Card className="w-full max-w-md relative z-10 shadow-paper">
+      <Card className="w-full max-w-md relative z-10 bg-card border border-border/50 shadow-xl rounded-2xl overflow-hidden">
         <AnimatePresence mode="wait">
           {showResetPassword ? (
             <motion.div
@@ -183,24 +151,24 @@ export default function Auth() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
             >
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-gradient-sakura flex items-center justify-center shadow-elegant">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
-                          fill="white" opacity="0.9" />
+                          fill="hsl(var(--primary))" opacity="0.9" />
                   </svg>
                 </div>
-                <CardTitle className="text-2xl font-serif">Reset Password</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-xl font-semibold">Reset Password</CardTitle>
+                <CardDescription className="text-sm">
                   Enter your new password
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pb-6">
                 <form onSubmit={handleResetPassword} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="new-password">New Password</Label>
+                    <Label htmlFor="new-password" className="text-sm font-medium">New Password</Label>
                     <Input
                       id="new-password"
                       type="password"
@@ -209,9 +177,10 @@ export default function Auth() {
                       onChange={(e) => setNewPassword(e.target.value)}
                       required
                       disabled={loading}
+                      variant="filled"
                     />
                   </div>
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button type="submit" className="w-full h-10 rounded-lg" disabled={loading}>
                     {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Update Password
                   </Button>
@@ -224,24 +193,24 @@ export default function Auth() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
             >
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-gradient-sakura flex items-center justify-center shadow-elegant">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
-                          fill="white" opacity="0.9" />
+                          fill="hsl(var(--primary))" opacity="0.9" />
                   </svg>
                 </div>
-                <CardTitle className="text-2xl font-serif">Forgot Password?</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-xl font-semibold">Forgot Password?</CardTitle>
+                <CardDescription className="text-sm">
                   We'll send you a reset link
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pb-6">
                 <form onSubmit={handleForgotPassword} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="reset-email">Email</Label>
+                    <Label htmlFor="reset-email" className="text-sm font-medium">Email</Label>
                     <Input
                       id="reset-email"
                       type="email"
@@ -250,16 +219,17 @@ export default function Auth() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                       disabled={loading}
+                      variant="filled"
                     />
                   </div>
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button type="submit" className="w-full h-10 rounded-lg" disabled={loading}>
                     {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Send Reset Link
                   </Button>
                   <Button
                     type="button"
                     variant="ghost"
-                    className="w-full"
+                    className="w-full h-10 rounded-lg"
                     onClick={() => setShowForgotPassword(false)}
                     disabled={loading}
                   >
@@ -272,40 +242,40 @@ export default function Auth() {
           ) : (
             <motion.div
               key="auth-tabs"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
             >
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-gradient-sakura flex items-center justify-center shadow-elegant">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
-                          fill="white" opacity="0.9" />
+                          fill="hsl(var(--primary))" opacity="0.9" />
                   </svg>
                 </div>
-                <CardTitle className="text-2xl font-serif">Welcome to Brain Spark</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-xl font-semibold">Welcome to Brain Spark</CardTitle>
+                <CardDescription className="text-sm">
                   Your AI-powered knowledge companion
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pb-6">
                 <Tabs value={isSignUp ? 'signup' : 'signin'} onValueChange={(v) => setIsSignUp(v === 'signup')}>
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="signin">Sign In</TabsTrigger>
-                    <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-2 h-10 p-1 rounded-lg bg-muted/50">
+                    <TabsTrigger value="signin" className="rounded-md text-sm font-medium">Sign In</TabsTrigger>
+                    <TabsTrigger value="signup" className="rounded-md text-sm font-medium">Sign Up</TabsTrigger>
                   </TabsList>
                   
-                  <TabsContent value="signin">
+                  <TabsContent value="signin" className="mt-4">
                     <motion.form
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.2 }}
                       onSubmit={handleSubmit}
                       className="space-y-4"
                     >
-                      <div className="space-y-2">
-                        <Label htmlFor="signin-email">Email</Label>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="signin-email" className="text-sm font-medium">Email</Label>
                         <Input
                           id="signin-email"
                           type="email"
@@ -314,15 +284,16 @@ export default function Auth() {
                           onChange={(e) => setEmail(e.target.value)}
                           required
                           disabled={loading}
+                          variant="filled"
                         />
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <Label htmlFor="signin-password">Password</Label>
+                          <Label htmlFor="signin-password" className="text-sm font-medium">Password</Label>
                           <button
                             type="button"
                             onClick={() => setShowForgotPassword(true)}
-                            className="text-sm text-primary hover:underline"
+                            className="text-xs text-primary hover:underline"
                             disabled={loading}
                           >
                             Forgot?
@@ -336,20 +307,21 @@ export default function Auth() {
                           onChange={(e) => setPassword(e.target.value)}
                           required
                           disabled={loading}
+                          variant="filled"
                         />
                       </div>
-                      <Button type="submit" className="w-full" disabled={loading}>
+                      <Button type="submit" className="w-full h-10 rounded-lg" disabled={loading}>
                         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Sign In
                       </Button>
                       
-                      <div className="relative my-4">
+                      <div className="relative my-3">
                         <div className="absolute inset-0 flex items-center">
-                          <span className="w-full border-t" />
+                          <span className="w-full border-t border-border/50" />
                         </div>
-                        <div className="relative flex justify-center text-xs uppercase">
+                        <div className="relative flex justify-center text-xs">
                           <span className="bg-card px-2 text-muted-foreground">
-                            Or try demo
+                            or try demo
                           </span>
                         </div>
                       </div>
@@ -357,7 +329,7 @@ export default function Auth() {
                       <Button
                         type="button"
                         variant="outline"
-                        className="w-full border-bamboo/30 hover:bg-bamboo/10"
+                        className="w-full h-10 rounded-lg"
                         onClick={() => {
                           setEmail('demo@example.com');
                           setPassword('Demo123456');
@@ -371,16 +343,16 @@ export default function Auth() {
                     </motion.form>
                   </TabsContent>
 
-                  <TabsContent value="signup">
+                  <TabsContent value="signup" className="mt-4">
                     <motion.form
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.2 }}
                       onSubmit={handleSubmit}
                       className="space-y-4"
                     >
-                      <div className="space-y-2">
-                        <Label htmlFor="signup-name">Full Name</Label>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="signup-name" className="text-sm font-medium">Full Name</Label>
                         <Input
                           id="signup-name"
                           type="text"
@@ -389,10 +361,11 @@ export default function Auth() {
                           onChange={(e) => setFullName(e.target.value)}
                           required
                           disabled={loading}
+                          variant="filled"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="signup-email">Email</Label>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="signup-email" className="text-sm font-medium">Email</Label>
                         <Input
                           id="signup-email"
                           type="email"
@@ -401,10 +374,11 @@ export default function Auth() {
                           onChange={(e) => setEmail(e.target.value)}
                           required
                           disabled={loading}
+                          variant="filled"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="signup-password">Password</Label>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="signup-password" className="text-sm font-medium">Password</Label>
                         <Input
                           id="signup-password"
                           type="password"
@@ -413,9 +387,10 @@ export default function Auth() {
                           onChange={(e) => setPassword(e.target.value)}
                           required
                           disabled={loading}
+                          variant="filled"
                         />
                       </div>
-                      <Button type="submit" className="w-full" disabled={loading}>
+                      <Button type="submit" className="w-full h-10 rounded-lg" disabled={loading}>
                         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Sign Up
                       </Button>

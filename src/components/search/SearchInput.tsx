@@ -101,7 +101,8 @@ export function SearchInput({ placeholder = "Search your knowledge...", onSearch
           value={query}
           onChange={handleInputChange}
           onFocus={() => setShowSuggestions(true)}
-          className="pl-10 pr-10 paper-input transition-smooth focus:shadow-floating"
+          variant="filled"
+          className="pl-10 pr-10 h-10 rounded-lg"
         />
         {query && (
           <Button
@@ -109,7 +110,7 @@ export function SearchInput({ placeholder = "Search your knowledge...", onSearch
             variant="ghost"
             size="icon"
             onClick={clearQuery}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 opacity-60 hover:opacity-100"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 rounded-full opacity-60 hover:opacity-100"
           >
             <X className="w-4 h-4" />
           </Button>
@@ -117,7 +118,7 @@ export function SearchInput({ placeholder = "Search your knowledge...", onSearch
       </form>
 
       {showSuggestions && (
-        <Card className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-sm border border-border shadow-floating z-50 max-h-80 overflow-y-auto">
+        <Card className="absolute top-full left-0 right-0 mt-2 bg-card border border-border/50 shadow-lg z-50 max-h-80 overflow-y-auto rounded-xl">
           <div className="p-2">
             {filteredSuggestions.length > 0 ? (
               <>
