@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Traditional Japanese seal stamp (hanko) decorative element -->
+  <defs>
+    <linearGradient id="sealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(355, 70%, 58%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(355, 70%, 52%);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Worn texture effect -->
+    <filter id="wornTexture" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" in="noise" result="monoNoise"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.3 0"/>
+      <feBlend in="SourceGraphic" in2="monoNoise" mode="multiply"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer square border -->
+  <rect 
+    x="8" y="8" 
+    width="48" height="48" 
+    rx="3" ry="3"
+    fill="none"
+    stroke="url(#sealGradient)"
+    stroke-width="4"
+    filter="url(#wornTexture)"
+  />
+  
+  <!-- Inner decorative border -->
+  <rect 
+    x="14" y="14" 
+    width="36" height="36" 
+    rx="2" ry="2"
+    fill="none"
+    stroke="url(#sealGradient)"
+    stroke-width="2"
+    filter="url(#wornTexture)"
+  />
+  
+  <!-- Stylized "BS" characters for BrainSpark -->
+  <g fill="url(#sealGradient)" filter="url(#wornTexture)">
+    <!-- B character - left side -->
+    <path d="M22,22 L22,42 L28,42 C32,42 34,40 34,37 C34,35 33,33 30,32 C33,31 34,29 34,27 C34,24 32,22 28,22 Z M25,25 L28,25 C30,25 31,26 31,27.5 C31,29 30,30 28,30 L25,30 Z M25,33 L28,33 C30,33 31,34 31,36 C31,38 30,39 28,39 L25,39 Z"/>
+    
+    <!-- S character - right side -->
+    <path d="M42,25 C42,25 40,22 36,22 C33,22 30,24 30,27 C30,30 32,31 36,32 C39,33 40,34 40,36 C40,38 38,39 36,39 C33,39 31,37 31,37 L29,40 C29,40 32,42 36,42 C40,42 43,40 43,36 C43,33 41,31 37,30 C34,29 33,28 33,27 C33,25 35,25 36,25 C39,25 40,27 40,27 Z"/>
+  </g>
+  
+  <!-- Corner decorations -->
+  <circle cx="12" cy="12" r="2" fill="url(#sealGradient)" opacity="0.8" filter="url(#wornTexture)"/>
+  <circle cx="52" cy="12" r="2" fill="url(#sealGradient)" opacity="0.8" filter="url(#wornTexture)"/>
+  <circle cx="12" cy="52" r="2" fill="url(#sealGradient)" opacity="0.8" filter="url(#wornTexture)"/>
+  <circle cx="52" cy="52" r="2" fill="url(#sealGradient)" opacity="0.8" filter="url(#wornTexture)"/>
+</svg>

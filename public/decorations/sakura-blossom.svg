@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- 5-petal cherry blossom design -->
+  <defs>
+    <linearGradient id="sakuraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(345, 50%, 88%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(345, 50%, 80%);stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(45, 80%, 75%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(45, 80%, 65%);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Petals -->
+  <g transform="translate(24, 24)">
+    <!-- Petal 1 (top) -->
+    <path d="M0,-20 C5,-15 8,-8 6,-2 C4,2 2,3 0,3 C-2,3 -4,2 -6,-2 C-8,-8 -5,-15 0,-20" 
+          fill="url(#sakuraGradient)" 
+          transform="rotate(0)"/>
+    
+    <!-- Petal 2 -->
+    <path d="M0,-20 C5,-15 8,-8 6,-2 C4,2 2,3 0,3 C-2,3 -4,2 -6,-2 C-8,-8 -5,-15 0,-20" 
+          fill="url(#sakuraGradient)" 
+          transform="rotate(72)"/>
+    
+    <!-- Petal 3 -->
+    <path d="M0,-20 C5,-15 8,-8 6,-2 C4,2 2,3 0,3 C-2,3 -4,2 -6,-2 C-8,-8 -5,-15 0,-20" 
+          fill="url(#sakuraGradient)" 
+          transform="rotate(144)"/>
+    
+    <!-- Petal 4 -->
+    <path d="M0,-20 C5,-15 8,-8 6,-2 C4,2 2,3 0,3 C-2,3 -4,2 -6,-2 C-8,-8 -5,-15 0,-20" 
+          fill="url(#sakuraGradient)" 
+          transform="rotate(216)"/>
+    
+    <!-- Petal 5 -->
+    <path d="M0,-20 C5,-15 8,-8 6,-2 C4,2 2,3 0,3 C-2,3 -4,2 -6,-2 C-8,-8 -5,-15 0,-20" 
+          fill="url(#sakuraGradient)" 
+          transform="rotate(288)"/>
+  </g>
+  
+  <!-- Center -->
+  <circle cx="24" cy="24" r="5" fill="url(#centerGradient)"/>
+  
+  <!-- Stamen dots -->
+  <circle cx="24" cy="20" r="1" fill="hsl(45, 80%, 60%)"/>
+  <circle cx="27" cy="22" r="1" fill="hsl(45, 80%, 60%)"/>
+  <circle cx="26" cy="26" r="1" fill="hsl(45, 80%, 60%)"/>
+  <circle cx="22" cy="26" r="1" fill="hsl(45, 80%, 60%)"/>
+  <circle cx="21" cy="22" r="1" fill="hsl(45, 80%, 60%)"/>
+</svg>

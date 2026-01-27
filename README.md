@@ -37,41 +37,44 @@ A beautiful, Japanese stationary-inspired knowledge management and bookmark orga
 - **Validation**: Zod
 - **Icons**: Lucide React
 - **Charts**: Recharts
-
 ## 📚 Documentation for Cursor Development
 
 ### Essential Files for Replication ⭐
 
 This project includes comprehensive documentation for easy frontend replication in Cursor:
 
-1. **[CURSOR_DESIGN_TOKENS.md](./CURSOR_DESIGN_TOKENS.md)** - START HERE
-   - Complete color palette (all HSL format)
-   - Gradients, shadows, typography
-   - Component patterns & best practices
-   - Copy-paste code snippets
+| Document | Purpose |
+|----------|---------|
+| **[CURSOR_DESIGN_TOKENS.md](./CURSOR_DESIGN_TOKENS.md)** | Color palette, gradients, shadows, typography (START HERE) |
+| **[CURSOR_COMPONENTS_GUIDE.md](./CURSOR_COMPONENTS_GUIDE.md)** | Component architecture, file structure, React patterns |
+| **[CURSOR_FEATURE_ROADMAP.md](./CURSOR_FEATURE_ROADMAP.md)** | Implementation status, phase plan, testing checklists |
+| **[CURSOR_API_REFERENCE.md](./CURSOR_API_REFERENCE.md)** | Database schema, API patterns, React Query examples |
 
-2. **[CURSOR_COMPONENTS_GUIDE.md](./CURSOR_COMPONENTS_GUIDE.md)** 
-   - Full component architecture
-   - File structure & organization
-   - Custom hooks reference
-   - React patterns & examples
+### UI & Navigation Reference 🎨
 
-3. **[CURSOR_FEATURE_ROADMAP.md](./CURSOR_FEATURE_ROADMAP.md)** 
-   - Implementation status checklist
-   - Phase-by-phase plan (10 weeks)
-   - Backend requirements
-   - Testing & security checklists
+| Document | Purpose |
+|----------|---------|
+| **[docs/NAVIGATION_ARCHITECTURE.md](./docs/NAVIGATION_ARCHITECTURE.md)** | Complete route map, navigation components, auth flow |
+| **[docs/ICONS_REFERENCE.md](./docs/ICONS_REFERENCE.md)** | Lucide React icons, custom SVG icons, usage patterns |
+| **[docs/COMPONENT_VARIANTS.md](./docs/COMPONENT_VARIANTS.md)** | Button, Card, Badge, Input variants with examples |
+| **[docs/TESTING_GUIDE.md](./docs/TESTING_GUIDE.md)** | Step-by-step testing, accessibility checklist |
 
-4. **[CURSOR_API_REFERENCE.md](./CURSOR_API_REFERENCE.md)** 
-   - Complete database schema with TypeScript interfaces
-   - API operation patterns
-   - Security best practices
-   - React Query integration examples
+### Assets & Design Resources 🎴
 
-5. **[docs/DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)** 
-   - Design philosophy
-   - Usage guidelines
-   - Component examples
+| Asset | Location |
+|-------|----------|
+| Sakura Blossom SVG | `public/decorations/sakura-blossom.svg` |
+| Washi Paper Pattern | `public/decorations/washi-pattern.svg` |
+| Ink Brush Stroke | `public/decorations/ink-brush.svg` |
+| Seal Stamp | `public/decorations/seal-stamp.svg` |
+
+### General Documentation
+
+| Document | Purpose |
+|----------|---------|
+| **[docs/DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)** | Design philosophy, usage guidelines |
+| **[CURSOR_BACKEND_SETUP.md](./CURSOR_BACKEND_SETUP.md)** | Backend configuration |
+| **[CURSOR_GUIDE.md](./CURSOR_GUIDE.md)** | AI development tips |
 
 ## 🏃‍♂️ Quick Start
 
