@@ -79,7 +79,18 @@ className="border-border"     // Standard border
 
 ## Shadows
 
-### Shadow Tokens
+### Material Design Shadow System
+```css
+--shadow-2xs: 1px 1px 0px 0px hsl(25 15% 15% / 0.1);
+--shadow-xs: 2px 2px 0px 0px hsl(25 15% 15% / 0.1);
+--shadow-sm: 0 1px 2px 0 hsl(25 15% 15% / 0.05);
+--shadow-md: 0 4px 6px -1px hsl(25 15% 15% / 0.1);
+--shadow-lg: 0 10px 15px -3px hsl(25 15% 15% / 0.1);
+--shadow-xl: 0 20px 25px -5px hsl(25 15% 15% / 0.1);
+--shadow-2xl: 0 25px 50px -12px hsl(25 15% 15% / 0.25);
+```
+
+### Legacy Shadow Tokens
 ```css
 --shadow-paper: 0 2px 8px hsl(25 15% 15% / 0.08);
 --shadow-elegant: 0 4px 16px hsl(25 15% 15% / 0.06);
@@ -89,9 +100,10 @@ className="border-border"     // Standard border
 
 ### Usage Classes
 ```tsx
-className="shadow-paper"      // Subtle card shadow
-className="shadow-elegant"    // Medium shadow
-className="shadow-floating"   // Floating element shadow
+className="shadow-sm"         // Subtle shadow
+className="shadow-md"         // Medium elevation
+className="shadow-lg"         // High elevation
+className="shadow-xl"         // Floating elements
 ```
 
 ## Typography
@@ -99,9 +111,9 @@ className="shadow-floating"   // Floating element shadow
 ### Font Families
 ```typescript
 fontFamily: {
-  'sans': ['Inter', 'system-ui', 'sans-serif'],
-  'serif': ['Playfair Display', 'Georgia', 'serif'],
-  'mono': ['JetBrains Mono', 'Menlo', 'monospace'],
+  'sans': ['Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  'serif': ['Lora', 'ui-serif', 'Georgia', 'serif'],
+  'mono': ['Space Mono', 'ui-monospace', 'Menlo', 'monospace'],
   'display': ['Playfair Display', 'Georgia', 'serif'],
 }
 ```
@@ -337,6 +349,107 @@ export function MyComponent({ className, ...props }) {
 | Seal | 355 70% 60% | CTAs, important actions |
 | Bamboo | 120 25% 45% | Success, positive actions |
 | Gold | 45 80% 70% | Premium, special features |
+
+## Dark Mode Tokens
+
+```css
+.dark {
+  --background: 25 15% 10%;
+  --foreground: 45 25% 95%;
+  --card: 25 15% 12%;
+  --card-foreground: 45 25% 95%;
+  --primary: 220 50% 55%;
+  --primary-foreground: 45 25% 97%;
+  --muted: 25 10% 20%;
+  --muted-foreground: 45 15% 65%;
+  --border: 25 10% 25%;
+  --sakura: 345 40% 70%;
+  --ink-black: 45 25% 90%;
+  --washi-cream: 25 15% 15%;
+  --seal-red: 355 65% 55%;
+  --bamboo-green: 120 30% 50%;
+  --gold-accent: 45 75% 65%;
+}
+```
+
+## Animation Keyframes
+
+```css
+@keyframes accordion-down {
+  from { height: 0 }
+  to { height: var(--radix-accordion-content-height) }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height) }
+  to { height: 0 }
+}
+
+@keyframes swipe-in {
+  0% { transform: translateX(100%); opacity: 0 }
+  100% { transform: translateX(0); opacity: 1 }
+}
+
+@keyframes swipe-out {
+  0% { transform: translateX(0); opacity: 1 }
+  100% { transform: translateX(-100%); opacity: 0 }
+}
+
+@keyframes fade-slide-up {
+  0% { transform: translateY(20px); opacity: 0 }
+  100% { transform: translateY(0); opacity: 1 }
+}
+
+@keyframes ink-flow {
+  0% { transform: scaleX(0); transform-origin: left }
+  100% { transform: scaleX(1); transform-origin: left }
+}
+```
+
+## Sidebar Tokens
+
+```css
+--sidebar-background: 45 25% 97%;
+--sidebar-foreground: 25 15% 15%;
+--sidebar-primary: 220 40% 25%;
+--sidebar-primary-foreground: 45 25% 97%;
+--sidebar-accent: 45 20% 92%;
+--sidebar-accent-foreground: 25 15% 20%;
+--sidebar-border: 45 15% 88%;
+--sidebar-ring: 220 40% 25%;
+```
+
+## Decorative SVG Assets
+
+Located in `public/decorations/`:
+
+| Asset | File | Usage |
+|-------|------|-------|
+| Cherry Blossom | `sakura-blossom.svg` | Decorative accents, backgrounds |
+| Washi Pattern | `washi-pattern.svg` | Paper texture backgrounds |
+| Ink Brush | `ink-brush.svg` | Underlines, dividers |
+| Seal Stamp | `seal-stamp.svg` | Branding, authentication |
+
+### Usage in CSS
+```css
+.paper-texture {
+  background-image: url('/decorations/washi-pattern.svg');
+  background-repeat: repeat;
+}
+
+.decorated-heading::after {
+  content: '';
+  background-image: url('/decorations/ink-brush.svg');
+  background-size: contain;
+}
+```
+
+### Usage in React
+```tsx
+import sakura from '/decorations/sakura-blossom.svg';
+
+<img src={sakura} alt="" className="w-8 h-8 opacity-50" />
+```
 
 ---
 

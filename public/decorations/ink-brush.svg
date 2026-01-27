@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <!-- Calligraphy brush stroke decorative element -->
+  <defs>
+    <linearGradient id="inkGradient" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" style="stop-color:hsl(25, 15%, 20%);stop-opacity:0.1" />
+      <stop offset="15%" style="stop-color:hsl(25, 15%, 15%);stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:hsl(25, 15%, 12%);stop-opacity:1" />
+      <stop offset="85%" style="stop-color:hsl(25, 15%, 15%);stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:hsl(25, 15%, 20%);stop-opacity:0.1" />
+    </linearGradient>
+    
+    <!-- Texture filter for brush effect -->
+    <filter id="brushTexture" x="-10%" y="-50%" width="120%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  
+  <!-- Main brush stroke -->
+  <path 
+    d="M5,20 
+       Q10,18 25,19 
+       C50,21 70,15 100,20 
+       C130,25 150,18 175,20 
+       Q190,21 195,20"
+    stroke="url(#inkGradient)"
+    stroke-width="8"
+    stroke-linecap="round"
+    fill="none"
+    filter="url(#brushTexture)"
+  />
+  
+  <!-- Secondary thin stroke for depth -->
+  <path 
+    d="M15,22 
+       Q30,20 50,22 
+       C80,25 120,19 160,23 
+       Q180,24 190,22"
+    stroke="hsl(25, 15%, 18%)"
+    stroke-width="2"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.6"
+    filter="url(#brushTexture)"
+  />
+  
+  <!-- Ink splatter details -->
+  <circle cx="8" cy="18" r="1.5" fill="hsl(25, 15%, 15%)" opacity="0.7"/>
+  <circle cx="12" cy="24" r="1" fill="hsl(25, 15%, 18%)" opacity="0.5"/>
+  <circle cx="188" cy="22" r="1.2" fill="hsl(25, 15%, 15%)" opacity="0.6"/>
+  <circle cx="192" cy="17" r="0.8" fill="hsl(25, 15%, 18%)" opacity="0.4"/>
+</svg>
